@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b931eaf51b5f8940bf8ffa2c72717e6, type: 3}
+  m_Name: BattleConfig
+  m_EditorClassIdentifier: JLPTQuest.Runtime::JLPTQuest.BattleConfig
+  rules:
+    baseDamage: 100
+    speedBonus: 0.5
+    perfectSpeed: 1.3
+    comboStep: 0.1
+    comboCap: 10
+    hintMultiplier: 0.75
+    strikeMultiplier: 1
+    multiMultiplier: 1
+    traceMultiplier: 1.5
+    forgeMultiplier: 1.5
+    buildMultiplier: 2
+    strikeSeconds: 12
+    multiSecondsPerBlank: 6
+    traceSeconds: 20
+    forgeSeconds: 15
+    buildSeconds: 25
+    parrySeconds: 10
+    referenceSpeed: 1.25
+    referenceCombo: 1.2
+    cooldownTickOnCorrect: 1
+    cooldownTickOnWrong: 2
+    choiceCount: 4
+  revealSeconds: 0.6
+  teachMinSeconds: 0.8
+  teachAutoSeconds: 0
