@@ -1,0 +1,12 @@
+{
+  "name": "com.inklook.core",
+  "displayName": "Ink Look",
+  "version": "1.0.0",
+  "unity": "6000.0",
+  "description": "Sumi-e ink-wash rendering for URP: stepped ink shading, brush outlines, edge wash, paper grain, full-screen bleed/flash/negative/dissolve effects, world-space brush strokes, and a painted scene transition.",
+  "keywords": ["ink", "sumi-e", "npr", "toon", "outline", "transition", "urp"],
+  "dependencies": {
+    "com.unity.render-pipelines.universal": "17.0.0",
+    "com.unity.ugui": "2.0.0"
+  }
+}

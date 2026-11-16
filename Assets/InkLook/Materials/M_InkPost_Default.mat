@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_InkPost_Default
+  m_Shader: {fileID: 4800000, guid: 8f4f5ef2b97aec3409ecea7311415e2c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _CreaseStrength: 0.5
+    - _DepthThreshold: 0.012
+    - _LineBreak: 0.55
+    - _LineWidth: 4.2
+    - _LineWidthVar: 0.85
+    - _NormalSens: 1.2
+    - _PaperStrength: 0.55
+    - _Vignette: 0.3
+    - _WashStrength: 0.3
+    - _WashWidth: 16
+    - _Wobble: 2
+    - _WobbleScale: 0.01
+    m_Colors:
+    - _InkColor: {r: 0.07, g: 0.065, b: 0.06, a: 0.96}
+    - _LineFade: {r: 30, g: 70, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
