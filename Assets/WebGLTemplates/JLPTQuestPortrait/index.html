@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <style>
+      /*
+        Portrait frame for JLPT Quest.
+        Desktop gets a centred 9:19.5 phone shaped frame with paper coloured bars on the sides.
+        Phones fill the whole screen, and a phone held sideways gets a "turn it upright" note.
+      */
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #F4EFE4; }
+      #frame { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+      #unity-canvas { display: block; width: 100%; height: 100%; background: {{{ BACKGROUND_COLOR }}}; }
+      #rotate-note { display: none; position: fixed; inset: 0; z-index: 10; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: #F4EFE4; color: #1A1714; font-family: sans-serif; font-size: 20px; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <div id="frame"><canvas id="unity-canvas" tabindex="-1"></canvas></div>
+    <div id="rotate-note">Turn your phone upright to play</div>
+    <script src="Build/{{{ LOADER_FILENAME }}}"></script>
+    <script>
+      //Width over height of the frame, same shape as a 9:19.5 phone
+      var aspect = 9 / 19.5;
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      var frame = document.getElementById("frame");
+      var rotateNote = document.getElementById("rotate-note");
+
+      function FitFrame() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        //Phones just take the whole screen
+        if (isMobile) {
+          frame.style.width = w + "px";
+          frame.style.height = h + "px";
+          rotateNote.style.display = w > h ? "flex" : "none";
+          return;
+        }
+
+        //Desktop gets the biggest portrait frame that fits
+        var frameH = h;
+        var frameW = h * aspect;
+        if (frameW > w) { frameW = w; frameH = w / aspect; }
+        frame.style.width = Math.floor(frameW) + "px";
+        frame.style.height = Math.floor(frameH) + "px";
+      }
+
+      window.addEventListener("resize", FitFrame);
+      window.addEventListener("orientationchange", FitFrame);
+      FitFrame();
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/{{{ DATA_FILENAME }}}",
+        frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+#if USE_THREADS
+        workerUrl: "Build/{{{ WORKER_FILENAME }}}",
+#endif
+#if USE_WASM
+        codeUrl: "Build/{{{ CODE_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+#endif
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+        productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+        productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+      }).catch(function (message) {
+        alert(message);
+      });
+    </script>
+  </body>
+</html>

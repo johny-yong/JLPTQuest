@@ -1,0 +1,19 @@
+{
+    "name": "JLPTQuest.Editor",
+    "rootNamespace": "JLPTQuest.EditorTools",
+    "references": [
+        "JLPTQuest.Runtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Git LFS is off for now. GitHub Desktop's bundled shell crashed starting the LFS helper on this machine.
+# Every file so far is way under GitHub's 100 MB limit. Turn LFS back on before big art and audio land (Phase 8):
+# rename the .lfs-off hooks in .git/hooks back, then re-add the *.png, *.psd, *.wav... filter lines here.

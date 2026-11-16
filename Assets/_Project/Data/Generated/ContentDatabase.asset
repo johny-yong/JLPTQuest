@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb28db1788d4dba42bde68d816a9eb47, type: 3}
+  m_Name: ContentDatabase
+  m_EditorClassIdentifier: JLPTQuest.Runtime::JLPTQuest.ContentDatabase
+  lessons:
+  - {fileID: 11400000, guid: 77ed05cdace319445bb2126613bcf216, type: 2}
+  - {fileID: 11400000, guid: 8cc80dd944dea3b48bc4698ad5b0372b, type: 2}
+  - {fileID: 11400000, guid: 5ad7e3e71a909d240aa0734c2dabeb80, type: 2}
+  - {fileID: 11400000, guid: 41d8cd3724cf46248b96405860da423f, type: 2}
+  - {fileID: 11400000, guid: ec74fa479f0fb9743b8ad50eb6748e2a, type: 2}
+  - {fileID: 11400000, guid: 2a79f572ca399b143b8d092ddaed7274, type: 2}
+  enemies:
+  - id: kuchi-he
+    displayName: Kuchi-he
+    nameJp: "\u304F\u3061\u3078"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u4EE4\u4EE4"
+    faceNose: "\u3082"
+    faceMouth: "\u3078"
+    wordSeal: "{\u5148\u751F|\u305B\u3093\u305B\u3044}"
+    sheetRow: 2
+  - id: nora-kana
+    displayName: Nora-kana
+    nameJp: "\u306E\u3089\u304B\u306A"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u306C\u3081"
+    faceNose: "\u308D"
+    faceMouth: "\u30FC"
+    wordSeal: "{\u5B66\u751F|\u304C\u304F\u305B\u3044}"
+    sheetRow: 3
+  - id: sumi-dama
+    displayName: Sumi-dama
+    nameJp: "\u3059\u307F\u3060\u307E"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u25CB\u25CB"
+    faceNose: "\u30CB"
+    faceMouth: "\u30EF"
+    wordSeal: "{\u672C|\u307B\u3093}"
+    sheetRow: 4
+  - id: dokodemo
+    displayName: Dokodemo
+    nameJp: "\u3069\u3053\u3067\u3082"
+    kind: 1
+    hits: 5
+    attack: 25
+    attackCd: 3
+    skill: 3
+    faceEyes: "\u3069\u3069"
+    faceNose: "\u3053"
+    faceMouth: "\u3067"
+    wordSeal: "{\u99C5|\u3048\u304D}"
+    sheetRow: 5
+  - id: kara-made
+    displayName: Kara-made
+    nameJp: "\u304B\u3089\u307E\u3067"
+    kind: 1
+    hits: 5
+    attack: 25
+    attackCd: 3
+    skill: 1
+    faceEyes: "\u304B\u3089"
+    faceNose: "\u307E"
+    faceMouth: "\u3067"
+    wordSeal: "{\u6642\u8A08|\u3068\u3051\u3044}"
+    sheetRow: 6
+  - id: jikan-dorobo
+    displayName: Jikan-dorobo
+    nameJp: "\u3058\u304B\u3093\u3069\u308D\u307C\u3046"
+    kind: 2
+    hits: 12
+    attack: 30
+    attackCd: 3
+    skill: 2
+    faceEyes: "\u6642\u6642"
+    faceNose: "\u5206"
+    faceMouth: "\u79D2"
+    wordSeal: "{\u6642\u9593|\u3058\u304B\u3093}"
+    sheetRow: 7
+  stages:
+  - id: R1-F1
+    realm: 1
+    floor: 1
+    title: Names and jobs
+    lessons: 01000000
+    waves:
+    - kuchi-he
+    - nora-kana
+    - dokodemo
+    sheetRow: 2
+  - id: R1-F2
+    realm: 1
+    floor: 2
+    title: This and that
+    lessons: 02000000
+    waves:
+    - sumi-dama
+    - kuchi-he
+    - dokodemo
+    sheetRow: 3
+  - id: R1-F3
+    realm: 1
+    floor: 3
+    title: Where is it?
+    lessons: 03000000
+    waves:
+    - nora-kana
+    - sumi-dama
+    - dokodemo
+    sheetRow: 4
+  - id: R1-F4
+    realm: 1
+    floor: 4
+    title: Time and days
+    lessons: 04000000
+    waves:
+    - kuchi-he
+    - sumi-dama
+    - kara-made
+    sheetRow: 5
+  - id: R1-F5
+    realm: 1
+    floor: 5
+    title: Going places
+    lessons: 05000000
+    waves:
+    - nora-kana
+    - kuchi-he
+    - kara-made
+    sheetRow: 6
+  - id: R1-F6
+    realm: 1
+    floor: 6
+    title: Daily life
+    lessons: 06000000
+    waves:
+    - sumi-dama
+    - nora-kana
+    - kara-made
+    sheetRow: 7
+  - id: R1-BOSS
+    realm: 1
+    floor: 7
+    title: The time thief
+    lessons: 010000000200000003000000040000000500000006000000
+    waves:
+    - dokodemo
+    - kara-made
+    - jikan-dorobo
+    sheetRow: 8
+  lastImport: 2026-11-16 15:28

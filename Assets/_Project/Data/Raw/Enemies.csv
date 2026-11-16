@@ -1,0 +1,7 @@
+id,name,nameJp,kind,hits,attack,attackCd,skill,face,wordSeal,status,notes
+kuchi-he,Kuchi-he,くちへ,grunt,3,20,3,none,令令|も|へ,{先生|せんせい},ready,The face from the first Figma sketch.
+nora-kana,Nora-kana,のらかな,grunt,3,20,3,none,ぬめ|ろ|ー,{学生|がくせい},ready,
+sumi-dama,Sumi-dama,すみだま,grunt,3,20,3,none,○○|ニ|ワ,{本|ほん},ready,
+dokodemo,Dokodemo,どこでも,elite,5,25,3,inkBlot,どど|こ|で,{駅|えき},ready,
+kara-made,Kara-made,からまで,elite,5,25,3,comboSeal,から|ま|で,{時計|とけい},ready,
+jikan-dorobo,Jikan-dorobo,じかんどろぼう,boss,12,30,3,timeSqueeze,時時|分|秒,{時間|じかん},ready,Realm 1 boss. Can join the player as a companion through rematch drops.

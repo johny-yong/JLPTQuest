@@ -73,3 +73,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Feel is a paid Asset Store package, import it from Package Manager > My Assets instead
+/[Aa]ssets/[Ff]eel/
+/[Aa]ssets/[Ff]eel.meta
+
+# IDE solution files, Unity makes these again
+*.slnx
