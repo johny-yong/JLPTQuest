@@ -14,6 +14,8 @@ namespace JLPTQuest
         [SerializeField] private TMP_Text cooldownLabel;
         [SerializeField] private TMP_Text damageLabel;
         [SerializeField] private BarFill hpBar;
+        [SerializeField] private CanvasGroup body; //The face, fades out when beaten
+        [SerializeField] private float enterSeconds = 0.25f;
         [SerializeField] private float damageRise = 90f;
         [SerializeField] private float damageSeconds = 0.7f;
 
@@ -30,13 +32,32 @@ namespace JLPTQuest
 
         public void Show(EnemyData data, EnemyState state)
         {
+            StopAllCoroutines();
+            damageRoutine = null;
+            attackRoutine = null;
+
             eyes.text = data.faceEyes;
             nose.text = data.faceNose;
             mouth.text = data.faceMouth;
-            nameLabel.text = string.IsNullOrEmpty(data.nameJp) ? data.displayName : data.displayName + "  " + data.nameJp;
+            nameLabel.text = NameLine(data);
             cooldownLabel.color = InkColors.Ink;
             damageLabel.alpha = 0f;
+            damageLabel.rectTransform.anchoredPosition = damageStart;
             Refresh(state);
+            StartCoroutine(FadeBody(0f, 1f, 1f, 1f, enterSeconds));
+        }
+
+        public void ShowDefeated(float seconds)
+        {
+            StartCoroutine(FadeBody(1f, 0f, 1f, 0.85f, seconds));
+        }
+
+        //"Dokodemo  どこでも", with Elite or Boss in front when it's not a grunt
+        public static string NameLine(EnemyData data)
+        {
+            string name = string.IsNullOrEmpty(data.nameJp) ? data.displayName : data.displayName + "  " + data.nameJp;
+            if (data.kind == EnemyKind.Grunt) return name;
+            return "<color=" + InkColors.ToTag(InkColors.Vermilion) + ">" + data.kind + "</color>  " + name;
         }
 
         public void Refresh(EnemyState state)
@@ -73,6 +94,20 @@ namespace JLPTQuest
             }
             damageLabel.alpha = 0f;
             rect.anchoredPosition = damageStart;
+        }
+
+        private IEnumerator FadeBody(float fromAlpha, float toAlpha, float fromScale, float toScale, float seconds)
+        {
+            Transform face = body.transform;
+            for (float t = 0f; t < seconds; t += Time.deltaTime)
+            {
+                float k = t / seconds;
+                body.alpha = Mathf.Lerp(fromAlpha, toAlpha, k);
+                face.localScale = Vector3.one * Mathf.Lerp(fromScale, toScale, k);
+                yield return null;
+            }
+            body.alpha = toAlpha;
+            face.localScale = Vector3.one * toScale;
         }
 
         private IEnumerator FlashCooldown()

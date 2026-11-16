@@ -20,7 +20,10 @@ namespace JLPTQuest.Tests
         {
             var enemy = new EnemyData { id = "kuchi-he", displayName = "Kuchi-he", hits = 3, attack = 20, attackCd = 3 };
             var questions = new List<QuestionData> { Strike("a", "は"), Strike("b", "も"), Strike("c", "の") };
-            return new BattleSession(enemy, questions, new BattleRules(), seed);
+            var session = new BattleSession(new List<EnemyData> { enemy }, questions, new BattleRules(), seed);
+            session.Start();
+            session.NextRound(); //Skip the wave intro, these tests are about single rounds
+            return session;
         }
 
         private static int WrongIndex(BattleSession session)
@@ -34,7 +37,6 @@ namespace JLPTQuest.Tests
             BattleSession session = Grunt();
             var hits = new List<int>();
             session.RoundResolved += result => hits.Add(result.damage.total);
-            session.Start();
 
             //Answering instantly: speed 1.5, combo 1.1 / 1.2 / 1.3
             session.Answer(session.Round.correctIndex);
@@ -48,14 +50,13 @@ namespace JLPTQuest.Tests
 
             CollectionAssert.AreEqual(new[] { 165, 180, 195 }, hits);
             Assert.IsTrue(session.Enemy.IsDefeated);
-            Assert.AreEqual(BattlePhase.Victory, session.Phase);
+            Assert.AreEqual(BattlePhase.StageCleared, session.Phase);
         }
 
         [Test]
         public void MissResetsTheStreakAndBringsTheAttackCloser()
         {
             BattleSession session = Grunt();
-            session.Start();
             session.Answer(session.Round.correctIndex);
             Assert.AreEqual(1, session.Streak);
             Assert.AreEqual(2, session.Enemy.CooldownLeft);
@@ -78,7 +79,6 @@ namespace JLPTQuest.Tests
             BattleSession session = Grunt();
             int attacks = 0;
             session.EnemyAttacked += () => attacks++;
-            session.Start();
 
             session.Answer(WrongIndex(session));
             Assert.AreEqual(0, attacks);
@@ -96,7 +96,6 @@ namespace JLPTQuest.Tests
             BattleSession session = Grunt();
             RoundResult result = null;
             session.RoundResolved += r => result = r;
-            session.Start();
 
             session.Tick(5f);
             Assert.AreEqual(BattlePhase.Asking, session.Phase);
@@ -115,7 +114,6 @@ namespace JLPTQuest.Tests
             BattleSession session = Grunt();
             int resolved = 0;
             session.RoundResolved += r => resolved++;
-            session.Start();
 
             session.Answer(session.Round.correctIndex);
             int hp = session.Enemy.Hp;
@@ -132,7 +130,6 @@ namespace JLPTQuest.Tests
             BattleSession session = Grunt();
             RoundResult result = null;
             session.RoundResolved += r => result = r;
-            session.Start();
 
             session.Tick(6f); //Half the 12 seconds gone
             session.Answer(session.Round.correctIndex);

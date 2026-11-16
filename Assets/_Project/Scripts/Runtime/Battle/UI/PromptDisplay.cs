@@ -9,6 +9,15 @@ namespace JLPTQuest
             return (prompt ?? string.Empty).Replace(ContentText.Blank.ToString(), blank);
         }
 
+        /*
+            The instruction column as a cue under the sentence, like "(not a doctor)".
+            Any question where a wrong choice could also make a real sentence needs one, or the player is guessing.
+        */
+        public static string Cue(string instruction)
+        {
+            return string.IsNullOrWhiteSpace(instruction) ? string.Empty : "(" + instruction.Trim() + ")";
+        }
+
         //Fills the first blank with the answer in vermilion, any other blanks stay empty
         public static string WithAnswer(string prompt, string answer)
         {

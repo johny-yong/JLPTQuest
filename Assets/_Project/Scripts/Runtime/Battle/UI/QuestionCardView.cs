@@ -19,8 +19,18 @@ namespace JLPTQuest
         {
             this.round = round;
             prompt.Markup = PromptDisplay.WithBlanks(round.question.prompt);
-            instruction.text = round.question.instruction;
-            instruction.gameObject.SetActive(!string.IsNullOrEmpty(round.question.instruction));
+            instruction.text = PromptDisplay.Cue(round.question.instruction);
+            instruction.gameObject.SetActive(instruction.text.Length > 0);
+        }
+
+        //Between waves, nothing to answer
+        public void Clear()
+        {
+            round = null;
+            prompt.Markup = string.Empty;
+            instruction.gameObject.SetActive(false);
+            timerBar.Value = 1f;
+            timerFill.color = InkColors.InkSoft;
         }
 
         public void Reveal(string answer)

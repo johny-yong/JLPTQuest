@@ -1,16 +1,17 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    //The enemy dissolves back into the word it was garbling. Waves and results come in Phase 3
+    //Stage cleared, with the words the enemies turned back into. Stars and results join in step 5
     public class VictoryView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup group;
         [SerializeField] private TMP_Text title;
-        [SerializeField] private RubyText wordSeal;
+        [SerializeField] private RubyText seals;
         [SerializeField] private Button againButton;
 
         private Action onAgain;
@@ -24,11 +25,11 @@ namespace JLPTQuest
             });
         }
 
-        public void Show(EnemyData enemy, Action onAgain)
+        public void Show(string heading, IList<string> wordSeals, Action onAgain)
         {
             this.onAgain = onAgain;
-            title.text = enemy.displayName + " is beaten!";
-            wordSeal.Markup = string.IsNullOrEmpty(enemy.wordSeal) ? string.Empty : "Word Seal: " + enemy.wordSeal;
+            title.text = heading;
+            seals.Markup = wordSeals.Count == 0 ? string.Empty : "Word Seals:  " + string.Join("  ", wordSeals);
             SetVisible(true);
         }
 

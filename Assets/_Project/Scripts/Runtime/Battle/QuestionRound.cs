@@ -28,6 +28,7 @@ namespace JLPTQuest
         public int streak;
         public bool enemyAttacked;
         public bool enemyDefeated;
+        public bool stageCleared; //That was the last enemy of the stage
     }
 
     public static class ChoiceBuilder

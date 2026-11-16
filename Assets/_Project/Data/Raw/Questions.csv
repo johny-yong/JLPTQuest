@@ -38,7 +38,7 @@ L02-006,2,particle,strike,その かぎは だれ＿ですか。,,の,を|が|�
 L02-007,2,noun,strike,これは ＿ですか。…{時計|とけい}です。,asking what,なん|{何|なん},だれ|どなた|なんさい,なん asks what a thing is.,What is this? ...It's a watch.,question-word,ready,
 L02-008,2,noun,strike,これは ＿の {雑誌|ざっし}ですか。…カメラの {雑誌|ざっし}です。,asking what about,なん|{何|なん},だれ|どれ|あの,なんの asks what something is about. だれの would ask whose.,What is this magazine about? ...It's a camera magazine.,question-word|no,ready,
 L02-009,2,expression,strike,それは ボールペンですか。…はい、＿です。,,そう,なん|だれ|この,"そうです means yes, that's right.","Is that a ballpoint pen? ...Yes, it is.",sou,ready,
-L02-010,2,expression,strike,それは ボールペンですか、シャープペンシルですか。…シャープペンシル＿。,,です,ですか|じゃありません|も,"For an either-or question, answer with the choice and です.",Is that a ballpoint pen or a mechanical pencil? ...A mechanical pencil.,choice-question,ready,
+L02-010,2,expression,strike,それは ボールペンですか、シャープペンシルですか。…シャープペンシル＿。,,です,ですか|を|も,"For an either-or question, answer with the choice and です.",Is that a ballpoint pen or a mechanical pencil? ...A mechanical pencil.,choice-question,ready,
 L02-011,2,particle,strike,これは コーヒーですか、ジュースです＿。,,か,を|は|の,An either-or question puts か after each choice.,Is this coffee or juice?,ka|choice-question,ready,
 L02-012,2,noun,strike,＿ {人|ひと}は だれですか。,that person over there,あの,あれ|それ|これ,あの comes before a noun. あれ stands alone.,Who is that person over there?,kosoado,ready,
 L02-013,2,particle,strike,これは {日本語|にほんご}＿ {本|ほん}です。,,の,で|を|に,の joins 日本語 to 本: a Japanese-language book.,This is a Japanese book.,no,ready,

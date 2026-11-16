@@ -9,6 +9,8 @@ namespace JLPTQuest
         public BattleRules rules = new BattleRules();
 
         public float revealSeconds = 0.6f; //How long the filled in sentence stays up after a right answer
+        public float defeatSeconds = 0.5f; //A beaten enemy fading out
+        public float waveIntroSeconds = 1.2f; //The pause while the next enemy steps in, the clock doesn't run
         public float teachMinSeconds = 0.8f; //The teach card can't be tapped away before this
         public float teachAutoSeconds = 0f; //Closes by itself after this many seconds, 0 means wait for a tap
     }

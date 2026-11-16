@@ -15,6 +15,7 @@ namespace JLPTQuest
         [SerializeField] private Button tapArea;
         [SerializeField] private TMP_Text header;
         [SerializeField] private RubyText sentence;
+        [SerializeField] private TMP_Text cue; //The same cue the question had, so the miss makes sense
         [SerializeField] private TMP_Text rule;
         [SerializeField] private TMP_Text tapHint;
 
@@ -38,6 +39,8 @@ namespace JLPTQuest
             QuestionData question = result.round.question;
             header.text = result.timedOut ? "Time's up" : "Not quite";
             sentence.Markup = PromptDisplay.WithAnswer(question.prompt, result.round.CorrectOption);
+            cue.text = PromptDisplay.Cue(question.instruction);
+            cue.gameObject.SetActive(cue.text.Length > 0);
             rule.text = question.rule;
             tapHint.enabled = false;
 

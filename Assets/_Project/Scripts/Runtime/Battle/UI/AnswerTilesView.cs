@@ -30,6 +30,11 @@ namespace JLPTQuest
             }
         }
 
+        public void Clear()
+        {
+            Show(Array.Empty<string>());
+        }
+
         public void ShowResult(RoundResult result)
         {
             for (int i = 0; i < tiles.Count; i++)
