@@ -78,6 +78,13 @@ namespace JLPTQuest
             Show(Array.Empty<string>());
         }
 
+        //50/50: those tiles fade out and can't be tapped
+        public void Remove(IList<int> indices)
+        {
+            foreach (int index in indices)
+                if (index >= 0 && index < tiles.Count) tiles[index].SetState(TileState.Removed);
+        }
+
         public void ShowResult(RoundResult result)
         {
             for (int i = 0; i < tiles.Count; i++)
@@ -85,7 +92,7 @@ namespace JLPTQuest
                 bool isRight = i == result.round.correctIndex;
                 bool isChosen = i == result.chosenIndex;
 
-                TileState state = TileState.Locked;
+                TileState state = result.round.removedOptions.Contains(i) ? TileState.Removed : TileState.Locked;
                 if (isRight) state = isChosen ? TileState.Right : TileState.Missed;
                 else if (isChosen) state = TileState.Wrong;
                 tiles[i].SetState(state);

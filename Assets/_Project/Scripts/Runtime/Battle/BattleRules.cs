@@ -59,6 +59,33 @@ namespace JLPTQuest
 
         public int choiceCount = 4; //The 2x2 tiles
 
+        public int hintCharges = 2; //What a stage starts with
+        public int hintMaxCharges = 2;
+        public int hintRefillEveryCombo = 5; //Every 5th combo gives a charge back, 0 turns refills off
+        public float extraTimeSeconds = 5f;
+
+        public float starAccuracy = 0.8f; //Share of right answers the second star needs
+
+        //Which hint helps with which format. parry is true on parry turns, whatever question stands in
+        public bool HintWorks(HintKind kind, QuestionFormat format, bool parry)
+        {
+            switch (kind)
+            {
+                case HintKind.FiftyFifty:
+                    return parry || format == QuestionFormat.Strike || format == QuestionFormat.Multi || format == QuestionFormat.Forge || format == QuestionFormat.Parry;
+                case HintKind.FirstKana:
+                    return !parry && (format == QuestionFormat.Trace || format == QuestionFormat.Build);
+                default:
+                    return true; //Translate and +5 seconds work everywhere
+            }
+        }
+
+        //+5 seconds only costs the charge, the rest take a quarter off that turn's damage
+        public static bool HintCostsDamage(HintKind kind)
+        {
+            return kind != HintKind.ExtraTime;
+        }
+
         public float FormatMultiplier(QuestionFormat format)
         {
             switch (format)

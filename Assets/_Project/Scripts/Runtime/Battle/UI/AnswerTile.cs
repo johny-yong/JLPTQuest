@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    public enum TileState { Idle, Locked, Right, Wrong, Missed }
+    public enum TileState { Idle, Locked, Right, Wrong, Missed, Removed }
 
     //One of the 2x2 answer tiles. The red ○ and × are how Japanese teachers mark work
     public class AnswerTile : MonoBehaviour
@@ -39,7 +39,9 @@ namespace JLPTQuest
         public void SetState(TileState state)
         {
             button.interactable = state == TileState.Idle;
-            LabelText.color = state == TileState.Locked ? InkColors.InkFaint : InkColors.Ink;
+            Color text = state == TileState.Locked ? InkColors.InkFaint : InkColors.Ink;
+            if (state == TileState.Removed) text.a = 0.2f; //50/50 took it, nearly gone
+            LabelText.color = text;
 
             switch (state)
             {
@@ -55,6 +57,7 @@ namespace JLPTQuest
                     background.color = InkColors.WrongTint;
                     ShowMark("×");
                     break;
+                case TileState.Removed:
                 case TileState.Locked: //Tiles nobody picked fade back
                     background.color = InkColors.Panel;
                     ShowMark(string.Empty);

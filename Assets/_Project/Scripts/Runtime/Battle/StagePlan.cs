@@ -18,6 +18,15 @@ namespace JLPTQuest
         //Only strike for now, the other formats join once they have screens (Phase 5 and 6)
         public static readonly QuestionFormat[] OffenseFormats = { QuestionFormat.Strike };
 
+        //The next floor up in the same realm, null at the top
+        public static string NextStageId(ContentDatabase database, StageData current)
+        {
+            if (database == null || current == null) return null;
+            foreach (StageData stage in database.stages)
+                if (stage.realm == current.realm && stage.floor == current.floor + 1) return stage.id;
+            return null;
+        }
+
         //Returns null and says why when the stage can't be played
         public static StagePlan Build(ContentDatabase database, string stageId, out string problem)
         {

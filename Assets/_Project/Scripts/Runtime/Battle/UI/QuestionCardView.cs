@@ -23,8 +23,7 @@ namespace JLPTQuest
             prompt.Markup = PromptDisplay.WithBlanks(round.question.prompt);
             background.color = round.isParry ? InkColors.ParryTint : InkColors.Card;
             parryTag.gameObject.SetActive(round.isParry);
-            instruction.text = PromptDisplay.Cue(round.question.instruction);
-            instruction.gameObject.SetActive(instruction.text.Length > 0);
+            SetCue(false);
         }
 
         //Between waves, nothing to answer
@@ -37,6 +36,23 @@ namespace JLPTQuest
             instruction.gameObject.SetActive(false);
             timerBar.Value = 1f;
             timerFill.color = InkColors.InkSoft;
+        }
+
+        //The translate hint: the English meaning goes above the cue
+        public void ShowTranslation()
+        {
+            if (round != null) SetCue(true);
+        }
+
+        private void SetCue(bool withTranslation)
+        {
+            string cue = PromptDisplay.Cue(round.question.instruction);
+            string english = withTranslation ? round.question.english : string.Empty;
+            if (!string.IsNullOrWhiteSpace(english))
+                cue = "<i><color=" + InkColors.ToTag(InkColors.Ink) + ">" + english + "</color></i>" + (cue.Length > 0 ? "\n" + cue : string.Empty);
+
+            instruction.text = cue;
+            instruction.gameObject.SetActive(cue.Length > 0);
         }
 
         public void Reveal(string answer)

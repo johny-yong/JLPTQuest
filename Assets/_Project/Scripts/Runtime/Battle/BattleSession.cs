@@ -25,6 +25,7 @@ namespace JLPTQuest
         public event Action<EnemyData> EnemyDefeated;
         public event Action StageCleared;
         public event Action PlayerDefeated;
+        public event Action<HintKind> HintUsed;
 
         public BattlePhase Phase { get; private set; } = BattlePhase.NotStarted;
         public IReadOnlyList<EnemyData> Waves => waves;
@@ -37,6 +38,8 @@ namespace JLPTQuest
         public QuestionRound Round { get; private set; }
         public int Streak { get; private set; }
         public bool ParryPending { get; private set; }
+        public int HintCharges { get; private set; }
+        public StageStats Stats { get; } = new StageStats();
 
         private readonly List<EnemyData> waves;
         private readonly BattleRules rules;
@@ -54,6 +57,7 @@ namespace JLPTQuest
             deck = new QuestionDeck(questions, random);
             if (parryQuestions != null && parryQuestions.Count > 0) parryDeck = new QuestionDeck(parryQuestions, random);
             Player = new PlayerState(rules.playerMaxHp);
+            HintCharges = rules.hintCharges;
         }
 
         public void Start()
@@ -90,7 +94,47 @@ namespace JLPTQuest
         {
             if (Phase != BattlePhase.Asking) return;
             if (optionIndex < 0 || optionIndex >= Round.options.Count) return;
+            if (Round.removedOptions.Contains(optionIndex)) return; //50/50 took that one away
             Resolve(optionIndex);
+        }
+
+        //Each hint once per question, only while the question is up, and only where it makes sense
+        public bool CanUseHint(HintKind kind)
+        {
+            if (Phase != BattlePhase.Asking || HintCharges <= 0 || Round.UsedHint(kind)) return false;
+            if (!rules.HintWorks(kind, Round.question.format, Round.isParry)) return false;
+            if (kind == HintKind.FiftyFifty && Round.options.Count < 4) return false; //Needs two wrong ones to take away
+            return true;
+        }
+
+        public bool UseHint(HintKind kind)
+        {
+            if (!CanUseHint(kind)) return false;
+
+            HintCharges--;
+            Round.hintsUsed.Add(kind);
+            Stats.hintsUsed++;
+
+            if (kind == HintKind.FiftyFifty) RemoveTwoWrong();
+            if (kind == HintKind.ExtraTime)
+            {
+                //The limit grows too, so the extra seconds can't pump up the speed bonus
+                Round.timeLeft += rules.extraTimeSeconds;
+                Round.timeLimit += rules.extraTimeSeconds;
+            }
+
+            HintUsed?.Invoke(kind); //Translate and first kana are just shown by the screen
+            return true;
+        }
+
+        private void RemoveTwoWrong()
+        {
+            var wrong = new List<int>();
+            for (int i = 0; i < Round.options.Count; i++)
+                if (i != Round.correctIndex) wrong.Add(i);
+            ListShuffle.Shuffle(wrong, random);
+            Round.removedOptions.Add(wrong[0]);
+            Round.removedOptions.Add(wrong[1]);
         }
 
         private void EnterWave(int index)
@@ -129,6 +173,9 @@ namespace JLPTQuest
             if (Round.isParry) ResolveParry(result);
             else ResolveOffense(result);
 
+            if (result.correct) RefillHint(result);
+            Count(result);
+
             result.streak = Streak;
             result.enemyDefeated = Enemy.IsDefeated;
             result.stageCleared = result.enemyDefeated && IsLastWave;
@@ -153,7 +200,7 @@ namespace JLPTQuest
             if (result.correct)
             {
                 Streak++;
-                result.damage = DamageCalculator.Calculate(rules, Round.question.format, Round.timeLeft, Round.timeLimit, Streak, 0);
+                result.damage = Hit(Round.question.format);
                 Enemy.TakeDamage(result.damage.total);
                 Enemy.TickCooldown(rules.cooldownTickOnCorrect);
             }
@@ -170,7 +217,7 @@ namespace JLPTQuest
             {
                 //Blocked, and the counter is half of what the same answer would do as a strike
                 Streak++;
-                DamageBreakdown hit = DamageCalculator.Calculate(rules, QuestionFormat.Strike, Round.timeLeft, Round.timeLimit, Streak, 0);
+                DamageBreakdown hit = Hit(QuestionFormat.Strike);
                 hit.total = (int)Math.Round(hit.total * (double)rules.parryCounterShare, MidpointRounding.AwayFromZero);
                 result.damage = hit;
                 result.blocked = true;
@@ -184,6 +231,35 @@ namespace JLPTQuest
             }
 
             Enemy.ResetCooldown(); //Either way the attack is spent
+        }
+
+        //Hints that cost damage take their quarter, and any hint at all means no Perfect
+        private DamageBreakdown Hit(QuestionFormat format)
+        {
+            DamageBreakdown hit = DamageCalculator.Calculate(rules, format, Round.timeLeft, Round.timeLimit, Streak, Round.DamageHints);
+            if (Round.hintsUsed.Count > 0) hit.perfect = false;
+            return hit;
+        }
+
+        private void RefillHint(RoundResult result)
+        {
+            if (rules.hintRefillEveryCombo <= 0 || Streak % rules.hintRefillEveryCombo != 0) return;
+            if (HintCharges >= rules.hintMaxCharges) return;
+            HintCharges++;
+            result.hintRefilled = true;
+        }
+
+        private void Count(RoundResult result)
+        {
+            Stats.answered++;
+            if (result.correct) Stats.correct++;
+            if (result.damage.perfect) Stats.perfects++;
+            Stats.bestStreak = Math.Max(Stats.bestStreak, Streak);
+            if (Round.isParry)
+            {
+                if (result.blocked) Stats.parriesBlocked++;
+                else Stats.parriesFailed++;
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace JLPTQuest
         Glue between the BattleSession rules and the views.
         Runs one stage from the Stages tab: its waves in order, strike questions from its lessons,
         and parry questions from the same lessons whenever an enemy's countdown hits 0.
-        Combo, hints and results come in the next steps of Phase 3.
+        Ends on the results screen with stars, which can go straight on to the next floor.
     */
     public class BattleController : MonoBehaviour
     {
@@ -25,6 +25,8 @@ namespace JLPTQuest
         [SerializeField] private CompanionView companion;
         [SerializeField] private CutInView cutIn;
         [SerializeField] private PlayerHud playerHud;
+        [SerializeField] private HintBarView hintBar;
+        [SerializeField] private ComboView combo;
         [SerializeField] private QuestionCardView questionCard;
         [SerializeField] private AnswerTilesView answerTiles;
         [SerializeField] private TeachCardView teachCard;
@@ -39,12 +41,14 @@ namespace JLPTQuest
         void Start()
         {
             answerTiles.Picked += OnPicked;
+            hintBar.Picked += OnHintPicked;
             StartStage();
         }
 
         void OnDestroy()
         {
             answerTiles.Picked -= OnPicked;
+            hintBar.Picked -= OnHintPicked;
             Unhook();
         }
 
@@ -82,13 +86,25 @@ namespace JLPTQuest
             waveBanner.Hide();
             cutIn.Hide();
             companion.ResetPose();
+            combo.Hide();
             playerHud.Refresh(session.Player);
+            hintBar.Refresh(session);
             session.Start();
         }
 
         private void OnPicked(int index)
         {
             session?.Answer(index);
+        }
+
+        private void OnHintPicked(HintKind kind)
+        {
+            if (session == null || !session.UseHint(kind)) return;
+
+            if (kind == HintKind.Translate) questionCard.ShowTranslation();
+            if (kind == HintKind.FiftyFifty) answerTiles.Remove(session.Round.removedOptions);
+            //+5 seconds shows on the timer bar by itself, first kana waits for Trace and Build
+            hintBar.Refresh(session);
         }
 
         private void OnWaveStarted(int index)
@@ -98,6 +114,7 @@ namespace JLPTQuest
             questionCard.Clear();
             answerTiles.Clear();
             enemyView.Show(session.CurrentEnemy, session.Enemy);
+            hintBar.Refresh(session);
 
             string title = count > 1 && session.IsLastWave ? "Final wave" : "Wave " + (index + 1) + "/" + count;
             waveBanner.Play(title, EnemyView.NameLine(session.CurrentEnemy), config.waveIntroSeconds);
@@ -108,6 +125,7 @@ namespace JLPTQuest
         {
             questionCard.Show(round);
             answerTiles.Show(round.options, round.isParry);
+            hintBar.Refresh(session);
         }
 
         private void OnRoundResolved(RoundResult result)
@@ -116,6 +134,9 @@ namespace JLPTQuest
             questionCard.Reveal(result.round.CorrectOption);
             enemyView.Refresh(session.Enemy);
             playerHud.Refresh(session.Player);
+            combo.Show(result.streak);
+            hintBar.Refresh(session);
+            if (result.hintRefilled) hintBar.ShowRefill();
 
             float wait = config.revealSeconds;
             if (TryCutIn(result)) wait = Mathf.Max(wait, config.cutInSeconds);
@@ -178,13 +199,32 @@ namespace JLPTQuest
 
         private void ShowStageCleared()
         {
-            victory.Show(plan.stage.title + " cleared!", WordSeals(), StartStage);
+            bool[] stars = StageStars.Earned(true, session.Stats, config.rules);
+            string next = StagePlan.NextStageId(database, plan.stage);
+            Action onNext = null;
+            if (next != null) onNext = () => PlayStage(next);
+            victory.Show(plan.stage.title + " cleared!", stars, StatsLine(), WordSeals(), StartStage, onNext);
         }
 
         private void ShowDefeat()
         {
-            string detail = "Wave " + (session.WaveIndex + 1) + "/" + session.WaveCount + "  ·  " + session.CurrentEnemy.displayName + " won this time";
+            string detail = "Wave " + (session.WaveIndex + 1) + "/" + session.WaveCount + "  ·  " + session.CurrentEnemy.displayName + " won this time\n" + StatsLine();
             defeat.Show("Out of HP", detail, StartStage);
+        }
+
+        public void PlayStage(string id)
+        {
+            stageId = id;
+            StartStage();
+        }
+
+        //"11/13 right  ·  85%  ·  best combo 7"
+        private string StatsLine()
+        {
+            StageStats stats = session.Stats;
+            string line = stats.correct + "/" + stats.answered + " right  ·  " + Mathf.RoundToInt(stats.Accuracy * 100f) + "%  ·  best combo " + stats.bestStreak;
+            if (stats.hintsUsed > 0) line += "  ·  " + stats.hintsUsed + (stats.hintsUsed == 1 ? " hint" : " hints");
+            return line;
         }
 
         //One of each, in the order the enemies were beaten

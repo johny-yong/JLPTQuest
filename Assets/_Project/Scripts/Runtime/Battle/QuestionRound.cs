@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace JLPTQuest
 {
+    public enum HintKind { Translate, FiftyFifty, FirstKana, ExtraTime }
+
     //One question on screen: the shuffled tiles, which one is right, and the clock
     public class QuestionRound
     {
@@ -13,6 +15,22 @@ namespace JLPTQuest
         public float timeLeft;
         public int number; //1 for the first question of the fight
         public bool isParry; //The enemy is attacking, pick the right reply to block it
+        public List<HintKind> hintsUsed = new List<HintKind>();
+        public List<int> removedOptions = new List<int>(); //Tiles 50/50 took away
+
+        public bool UsedHint(HintKind kind) => hintsUsed.Contains(kind);
+
+        //Hints that take damage off, +5 seconds doesn't count
+        public int DamageHints
+        {
+            get
+            {
+                int count = 0;
+                foreach (HintKind kind in hintsUsed)
+                    if (BattleRules.HintCostsDamage(kind)) count++;
+                return count;
+            }
+        }
 
         public string CorrectOption => options[correctIndex];
 
@@ -39,6 +57,7 @@ namespace JLPTQuest
         public bool enemyDefeated;
         public bool stageCleared; //That was the last enemy of the stage
         public bool playerDefeated;
+        public bool hintRefilled; //This answer's combo gave a hint charge back
     }
 
     public static class ChoiceBuilder

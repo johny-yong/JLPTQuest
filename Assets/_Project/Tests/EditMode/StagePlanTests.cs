@@ -80,6 +80,20 @@ namespace JLPTQuest.Tests
         }
 
         [Test]
+        public void NextFloorIsOneUpInTheSameRealm()
+        {
+            var first = new StageData { id = "R1-F1", realm = 1, floor = 1 };
+            var second = new StageData { id = "R1-F2", realm = 1, floor = 2 };
+            var otherRealm = new StageData { id = "R2-F2", realm = 2, floor = 2 };
+            database.stages.Add(otherRealm);
+            database.stages.Add(second);
+            database.stages.Add(first);
+
+            Assert.AreEqual("R1-F2", StagePlan.NextStageId(database, first));
+            Assert.IsNull(StagePlan.NextStageId(database, second), "Top of the realm");
+        }
+
+        [Test]
         public void UnknownEnemyIsCalledOut()
         {
             Assert.IsNull(StagePlan.Build(database, "ghost", out string problem));
