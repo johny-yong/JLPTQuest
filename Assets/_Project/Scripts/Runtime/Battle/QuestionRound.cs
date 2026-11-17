@@ -12,6 +12,7 @@ namespace JLPTQuest
         public float timeLimit;
         public float timeLeft;
         public int number; //1 for the first question of the fight
+        public bool isParry; //The enemy is attacking, pick the right reply to block it
 
         public string CorrectOption => options[correctIndex];
         public float TimeFraction => timeLimit > 0f ? Math.Max(0f, timeLeft) / timeLimit : 0f;
@@ -26,9 +27,12 @@ namespace JLPTQuest
         public bool timedOut;
         public DamageBreakdown damage;
         public int streak;
-        public bool enemyAttacked;
+        public bool parryNext; //The enemy's countdown hit 0, the next turn is a parry
+        public bool blocked; //A parry that worked, damage holds the counter hit
+        public int playerDamage; //HP lost to a parry that failed
         public bool enemyDefeated;
         public bool stageCleared; //That was the last enemy of the stage
+        public bool playerDefeated;
     }
 
     public static class ChoiceBuilder

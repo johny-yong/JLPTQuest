@@ -13,6 +13,7 @@ namespace JLPTQuest
         public StageData stage;
         public List<EnemyData> waves = new List<EnemyData>();
         public List<QuestionData> questions = new List<QuestionData>();
+        public List<QuestionData> parryQuestions = new List<QuestionData>(); //What the enemies ask when they attack
 
         //Only strike for now, the other formats join once they have screens (Phase 5 and 6)
         public static readonly QuestionFormat[] OffenseFormats = { QuestionFormat.Strike };
@@ -59,7 +60,10 @@ namespace JLPTQuest
                 if (set == null) continue;
 
                 foreach (QuestionData question in set.questions)
+                {
                     if (Array.IndexOf(OffenseFormats, question.format) >= 0) plan.questions.Add(question);
+                    else if (question.format == QuestionFormat.Parry) plan.parryQuestions.Add(question);
+                }
             }
 
             if (plan.questions.Count == 0)

@@ -11,6 +11,7 @@ namespace JLPTQuest
         public int CooldownLeft { get; private set; }
 
         public bool IsDefeated => Hp <= 0;
+        public bool IsReadyToAttack => CooldownLeft <= 0;
         public float HpFraction => MaxHp > 0 ? (float)Hp / MaxHp : 0f;
 
         public EnemyState(int maxHp, int attackCd)
@@ -26,9 +27,10 @@ namespace JLPTQuest
             Hp = Math.Max(0, Hp - Math.Max(0, amount));
         }
 
+        //Stops at 0, the attack then waits there until the parry turn is over
         public void TickCooldown(int amount)
         {
-            CooldownLeft -= Math.Max(0, amount);
+            CooldownLeft = Math.Max(0, CooldownLeft - Math.Max(0, amount));
         }
 
         public void ResetCooldown()

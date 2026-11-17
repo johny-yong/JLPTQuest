@@ -18,6 +18,14 @@ namespace JLPTQuest
             return string.IsNullOrWhiteSpace(instruction) ? string.Empty : "(" + instruction.Trim() + ")";
         }
 
+        //The sentence with its answer showing. A parry question has no blank, so the reply goes under it
+        public static string Filled(string prompt, string answer)
+        {
+            prompt = prompt ?? string.Empty;
+            if (prompt.IndexOf(ContentText.Blank) >= 0) return WithAnswer(prompt, answer);
+            return prompt + "\n<color=" + InkColors.ToTag(InkColors.Vermilion) + ">" + answer + "</color>";
+        }
+
         //Fills the first blank with the answer in vermilion, any other blanks stay empty
         public static string WithAnswer(string prompt, string answer)
         {

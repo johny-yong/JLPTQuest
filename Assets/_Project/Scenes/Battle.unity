@@ -490,9 +490,77 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1227640867}
     m_Modifications:
+    - target: {fileID: 81425078175897733, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280433602
+      objectReference: {fileID: 0}
+    - target: {fileID: 81425078175897733, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 284099687067903378, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 284099687067903378, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4205952533913968564, guid: f2876b87c4a88a5499301c8ad78937ed, type: 3}
+    - target: {fileID: 674207932932482454, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607013104037941747, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607013104037941747, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4279506714
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607013104037941747, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628085771330504175, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4279506714
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628085771330504175, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     - target: {fileID: 2840306791034767914, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
       propertyPath: m_Name
       value: Battle UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3474223005790666242, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4283916651
+      objectReference: {fileID: 0}
+    - target: {fileID: 3474223005790666242, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684433744061743068, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4033390
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684433744061743068, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101574304181142955, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_Name
+      value: Face (Standholder)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508258959006702378, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293193716
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508258959006702378, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 8013368972864581418, guid: 0faa515f586c90547a1710f1ac646f0e, type: 3}
       propertyPath: m_Pivot.x

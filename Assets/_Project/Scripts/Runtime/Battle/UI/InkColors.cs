@@ -7,6 +7,8 @@ namespace JLPTQuest
     {
         public static readonly Color Paper = Hex(0xF4EFE4);
         public static readonly Color Panel = Hex(0xECE5D6);
+        public static readonly Color Card = Hex(0xFCF9F2);
+        public static readonly Color ParryTint = Hex(0xF7E4DE);
         public static readonly Color Tile = Hex(0xE2D9C6);
         public static readonly Color Ink = Hex(0x1A1714);
         public static readonly Color InkSoft = Hex(0x6B6157);

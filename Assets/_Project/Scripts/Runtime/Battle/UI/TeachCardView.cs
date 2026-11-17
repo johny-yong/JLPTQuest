@@ -37,8 +37,8 @@ namespace JLPTQuest
             this.onClosed = onClosed;
 
             QuestionData question = result.round.question;
-            header.text = result.timedOut ? "Time's up" : "Not quite";
-            sentence.Markup = PromptDisplay.WithAnswer(question.prompt, result.round.CorrectOption);
+            header.text = (result.timedOut ? "Time's up" : "Not quite") + (result.playerDamage > 0 ? "   -" + result.playerDamage + " HP" : string.Empty);
+            sentence.Markup = PromptDisplay.Filled(question.prompt, result.round.CorrectOption);
             cue.text = PromptDisplay.Cue(question.instruction);
             cue.gameObject.SetActive(cue.text.Length > 0);
             rule.text = question.rule;

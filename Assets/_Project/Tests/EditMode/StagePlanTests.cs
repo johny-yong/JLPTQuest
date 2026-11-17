@@ -73,6 +73,13 @@ namespace JLPTQuest.Tests
         }
 
         [Test]
+        public void ParryQuestionsGoInTheirOwnPile()
+        {
+            StagePlan plan = StagePlan.Build(database, "floor", out _);
+            CollectionAssert.AreEqual(new[] { "L01-026" }, plan.parryQuestions.ConvertAll(q => q.id));
+        }
+
+        [Test]
         public void UnknownEnemyIsCalledOut()
         {
             Assert.IsNull(StagePlan.Build(database, "ghost", out string problem));

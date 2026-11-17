@@ -22,10 +22,15 @@ namespace JLPTQuest
 
         public void SetOption(string markup)
         {
+            SetOption(markup, maxFontSize);
+        }
+
+        public void SetOption(string markup, float maxSize)
+        {
             //Long answers like じゃありません shrink to stay on one line. Kana and kanji are about 1 em wide
             int length = Mathf.Max(1, RubyMarkup.StripReadings(markup).Length);
             float width = ((RectTransform)LabelText.transform).rect.width;
-            LabelText.fontSize = width > 0f ? Mathf.Min(maxFontSize, width / (length + 0.5f)) : maxFontSize;
+            LabelText.fontSize = width > 0f ? Mathf.Min(maxSize, width / (length + 0.5f)) : maxSize;
 
             label.Markup = markup; //After the size, the furigana is measured at the new size
             SetState(TileState.Idle);

@@ -8,8 +8,9 @@ namespace JLPTQuest
 {
     /*
         Glue between the BattleSession rules and the views.
-        Runs one stage from the Stages tab: its waves in order, strike questions from its lessons.
-        Parry, hints and results come in the next steps of Phase 3.
+        Runs one stage from the Stages tab: its waves in order, strike questions from its lessons,
+        and parry questions from the same lessons whenever an enemy's countdown hits 0.
+        Combo, hints and results come in the next steps of Phase 3.
     */
     public class BattleController : MonoBehaviour
     {
@@ -21,10 +22,16 @@ namespace JLPTQuest
         [SerializeField] private TMP_Text waveLabel;
         [SerializeField] private EnemyView enemyView;
         [SerializeField] private WaveBanner waveBanner;
+        [SerializeField] private CompanionView companion;
+        [SerializeField] private CutInView cutIn;
+        [SerializeField] private PlayerHud playerHud;
         [SerializeField] private QuestionCardView questionCard;
         [SerializeField] private AnswerTilesView answerTiles;
         [SerializeField] private TeachCardView teachCard;
         [SerializeField] private VictoryView victory;
+        [SerializeField] private DefeatView defeat;
+        [SerializeField] private float worriedSeconds = 3f; //Companion looks worried on the last seconds of the clock
+        [SerializeField, Range(0f, 1f)] private float worriedHp = 0.3f; //...or below this much HP
 
         private BattleSession session;
         private StagePlan plan;
@@ -43,7 +50,11 @@ namespace JLPTQuest
 
         void Update()
         {
-            session?.Tick(Time.deltaTime);
+            if (session == null) return;
+            session.Tick(Time.deltaTime);
+
+            bool timeRunningOut = session.Phase == BattlePhase.Asking && session.Round.timeLeft <= worriedSeconds;
+            companion.SetWorried(timeRunningOut || session.Player.HpFraction <= worriedHp);
         }
 
         public void StartStage()
@@ -54,21 +65,24 @@ namespace JLPTQuest
             plan = StagePlan.Build(database, stageId, out string problem);
             if (config == null || plan == null)
             {
-                Debug.LogError("[Battle] Can't start: " + (config == null ? "there's no BattleConfig, rebuild the greybox." : problem + " Sync the content first."));
+                Debug.LogError("[Battle] Can't start: " + (config == null ? "there's no BattleConfig on the BattleController." : problem + " Sync the content first."));
                 enabled = false;
                 return;
             }
 
-            session = new BattleSession(plan.waves, plan.questions, config.rules, Environment.TickCount);
+            session = new BattleSession(plan.waves, plan.questions, config.rules, Environment.TickCount, plan.parryQuestions);
             session.WaveStarted += OnWaveStarted;
             session.RoundStarted += OnRoundStarted;
             session.RoundResolved += OnRoundResolved;
-            session.EnemyAttacked += OnEnemyAttacked;
 
             topLabel.text = "Floor " + plan.stage.floor + "  ·  " + plan.stage.title;
             teachCard.Hide();
             victory.Hide();
+            defeat.Hide();
             waveBanner.Hide();
+            cutIn.Hide();
+            companion.ResetPose();
+            playerHud.Refresh(session.Player);
             session.Start();
         }
 
@@ -93,7 +107,7 @@ namespace JLPTQuest
         private void OnRoundStarted(QuestionRound round)
         {
             questionCard.Show(round);
-            answerTiles.Show(round.options);
+            answerTiles.Show(round.options, round.isParry);
         }
 
         private void OnRoundResolved(RoundResult result)
@@ -101,24 +115,76 @@ namespace JLPTQuest
             answerTiles.ShowResult(result);
             questionCard.Reveal(result.round.CorrectOption);
             enemyView.Refresh(session.Enemy);
-            if (result.correct) enemyView.ShowHit(result.damage);
+            playerHud.Refresh(session.Player);
+
+            float wait = config.revealSeconds;
+            if (TryCutIn(result)) wait = Mathf.Max(wait, config.cutInSeconds);
+
+            if (result.round.isParry)
+            {
+                if (result.blocked)
+                {
+                    companion.Block();
+                    enemyView.ShowHit(result.damage, true);
+                }
+                else
+                {
+                    companion.Hurt(result.playerDamage);
+                    playerHud.ShowHit();
+                }
+            }
+            else if (result.correct)
+            {
+                companion.Attack();
+                enemyView.ShowHit(result.damage);
+            }
 
             if (result.enemyDefeated)
-                StartCoroutine(DefeatThen(result.stageCleared ? (Action)ShowStageCleared : session.NextWave));
+                StartCoroutine(DefeatThen(wait, result.stageCleared ? (Action)ShowStageCleared : session.NextWave));
             else if (result.correct)
-                StartCoroutine(AfterDelay(config.revealSeconds, session.NextRound));
+                StartCoroutine(AfterDelay(wait, Continue));
             else
-                teachCard.Show(result, config.teachMinSeconds, config.teachAutoSeconds, session.NextRound);
+                teachCard.Show(result, config.teachMinSeconds, config.teachAutoSeconds, result.playerDefeated ? (Action)ShowDefeat : Continue); //Even the last miss gets taught
         }
 
-        private void OnEnemyAttacked()
+        //Counters always get the cut-in, Perfects only on every few combos so it stays special
+        private bool TryCutIn(RoundResult result)
         {
-            enemyView.ShowAttack();
+            string title = null;
+            if (result.blocked && config.cutInOnCounter) title = "Counter!";
+            else if (result.correct && result.damage.perfect && config.cutInEveryCombo > 0 && result.streak % config.cutInEveryCombo == 0) title = "Perfect!";
+            if (title == null) return false;
+
+            //The band covers the floating damage number, so the damage rides along in the subtitle
+            cutIn.Play(companion.Art, companion.Glyph, title, result.damage.total + " damage  ·  " + result.streak + " combo", config.cutInSeconds);
+            return true;
+        }
+
+        //Next turn, with a short warning first when it's the enemy's attack
+        private void Continue()
+        {
+            if (session.ParryPending) StartCoroutine(ParryIntroThenAsk());
+            else session.NextRound();
+        }
+
+        private IEnumerator ParryIntroThenAsk()
+        {
+            questionCard.Clear();
+            answerTiles.Clear();
+            waveBanner.Play("Enemy attack!", "Pick the reply that blocks it", config.parryIntroSeconds);
+            yield return new WaitForSeconds(config.parryIntroSeconds);
+            session.NextRound();
         }
 
         private void ShowStageCleared()
         {
             victory.Show(plan.stage.title + " cleared!", WordSeals(), StartStage);
+        }
+
+        private void ShowDefeat()
+        {
+            string detail = "Wave " + (session.WaveIndex + 1) + "/" + session.WaveCount + "  ·  " + session.CurrentEnemy.displayName + " won this time";
+            defeat.Show("Out of HP", detail, StartStage);
         }
 
         //One of each, in the order the enemies were beaten
@@ -131,10 +197,11 @@ namespace JLPTQuest
         }
 
         //Let the last hit land, fade the enemy out, then move on
-        private IEnumerator DefeatThen(Action then)
+        private IEnumerator DefeatThen(float wait, Action then)
         {
-            yield return new WaitForSeconds(config.revealSeconds);
+            yield return new WaitForSeconds(wait);
             enemyView.ShowDefeated(config.defeatSeconds);
+            companion.Cheer();
             yield return new WaitForSeconds(config.defeatSeconds);
             then();
         }
@@ -151,7 +218,6 @@ namespace JLPTQuest
             session.WaveStarted -= OnWaveStarted;
             session.RoundStarted -= OnRoundStarted;
             session.RoundResolved -= OnRoundResolved;
-            session.EnemyAttacked -= OnEnemyAttacked;
             session = null;
         }
     }

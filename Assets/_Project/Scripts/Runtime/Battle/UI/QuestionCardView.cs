@@ -9,6 +9,8 @@ namespace JLPTQuest
     {
         [SerializeField] private RubyText prompt;
         [SerializeField] private TMP_Text instruction;
+        [SerializeField] private Image background;
+        [SerializeField] private TMP_Text parryTag; //"Enemy attack", only on parry turns
         [SerializeField] private BarFill timerBar;
         [SerializeField] private Image timerFill;
         [SerializeField] private float warnSeconds = 3f;
@@ -19,6 +21,8 @@ namespace JLPTQuest
         {
             this.round = round;
             prompt.Markup = PromptDisplay.WithBlanks(round.question.prompt);
+            background.color = round.isParry ? InkColors.ParryTint : InkColors.Card;
+            parryTag.gameObject.SetActive(round.isParry);
             instruction.text = PromptDisplay.Cue(round.question.instruction);
             instruction.gameObject.SetActive(instruction.text.Length > 0);
         }
@@ -28,6 +32,8 @@ namespace JLPTQuest
         {
             round = null;
             prompt.Markup = string.Empty;
+            background.color = InkColors.Card;
+            parryTag.gameObject.SetActive(false);
             instruction.gameObject.SetActive(false);
             timerBar.Value = 1f;
             timerFill.color = InkColors.InkSoft;
@@ -36,7 +42,7 @@ namespace JLPTQuest
         public void Reveal(string answer)
         {
             if (round == null) return;
-            prompt.Markup = PromptDisplay.WithAnswer(round.question.prompt, answer);
+            prompt.Markup = PromptDisplay.Filled(round.question.prompt, answer);
         }
 
         void Update()

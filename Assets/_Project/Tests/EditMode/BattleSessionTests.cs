@@ -69,16 +69,16 @@ namespace JLPTQuest.Tests
             Assert.IsFalse(miss.correct);
             Assert.AreEqual(0, miss.damage.total);
             Assert.AreEqual(0, session.Streak);
-            Assert.IsTrue(miss.enemyAttacked); //2 - 2 hits zero
-            Assert.AreEqual(3, session.Enemy.CooldownLeft, "Cooldown resets after the attack");
+            Assert.IsTrue(miss.parryNext); //2 - 2 hits zero
+            Assert.AreEqual(0, session.Enemy.CooldownLeft, "The attack waits at 0 for the parry turn");
         }
 
         [Test]
-        public void TwoMissesInARowTriggerAnAttack()
+        public void TwoMissesInARowTriggerAParry()
         {
             BattleSession session = Grunt();
             int attacks = 0;
-            session.EnemyAttacked += () => attacks++;
+            session.ParryIncoming += () => attacks++;
 
             session.Answer(WrongIndex(session));
             Assert.AreEqual(0, attacks);
@@ -87,7 +87,8 @@ namespace JLPTQuest.Tests
             session.NextRound();
             session.Answer(WrongIndex(session));
             Assert.AreEqual(1, attacks);
-            Assert.AreEqual(3, session.Enemy.CooldownLeft);
+            Assert.AreEqual(0, session.Enemy.CooldownLeft);
+            Assert.IsTrue(session.ParryPending);
         }
 
         [Test]

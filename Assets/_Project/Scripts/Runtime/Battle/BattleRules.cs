@@ -40,6 +40,9 @@ namespace JLPTQuest
         public int cooldownTickOnCorrect = 1;
         public int cooldownTickOnWrong = 2;
 
+        public int playerMaxHp = 100; //Survives about four failed parries
+        public float parryCounterShare = 0.5f; //A blocked attack hits back for this much of a strike
+
         public int choiceCount = 4; //The 2x2 tiles
 
         public float FormatMultiplier(QuestionFormat format)

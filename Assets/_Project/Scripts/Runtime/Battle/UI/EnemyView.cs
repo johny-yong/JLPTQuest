@@ -20,9 +20,7 @@ namespace JLPTQuest
         [SerializeField] private float damageSeconds = 0.7f;
 
         private Vector2 damageStart;
-        private int shownCooldown;
         private Coroutine damageRoutine;
-        private Coroutine attackRoutine;
 
         void Awake()
         {
@@ -34,13 +32,11 @@ namespace JLPTQuest
         {
             StopAllCoroutines();
             damageRoutine = null;
-            attackRoutine = null;
 
             eyes.text = data.faceEyes;
             nose.text = data.faceNose;
             mouth.text = data.faceMouth;
             nameLabel.text = NameLine(data);
-            cooldownLabel.color = InkColors.Ink;
             damageLabel.alpha = 0f;
             damageLabel.rectTransform.anchoredPosition = damageStart;
             Refresh(state);
@@ -63,23 +59,23 @@ namespace JLPTQuest
         public void Refresh(EnemyState state)
         {
             hpBar.Value = state.HpFraction;
-            shownCooldown = Mathf.Max(0, state.CooldownLeft);
-            cooldownLabel.text = "CD " + shownCooldown;
+
+            //Red at 1 as a warning, "Attack!" while the parry is coming
+            cooldownLabel.text = state.IsReadyToAttack ? "Attack!" : "CD " + state.CooldownLeft;
+            cooldownLabel.color = state.CooldownLeft <= 1 ? InkColors.Vermilion : InkColors.Ink;
         }
 
-        public void ShowHit(DamageBreakdown hit)
+        //counter is the hit back after a blocked attack
+        public void ShowHit(DamageBreakdown hit, bool counter = false)
         {
-            damageLabel.text = hit.perfect ? hit.total + "  会心" : hit.total.ToString();
+            //The number stays big, the words around it are small so they never crowd the face
+            string text = hit.total.ToString();
+            if (counter) text = "<size=55%>Counter </size>" + text;
+            if (hit.perfect) text += "<size=55%> 会心</size>";
+            damageLabel.text = text;
             damageLabel.color = hit.perfect ? InkColors.Vermilion : InkColors.Ink;
             if (damageRoutine != null) StopCoroutine(damageRoutine);
             damageRoutine = StartCoroutine(FloatDamage());
-        }
-
-        //Parry turns replace this in Phase 3, for now the badge just flashes
-        public void ShowAttack()
-        {
-            if (attackRoutine != null) StopCoroutine(attackRoutine);
-            attackRoutine = StartCoroutine(FlashCooldown());
         }
 
         private IEnumerator FloatDamage()
@@ -108,15 +104,6 @@ namespace JLPTQuest
             }
             body.alpha = toAlpha;
             face.localScale = Vector3.one * toScale;
-        }
-
-        private IEnumerator FlashCooldown()
-        {
-            cooldownLabel.text = "Attack!";
-            cooldownLabel.color = InkColors.Vermilion;
-            yield return new WaitForSeconds(0.8f);
-            cooldownLabel.color = InkColors.Ink;
-            cooldownLabel.text = "CD " + shownCooldown;
         }
     }
 }
