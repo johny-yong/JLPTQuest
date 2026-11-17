@@ -63,7 +63,7 @@ namespace JLPTQuest.Tests
             MissUntilParry(session);
 
             Assert.AreEqual(QuestionFormat.Parry, session.Round.question.format);
-            Assert.AreEqual(10f, session.Round.timeLimit);
+            Assert.AreEqual(new BattleRules().TimeLimit(session.Round.question, session.Round.options, true), session.Round.timeLimit);
             Assert.AreEqual(0, session.Enemy.CooldownLeft);
         }
 
@@ -116,7 +116,7 @@ namespace JLPTQuest.Tests
 
             RoundResult result = null;
             session.RoundResolved += r => result = r;
-            session.Tick(10.5f);
+            session.Tick(session.Round.timeLimit + 0.5f);
 
             Assert.IsTrue(result.timedOut);
             Assert.AreEqual(20, result.playerDamage);
@@ -154,8 +154,8 @@ namespace JLPTQuest.Tests
         public void CounterCanFinishTheEnemy()
         {
             BattleSession session = Fight(Enemy("tiny", 1, 20, 1)); //150 HP and attacks every turn
-            session.Tick(11.9f);
-            session.Answer(session.Round.correctIndex); //A slow hit, about 110, and the countdown hits 0
+            session.Tick(session.Round.timeLimit - 0.01f);
+            session.Answer(session.Round.correctIndex); //A last second hit, 110, and the countdown hits 0
             Assert.AreEqual(40, session.Enemy.Hp);
             Assert.IsTrue(session.ParryPending);
             session.NextRound();
@@ -193,7 +193,7 @@ namespace JLPTQuest.Tests
             MissUntilParry(session);
 
             Assert.AreEqual(QuestionFormat.Strike, session.Round.question.format);
-            Assert.AreEqual(10f, session.Round.timeLimit, "Still on the parry clock");
+            Assert.AreEqual(new BattleRules().TimeLimit(session.Round.question, session.Round.options, true), session.Round.timeLimit, "Still on the parry clock");
         }
     }
 }

@@ -21,6 +21,29 @@ namespace JLPTQuest.Tests
         }
 
         [Test]
+        public void MissingEnglishIsFlagged()
+        {
+            string row = "L01-001,1,particle,strike,わたし＿ {学生|がくせい}です。,,は,を|に|で,A rule.,,,ready,\n";
+            ContentBundle bundle = Import(row, out ImportReport report);
+            Assert.AreEqual(1, bundle.questions.Count, "Still imports, it's a warning");
+            Assert.AreEqual(1, report.WarningCount);
+            Assert.AreEqual("english", report.issues[0].column);
+        }
+
+        [Test]
+        public void ParryWithoutFactsIsFlagged()
+        {
+            ContentBundle bundle = Import(Row("L01-026", "parry", "おなまえは？", "アンナです。", "アンナさんです。|アンナですか。|いいえ、アンナです。"), out ImportReport report);
+            Assert.AreEqual(1, bundle.questions.Count, "Still imports, it's a warning");
+            Assert.AreEqual(1, report.WarningCount);
+            StringAssert.Contains("facts", report.issues[0].message);
+
+            string withFacts = "L01-026,1,expression,parry,おなまえは？,\"you: Anna, 28, student\",アンナです。,アンナさんです。|アンナですか。|いいえ、アンナです。,A rule.,An English line.,,ready,\n";
+            Import(withFacts, out ImportReport clean);
+            Assert.AreEqual(0, clean.WarningCount, string.Join("\n", clean.issues));
+        }
+
+        [Test]
         public void GoodStrikeRowImports()
         {
             ContentBundle bundle = Import(Row("L01-001", "strike", "わたし＿ {学生|がくせい}です。", "は", "を|に|で"), out ImportReport report);

@@ -15,6 +15,12 @@ namespace JLPTQuest
         public bool isParry; //The enemy is attacking, pick the right reply to block it
 
         public string CorrectOption => options[correctIndex];
+
+        public void StartClock(float seconds)
+        {
+            timeLimit = seconds;
+            timeLeft = seconds;
+        }
         public float TimeFraction => timeLimit > 0f ? Math.Max(0f, timeLeft) / timeLimit : 0f;
     }
 

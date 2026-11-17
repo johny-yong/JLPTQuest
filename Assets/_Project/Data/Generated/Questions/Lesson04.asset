@@ -539,7 +539,7 @@ MonoBehaviour:
     wordClass: 4
     format: 5
     prompt: "{\u4ECA|\u3044\u307E} \u306A\u3093{\u6642|\u3058}\u3067\u3059\u304B\u3002"
-    instruction: reply to the enemy
+    instruction: the clock says 2:10
     slots:
     - accepted:
       - "2{\u6642|\u3058}10{\u5206|\u3077\u3093}\u3067\u3059\u3002"
@@ -558,7 +558,7 @@ MonoBehaviour:
     format: 5
     prompt: "{\u6BCE\u6669|\u307E\u3044\u3070\u3093} \u306A\u3093{\u6642|\u3058}\u306B
       {\u5BDD|\u306D}\u307E\u3059\u304B\u3002"
-    instruction: reply to the enemy
+    instruction: you go to bed at 11 every night
     slots:
     - accepted:
       - "11{\u6642|\u3058}\u306B {\u5BDD|\u306D}\u307E\u3059\u3002"
@@ -576,11 +576,10 @@ MonoBehaviour:
     wordClass: 4
     format: 5
     prompt: "\u304D\u306E\u3046 {\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u3057\u305F\u304B\u3002"
-    instruction: reply to the enemy
+    instruction: you studied yesterday
     slots:
     - accepted:
       - "\u306F\u3044\u3001{\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u3057\u305F\u3002"
-      - "\u3044\u3044\u3048\u3001{\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u305B\u3093\u3067\u3057\u305F\u3002"
       wrong:
       - "\u306F\u3044\u3001{\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u305B\u3093\u3067\u3057\u305F\u3002"
       - "\u3044\u3044\u3048\u3001{\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u3057\u305F\u3002"

@@ -34,6 +34,13 @@ namespace JLPTQuest.EditorTools
             if (question.rule.Length == 0)
                 report.Warn(Tab, line, "rule", "empty, so the teach card has nothing to say after a miss");
 
+            if (question.english.Length == 0)
+                report.Warn(Tab, line, "english", "empty, so the teach card can't show what the sentence means");
+
+            //"Is Ken an engineer?" can't be answered without knowing Ken
+            if (question.format == QuestionFormat.Parry && question.instruction.Length == 0)
+                report.Warn(Tab, line, "instruction", "a parry needs the facts that make one reply true, like: you: Anna, 28, student");
+
             question.slots = ReadSlots(row, report);
 
             //Format checks only make sense once the basic fields read fine

@@ -98,6 +98,123 @@ MonoBehaviour:
     faceMouth: "\u79D2"
     wordSeal: "{\u6642\u9593|\u3058\u304B\u3093}"
     sheetRow: 7
+  - id: kore-kore
+    displayName: Kore-kore
+    nameJp: "\u3053\u308C\u3053\u308C"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u3053\u3053"
+    faceNose: "\u308C"
+    faceMouth: "\u30FC"
+    wordSeal: "{\u8F9E\u66F8|\u3058\u3057\u3087}"
+    sheetRow: 8
+  - id: are-sore
+    displayName: Are-sore
+    nameJp: "\u3042\u308C\u305D\u308C"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u305D\u305D"
+    faceNose: "\u3042"
+    faceMouth: "\u308C"
+    wordSeal: "{\u5098|\u304B\u3055}"
+    sheetRow: 9
+  - id: ikura-gani
+    displayName: Ikura-gani
+    nameJp: "\u3044\u304F\u3089\u304C\u306B"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u3044\u3044"
+    faceNose: "\u304F"
+    faceMouth: "\u3089"
+    wordSeal: "{\u9774|\u304F\u3064}"
+    sheetRow: 10
+  - id: nanji-mushi
+    displayName: Nanji-mushi
+    nameJp: "\u306A\u3093\u3058\u3080\u3057"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u306A\u306A"
+    faceNose: "\u3093"
+    faceMouth: "\u3058"
+    wordSeal: "{\u6BCE\u671D|\u307E\u3044\u3042\u3055}"
+    sheetRow: 11
+  - id: nemu-nemu
+    displayName: Nemu-nemu
+    nameJp: "\u306D\u3080\u306D\u3080"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 4
+    skill: 0
+    faceEyes: "\u30FC\u30FC"
+    faceNose: "\u3080"
+    faceMouth: "\u306D"
+    wordSeal: "{\u6BCE\u6669|\u307E\u3044\u3070\u3093}"
+    sheetRow: 12
+  - id: ikanai-bo
+    displayName: Ikanai-bo
+    nameJp: "\u3044\u304B\u306A\u3044\u307C\u3046"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u884C\u884C"
+    faceNose: "\u304B"
+    faceMouth: "\u3093"
+    wordSeal: "{\u96FB\u8ECA|\u3067\u3093\u3057\u3083}"
+    sheetRow: 13
+  - id: paku-paku
+    displayName: Paku-paku
+    nameJp: "\u3071\u304F\u3071\u304F"
+    kind: 0
+    hits: 3
+    attack: 20
+    attackCd: 3
+    skill: 0
+    faceEyes: "\u3071\u3071"
+    faceNose: "\u304F"
+    faceMouth: "\u53E3"
+    wordSeal: "{\u671D|\u3042\u3055}\u3054\u306F\u3093"
+    sheetRow: 14
+  - id: dare-kamen
+    displayName: Dare-kamen
+    nameJp: "\u3060\u308C\u304B\u3081\u3093"
+    kind: 1
+    hits: 5
+    attack: 25
+    attackCd: 3
+    skill: 4
+    faceEyes: "\uFF1F\uFF1F"
+    faceNose: "\u3060"
+    faceMouth: "\u308C"
+    wordSeal: "{\u540D\u524D|\u306A\u307E\u3048}"
+    sheetRow: 15
+  - id: nijuu-kuchi
+    displayName: Nijuu-kuchi
+    nameJp: "\u306B\u3058\u3085\u3046\u304F\u3061"
+    kind: 1
+    hits: 5
+    attack: 25
+    attackCd: 4
+    skill: 5
+    faceEyes: "\u4E8C\u4E8C"
+    faceNose: "\u53E3"
+    faceMouth: "\u53E3\u53E3"
+    wordSeal: "{\u6620\u753B|\u3048\u3044\u304C}"
+    sheetRow: 16
   stages:
   - id: R1-F1
     realm: 1
@@ -107,7 +224,7 @@ MonoBehaviour:
     waves:
     - kuchi-he
     - nora-kana
-    - dokodemo
+    - dare-kamen
     sheetRow: 2
   - id: R1-F2
     realm: 1
@@ -115,9 +232,9 @@ MonoBehaviour:
     title: This and that
     lessons: 02000000
     waves:
-    - sumi-dama
-    - kuchi-he
-    - dokodemo
+    - kore-kore
+    - are-sore
+    - dare-kamen
     sheetRow: 3
   - id: R1-F3
     realm: 1
@@ -125,7 +242,7 @@ MonoBehaviour:
     title: Where is it?
     lessons: 03000000
     waves:
-    - nora-kana
+    - ikura-gani
     - sumi-dama
     - dokodemo
     sheetRow: 4
@@ -135,8 +252,8 @@ MonoBehaviour:
     title: Time and days
     lessons: 04000000
     waves:
-    - kuchi-he
-    - sumi-dama
+    - nanji-mushi
+    - nemu-nemu
     - kara-made
     sheetRow: 5
   - id: R1-F5
@@ -145,9 +262,9 @@ MonoBehaviour:
     title: Going places
     lessons: 05000000
     waves:
-    - nora-kana
+    - ikanai-bo
     - kuchi-he
-    - kara-made
+    - dokodemo
     sheetRow: 6
   - id: R1-F6
     realm: 1
@@ -155,9 +272,9 @@ MonoBehaviour:
     title: Daily life
     lessons: 06000000
     waves:
-    - sumi-dama
+    - paku-paku
     - nora-kana
-    - kara-made
+    - nijuu-kuchi
     sheetRow: 7
   - id: R1-BOSS
     realm: 1
@@ -169,4 +286,4 @@ MonoBehaviour:
     - kara-made
     - jikan-dorobo
     sheetRow: 8
-  lastImport: 2026-11-16 16:24
+  lastImport: 2026-11-17 15:28

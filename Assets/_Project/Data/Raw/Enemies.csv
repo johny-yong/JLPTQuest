@@ -5,3 +5,13 @@ sumi-dama,Sumi-dama,すみだま,grunt,3,20,3,none,○○|ニ|ワ,{本|ほん},r
 dokodemo,Dokodemo,どこでも,elite,5,25,3,inkBlot,どど|こ|で,{駅|えき},ready,
 kara-made,Kara-made,からまで,elite,5,25,3,comboSeal,から|ま|で,{時計|とけい},ready,
 jikan-dorobo,Jikan-dorobo,じかんどろぼう,boss,12,30,3,timeSqueeze,時時|分|秒,{時間|じかん},ready,Realm 1 boss. Can join the player as a companion through rematch drops.
+kore-kore,Kore-kore,これこれ,grunt,3,20,3,none,ここ|れ|ー,{辞書|じしょ},ready,Lesson 2. Points at everything and calls it this.
+are-sore,Are-sore,あれそれ,grunt,3,20,3,none,そそ|あ|れ,{傘|かさ},ready,Lesson 2. Can never decide between that and that over there.
+ikura-gani,Ikura-gani,いくらがに,grunt,3,20,3,none,いい|く|ら,{靴|くつ},ready,Lesson 3. A crab that haggles over every price. Its face spells いくら.
+nanji-mushi,Nanji-mushi,なんじむし,grunt,3,20,3,none,なな|ん|じ,{毎朝|まいあさ},ready,Lesson 4. Keeps asking the time and never listens to the answer.
+nemu-nemu,Nemu-nemu,ねむねむ,grunt,3,20,4,none,ーー|む|ね,{毎晩|まいばん},ready,"Lesson 4. Half asleep, so it attacks a turn slower."
+ikanai-bo,Ikanai-bo,いかないぼう,grunt,3,20,3,none,行行|か|ん,{電車|でんしゃ},ready,Lesson 5. Refuses to go anywhere.
+paku-paku,Paku-paku,ぱくぱく,grunt,3,20,3,none,ぱぱ|く|口,{朝|あさ}ごはん,ready,Lesson 6. Eats any word it can get its mouth on.
+dare-kamen,Dare-kamen,だれかめん,elite,5,25,3,furiganaThief,？？|だ|れ,{名前|なまえ},ready,"Lessons 1-2. A mask that steals readings. Furigana Thief isn't built yet, so it fights plain until then."
+nijuu-kuchi,Nijuu-kuchi,にじゅうくち,elite,5,25,4,doubleParry,二二|口|口口,{映画|えいが},ready,"Lesson 6. Two mouths, so two questions per attack once Double Parry is built. Attacks a turn slower to make up for it."
+kazoe-oni,Kazoe-oni,かぞえおに,boss,14,35,3,comboSeal,一二|三|四五,{一|ひと}つ,draft,"Realm 2 boss (lessons 7-12, counters). Draft until Realm 2 exists."

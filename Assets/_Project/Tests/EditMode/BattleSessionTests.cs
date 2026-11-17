@@ -98,9 +98,10 @@ namespace JLPTQuest.Tests
             RoundResult result = null;
             session.RoundResolved += r => result = r;
 
-            session.Tick(5f);
+            float limit = session.Round.timeLimit;
+            session.Tick(limit * 0.4f);
             Assert.AreEqual(BattlePhase.Asking, session.Phase);
-            session.Tick(7.5f);
+            session.Tick(limit * 0.7f);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.timedOut);
@@ -132,7 +133,7 @@ namespace JLPTQuest.Tests
             RoundResult result = null;
             session.RoundResolved += r => result = r;
 
-            session.Tick(6f); //Half the 12 seconds gone
+            session.Tick(session.Round.timeLimit * 0.5f); //Half the clock gone
             session.Answer(session.Round.correctIndex);
             Assert.AreEqual(138, result.damage.total); //100 x 1.25 x 1.1 = 137.5, rounds up
         }

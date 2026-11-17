@@ -6,7 +6,8 @@ using UnityEngine.UI;
 namespace JLPTQuest
 {
     /*
-        Shows up after a miss: the sentence with the right answer filled in, and the one line rule.
+        Shows up after a miss: the sentence with the right answer filled in, what it means in English,
+        and the one line rule.
         Can't be tapped away straight away, so the player actually reads it.
     */
     public class TeachCardView : MonoBehaviour
@@ -15,6 +16,7 @@ namespace JLPTQuest
         [SerializeField] private Button tapArea;
         [SerializeField] private TMP_Text header;
         [SerializeField] private RubyText sentence;
+        [SerializeField] private TMP_Text translation; //What the whole sentence means, for when the Japanese didn't land at all
         [SerializeField] private TMP_Text cue; //The same cue the question had, so the miss makes sense
         [SerializeField] private TMP_Text rule;
         [SerializeField] private TMP_Text tapHint;
@@ -39,6 +41,8 @@ namespace JLPTQuest
             QuestionData question = result.round.question;
             header.text = (result.timedOut ? "Time's up" : "Not quite") + (result.playerDamage > 0 ? "   -" + result.playerDamage + " HP" : string.Empty);
             sentence.Markup = PromptDisplay.Filled(question.prompt, result.round.CorrectOption);
+            translation.text = question.english;
+            translation.gameObject.SetActive(!string.IsNullOrWhiteSpace(question.english));
             cue.text = PromptDisplay.Cue(question.instruction);
             cue.gameObject.SetActive(cue.text.Length > 0);
             rule.text = question.rule;

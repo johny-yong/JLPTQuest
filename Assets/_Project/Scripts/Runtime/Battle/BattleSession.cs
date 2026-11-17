@@ -107,11 +107,11 @@ namespace JLPTQuest
         {
             bool parry = ParryPending;
             QuestionData question = parry && parryDeck != null ? parryDeck.Draw() : deck.Draw();
-            float timeLimit = parry ? rules.parrySeconds : rules.TimeLimit(question);
 
             roundCount++;
-            Round = ChoiceBuilder.Build(question, random, rules.choiceCount, timeLimit, roundCount);
+            Round = ChoiceBuilder.Build(question, random, rules.choiceCount, 0f, roundCount);
             Round.isParry = parry;
+            Round.StartClock(rules.TimeLimit(question, Round.options, parry)); //Longer questions and replies get more time
             Phase = BattlePhase.Asking;
             RoundStarted?.Invoke(Round);
         }

@@ -101,7 +101,8 @@ namespace JLPTQuest.Tests
 
             session.NextRound();
             Assert.AreEqual(BattlePhase.Asking, session.Phase);
-            Assert.AreEqual(12f, session.Round.timeLeft);
+            Assert.AreEqual(session.Round.timeLimit, session.Round.timeLeft);
+            Assert.Greater(session.Round.timeLeft, 0f);
         }
 
         [Test]
