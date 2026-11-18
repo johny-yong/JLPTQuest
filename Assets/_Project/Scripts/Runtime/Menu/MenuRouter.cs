@@ -19,7 +19,9 @@ namespace JLPTQuest
         [SerializeField] private MenuPanel companions;
         [SerializeField] private MenuPanel settings;
         [SerializeField] private MenuPanel title;
+        [SerializeField] private MenuPanel intro;
         [SerializeField] private FloorPreviewSheet floorPreview;
+        [SerializeField] private ScrollSheet scroll;
         [SerializeField] private TabBar tabBar;
 
         private MenuScreen current = MenuScreen.Home;
@@ -27,6 +29,7 @@ namespace JLPTQuest
 
         public ContentDatabase Database => database;
         public int Realm => realm;
+        public Progress Progress => SaveSystem.Progress;
 
         void Awake()
         {
@@ -42,6 +45,13 @@ namespace JLPTQuest
         {
             if (database == null) Debug.LogError("[Menu] There's no ContentDatabase on the MenuRouter.");
             Show(GameFlow.ReturnScreen);
+
+            //Read the scroll after a defeat lands here with that floor's scroll open
+            if (GameFlow.TakeScroll(out string stageId, out string grammarId) && database != null)
+            {
+                StageData stage = database.GetStage(stageId);
+                if (stage != null) scroll.Show(stage, true, grammarId);
+            }
         }
 
         void OnDestroy()
@@ -54,8 +64,9 @@ namespace JLPTQuest
             if (screen == MenuScreen.Settings && current != MenuScreen.Settings) beforeSettings = current;
 
             floorPreview.Close();
+            scroll.Close();
             foreach (MenuPanel panel in Panels())
-                if (panel != floorPreview && panel != Get(screen)) panel.Close();
+                if (panel != floorPreview && panel != scroll && panel != Get(screen)) panel.Close();
 
             current = screen;
             Get(screen).Open();
@@ -66,6 +77,31 @@ namespace JLPTQuest
         public void Back()
         {
             Show(beforeSettings);
+        }
+
+        //The first time a floor is played its scroll comes up first, after that Start goes straight in
+        public void StartFloor(StageData stage)
+        {
+            if (stage == null) return;
+            if (!Progress.HasReadScroll(stage.id)) scroll.Show(stage, true);
+            else GameFlow.PlayStage(stage.id);
+        }
+
+        public void OpenScroll(StageData stage)
+        {
+            if (stage != null) scroll.Show(stage, false);
+        }
+
+        //Reread one grammar point from the Codex: its lesson's floor scroll, opened on that card
+        public void OpenScrollAt(GrammarData point)
+        {
+            if (point == null) return;
+            foreach (StageData floor in Floors())
+            {
+                if (floor.lessons.Count != 1 || floor.lessons[0] != point.lesson) continue;
+                scroll.Show(floor, false, point.id);
+                return;
+            }
         }
 
         public void PreviewFloor(StageData stage)
@@ -116,6 +152,7 @@ namespace JLPTQuest
                 case MenuScreen.Companions: return companions;
                 case MenuScreen.Settings: return settings;
                 case MenuScreen.Title: return title;
+                case MenuScreen.Intro: return intro;
                 default: return home;
             }
         }
@@ -128,7 +165,9 @@ namespace JLPTQuest
             yield return companions;
             yield return settings;
             yield return title;
+            yield return intro;
             yield return floorPreview;
+            yield return scroll;
         }
     }
 }

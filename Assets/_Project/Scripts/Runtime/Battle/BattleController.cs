@@ -33,12 +33,15 @@ namespace JLPTQuest
         [SerializeField] private VictoryView victory;
         [SerializeField] private DefeatView defeat;
         [SerializeField] private PauseView pauseView;
+        [SerializeField] private NewGrammarView newGrammar;
         [SerializeField] private float worriedSeconds = 3f; //Companion looks worried on the last seconds of the clock
         [SerializeField, Range(0f, 1f)] private float worriedHp = 0.3f; //...or below this much HP
 
         private BattleSession session;
         private StagePlan plan;
         private bool paused;
+        private bool introducing; //A new-grammar card is up, the clock waits for it
+        private string lastMissedGrammar; //Read the scroll after a defeat opens on this one
 
         void Start()
         {
@@ -51,6 +54,7 @@ namespace JLPTQuest
             pauseView.PauseRequested += Pause;
             pauseView.ResumeRequested += Resume;
             pauseView.QuitRequested += BackToTower;
+            GameSettings.Changed += OnSettingsChanged;
             StartStage();
         }
 
@@ -61,6 +65,7 @@ namespace JLPTQuest
             pauseView.PauseRequested -= Pause;
             pauseView.ResumeRequested -= Resume;
             pauseView.QuitRequested -= BackToTower;
+            GameSettings.Changed -= OnSettingsChanged;
             Unhook();
             Time.timeScale = 1f; //Never leave the next scene frozen
         }
@@ -74,7 +79,7 @@ namespace JLPTQuest
         void Update()
         {
             if (session == null) return;
-            session.Tick(Time.deltaTime);
+            if (!introducing) session.Tick(Time.deltaTime);
 
             bool timeRunningOut = session.Phase == BattlePhase.Asking && session.Round.timeLeft <= worriedSeconds;
             companion.SetWorried(timeRunningOut || session.Player.HpFraction <= worriedHp);
@@ -85,6 +90,7 @@ namespace JLPTQuest
             StopAllCoroutines();
             Unhook();
             paused = false;
+            lastMissedGrammar = null;
             Time.timeScale = 1f;
             pauseView.Hide();
 
@@ -97,6 +103,8 @@ namespace JLPTQuest
             }
 
             session = new BattleSession(plan.waves, plan.questions, config.rules, Environment.TickCount, plan.parryQuestions);
+            session.Calm = GameSettings.CalmMode;
+            questionCard.SetCalm(session.Calm);
             session.WaveStarted += OnWaveStarted;
             session.RoundStarted += OnRoundStarted;
             session.RoundResolved += OnRoundResolved;
@@ -106,6 +114,8 @@ namespace JLPTQuest
             victory.Hide();
             defeat.Hide();
             waveBanner.Hide();
+            newGrammar.Hide();
+            introducing = false;
             cutIn.Hide();
             companion.ResetPose();
             combo.Hide();
@@ -145,14 +155,42 @@ namespace JLPTQuest
 
         private void OnRoundStarted(QuestionRound round)
         {
+            if (!round.isParry && TryIntroduce(round)) return;
+            ShowRound(round);
+        }
+
+        private void ShowRound(QuestionRound round)
+        {
             questionCard.Show(round);
             answerTiles.Show(round.options, round.isParry);
             hintBar.Refresh(session);
         }
 
+        //The first time a grammar point turns up, it gets taught with a worked example before it gets asked
+        private bool TryIntroduce(QuestionRound round)
+        {
+            string id = round.question.grammar;
+            if (string.IsNullOrEmpty(id) || SaveSystem.Progress.HasSeenGrammar(id)) return false;
+            GrammarData point = database.GetGrammar(id);
+            if (point == null) return false;
+
+            SaveSystem.Progress.MarkGrammarSeen(id);
+            SaveSystem.Save();
+            introducing = true;
+            questionCard.Clear();
+            answerTiles.Clear();
+            newGrammar.Show(point, ScrollPlan.ExampleFor(database, id, round.question.id), () =>
+            {
+                introducing = false;
+                ShowRound(round);
+            });
+            return true;
+        }
+
         private void OnRoundResolved(RoundResult result)
         {
             answerTiles.ShowResult(result);
+            if (!result.correct && !string.IsNullOrEmpty(result.round.question.grammar)) lastMissedGrammar = result.round.question.grammar;
             questionCard.Reveal(result.round.CorrectOption);
             enemyView.Refresh(session.Enemy);
             playerHud.Refresh(session.Player);
@@ -222,6 +260,8 @@ namespace JLPTQuest
         private void ShowStageCleared()
         {
             bool[] stars = StageStars.Earned(true, session.Stats, config.rules);
+            SaveSystem.Progress.RecordClear(plan.stage.id, stars, WordSeals()); //Stars, the floor above unlocking, and the seals
+            SaveSystem.Save();
             string next = StagePlan.NextStageId(database, plan.stage);
             Action onNext = null;
             if (next != null) onNext = () => PlayStage(next);
@@ -231,7 +271,7 @@ namespace JLPTQuest
         private void ShowDefeat()
         {
             string detail = "Wave " + (session.WaveIndex + 1) + "/" + session.WaveCount + "  ·  " + session.CurrentEnemy.displayName + " won this time\n" + StatsLine();
-            defeat.Show("Out of HP", detail, StartStage, BackToTower);
+            defeat.Show("Out of HP", detail, StartStage, BackToTower, ReadScroll);
         }
 
         //Time scale 0 stops the question clock and every WaitForSeconds in here and the views in one go
@@ -249,6 +289,21 @@ namespace JLPTQuest
             paused = false;
             Time.timeScale = 1f;
             pauseView.Hide();
+        }
+
+        //Calm mode can be flipped from Settings in the pause menu, so it applies straight away
+        private void OnSettingsChanged()
+        {
+            if (session == null) return;
+            session.Calm = GameSettings.CalmMode;
+            questionCard.SetCalm(session.Calm);
+            hintBar.Refresh(session);
+        }
+
+        private void ReadScroll()
+        {
+            Time.timeScale = 1f;
+            GameFlow.OpenScroll(plan.stage.id, lastMissedGrammar);
         }
 
         private void BackToTower()

@@ -30,6 +30,7 @@ MonoBehaviour:
     rule: "\u3053\u308C is near the speaker, \u305D\u308C is near the listener, \u3042\u308C
       is far from both."
     english: This is a dictionary.
+    grammar: G02-kore
     tags:
     - kosoado
     sheetRow: 32
@@ -48,6 +49,7 @@ MonoBehaviour:
       - "\u3042\u306E"
     rule: "\u3042\u308C points at something far from both of you."
     english: Whose umbrella is that over there?
+    grammar: G02-kore
     tags:
     - kosoado
     sheetRow: 33
@@ -66,6 +68,7 @@ MonoBehaviour:
       - "\u3042\u308C"
     rule: "\u3053\u306E comes right before a noun. \u3053\u308C stands alone."
     english: This book is mine.
+    grammar: G02-kono
     tags:
     - kosoado
     sheetRow: 34
@@ -84,6 +87,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u306E shows the owner: my book."
     english: This is my book.
+    grammar: G02-no
     tags:
     - no
     sheetRow: 35
@@ -103,6 +107,7 @@ MonoBehaviour:
       - "\u3067"
     rule: "\u306E shows what the book is about: a computer book."
     english: That's a book about computers.
+    grammar: G02-no
     tags:
     - no
     sheetRow: 36
@@ -121,6 +126,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u3060\u308C\u306E asks whose. The noun after \u306E can be left out."
     english: Whose is that key?
+    grammar: G02-nan
     tags:
     - no
     - question-word
@@ -141,6 +147,7 @@ MonoBehaviour:
       - "\u306A\u3093\u3055\u3044"
     rule: "\u306A\u3093 asks what a thing is."
     english: What is this? ...It's a watch.
+    grammar: G02-nan
     tags:
     - question-word
     sheetRow: 38
@@ -162,6 +169,7 @@ MonoBehaviour:
     rule: "\u306A\u3093\u306E asks what something is about. \u3060\u308C\u306E would
       ask whose."
     english: What is this magazine about? ...It's a camera magazine.
+    grammar: G02-nan
     tags:
     - question-word
     - no
@@ -181,6 +189,7 @@ MonoBehaviour:
       - "\u3053\u306E"
     rule: "\u305D\u3046\u3067\u3059 means yes, that's right."
     english: Is that a ballpoint pen? ...Yes, it is.
+    grammar: G02-sou
     tags:
     - sou
     sheetRow: 40
@@ -199,6 +208,7 @@ MonoBehaviour:
       - "\u3082"
     rule: "For an either-or question, answer with the choice and \u3067\u3059."
     english: Is that a ballpoint pen or a mechanical pencil? ...A mechanical pencil.
+    grammar: G02-choice
     tags:
     - choice-question
     sheetRow: 41
@@ -217,6 +227,7 @@ MonoBehaviour:
       - "\u306E"
     rule: "An either-or question puts \u304B after each choice."
     english: Is this coffee or juice?
+    grammar: G02-choice
     tags:
     - ka
     - choice-question
@@ -236,6 +247,7 @@ MonoBehaviour:
       - "\u3053\u308C"
     rule: "\u3042\u306E comes before a noun. \u3042\u308C stands alone."
     english: Who is that person over there?
+    grammar: G02-kono
     tags:
     - kosoado
     sheetRow: 43
@@ -255,6 +267,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u306E joins \u65E5\u672C\u8A9E to \u672C: a Japanese-language book."
     english: This is a Japanese book.
+    grammar: G02-no
     tags:
     - no
     sheetRow: 44
@@ -279,6 +292,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u3053\u306E goes before the noun. \u308F\u305F\u3057\u306E means mine."
     english: This book is mine.
+    grammar: G02-kono
     tags:
     - kosoado
     - no
@@ -306,6 +320,7 @@ MonoBehaviour:
     rule: "\u306A\u3093\u306E asks what about, and the answer uses \u306E the same
       way."
     english: What is this book about? ...It's a book about cars.
+    grammar: G02-nan
     tags:
     - no
     sheetRow: 46
@@ -326,6 +341,7 @@ MonoBehaviour:
     rule: "\u305D\u3046\u3067\u3059 becomes \u305D\u3046\u3058\u3083\u3042\u308A\u307E\u305B\u3093.
       You can also say \u3061\u304C\u3044\u307E\u3059."
     english: That's not right.
+    grammar: G02-sou
     tags:
     - sou
     - copula
@@ -345,6 +361,7 @@ MonoBehaviour:
       - "\u3053\u308C\u306F {\u672C|\u307B\u3093}\u3058\u3083\u3042\u308A\u307E\u305B\u3093"
     rule: "Add \u304B after \u3067\u3059 to ask."
     english: Is this a book?
+    grammar: G02-choice
     tags:
     - ka
     sheetRow: 48
@@ -360,6 +377,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u8F9E\u66F8 (\u3058\u3057\u3087) means dictionary."
     english: This is a dictionary.
+    grammar: 
     tags:
     - vocab
     sheetRow: 49
@@ -375,6 +393,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u304B\u304E means key."
     english: That's a key.
+    grammar: 
     tags:
     - vocab
     sheetRow: 50
@@ -390,6 +409,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u5098 (\u304B\u3055) means umbrella."
     english: That over there is an umbrella.
+    grammar: 
     tags:
     - vocab
     sheetRow: 51
@@ -405,6 +425,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u65B0\u805E (\u3057\u3093\u3076\u3093) means newspaper."
     english: This is a newspaper.
+    grammar: 
     tags:
     - vocab
     sheetRow: 52
@@ -420,6 +441,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u6642\u8A08 (\u3068\u3051\u3044) means watch or clock."
     english: That's a watch.
+    grammar: 
     tags:
     - vocab
     sheetRow: 53
@@ -436,6 +458,7 @@ MonoBehaviour:
     rule: "\u3053\u308C\u306F comes first, then \u308F\u305F\u3057\u306E right before
       \u672C."
     english: This is my book.
+    grammar: G02-no
     tags:
     - word-order
     sheetRow: 54
@@ -451,6 +474,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u305D\u306E comes before \u304B\u304E, and \u3060\u308C\u306E asks whose."
     english: Whose is that key?
+    grammar: G02-nan
     tags:
     - word-order
     sheetRow: 55
@@ -468,6 +492,7 @@ MonoBehaviour:
     rule: "\u3042\u308C\u306F comes first, then \u65E5\u672C\u8A9E\u306E right before
       \u65B0\u805E."
     english: That over there is a Japanese newspaper.
+    grammar: G02-no
     tags:
     - word-order
     sheetRow: 56
@@ -487,6 +512,7 @@ MonoBehaviour:
       - "\u3042\u308C\u306F \u30AB\u30E1\u30E9\u3067\u3059\u304B\u3002"
     rule: "When someone asks about \u305D\u308C (near you), answer with \u3053\u308C."
     english: What's that? ...This is a camera.
+    grammar: G02-kore
     tags:
     - kosoado
     sheetRow: 57
@@ -506,6 +532,7 @@ MonoBehaviour:
     rule: "\u306F\u3044 goes with \u305D\u3046\u3067\u3059, \u3044\u3044\u3048 goes
       with \u3061\u304C\u3044\u307E\u3059."
     english: Is this your umbrella? ...Yes, it is.
+    grammar: G02-sou
     tags:
     - sou
     - yes-no
@@ -526,6 +553,7 @@ MonoBehaviour:
       - "\u304F\u308B\u307E\u306E \u305F\u306A\u304B\u3055\u3093\u3067\u3059\u3002"
     rule: "\u3060\u308C\u306E asks whose, so answer with a name and \u306E."
     english: Whose car is that? ...It's Mr Tanaka's car.
+    grammar: G02-nan
     tags:
     - no
     - question-word
@@ -545,6 +573,7 @@ MonoBehaviour:
       - "\u300C\u304A\u300D\u3067\u3059\u304B\u3002"
     rule: "Answer an either-or question with the choice, not \u306F\u3044 or \u3044\u3044\u3048."
     english: "Is this \u3042 or \u304A? ...It's \u304A."
+    grammar: G02-choice
     tags:
     - choice-question
     sheetRow: 60
@@ -563,6 +592,7 @@ MonoBehaviour:
       - "\u306A\u3093\u306E {\u96D1\u8A8C|\u3056\u3063\u3057}\u3067\u3059\u3002"
     rule: "\u306A\u3093\u306E asks what something is about, not whose."
     english: What is that magazine about? ...It's a camera magazine.
+    grammar: G02-nan
     tags:
     - no
     - question-word

@@ -28,6 +28,7 @@ namespace JLPTQuest.EditorTools
                 instruction = row.Get("instruction"),
                 rule = row.Get("rule"),
                 english = row.Get("english"),
+                grammar = row.Get("grammar"),
                 tags = ContentText.SplitOutsideBraces(row.Get("tags"), ContentText.OrSeparator)
             };
 

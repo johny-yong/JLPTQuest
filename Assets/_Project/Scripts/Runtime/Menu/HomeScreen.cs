@@ -13,6 +13,7 @@ namespace JLPTQuest
         [SerializeField] private TMP_Text continueTitle;
         [SerializeField] private Button sealsButton;
         [SerializeField] private TMP_Text sealsCount;
+        [SerializeField] private TMP_Text speech; //Ryū's bubble, follows how far you've got
 
         private StageData next;
 
@@ -27,13 +28,43 @@ namespace JLPTQuest
         {
             base.Open();
 
-            //Always floor 1 for now, it'll point at the first uncleared floor once progress is saved
+            //Continue points at the lowest floor not cleared yet, and sits on the boss once the realm is done
             List<StageData> floors = Router.Floors();
-            next = floors.Count > 0 ? floors[0] : null;
+            Progress progress = Router.Progress;
+            next = progress.NextFloor(floors);
             continueButton.interactable = next != null;
-            continueFloor.text = next == null ? "No floors yet" : "Realm " + next.realm + "  ·  Floor " + next.floor;
-            continueTitle.text = next == null ? "Sync the content first" : next.title;
-            sealsCount.text = Router.Seals().Count + " to find";
+
+            if (next == null)
+            {
+                continueFloor.text = "No floors yet";
+                continueTitle.text = "Sync the content first";
+            }
+            else if (progress.AllCleared(floors))
+            {
+                continueFloor.text = "Realm " + Router.Realm + " cleared!";
+                continueTitle.text = "Rematch the boss or chase missing stars";
+            }
+            else
+            {
+                continueFloor.text = "Realm " + next.realm + "  ·  " + (Router.IsBoss(next) ? "Boss floor" : "Floor " + next.floor);
+                continueTitle.text = next.title;
+            }
+            speech.text = SpeechLine(progress, floors);
+
+            List<string> seals = Router.Seals();
+            int found = 0;
+            foreach (string seal in seals)
+                if (progress.HasSeal(seal)) found++;
+            sealsCount.text = found + " / " + seals.Count + " found";
+        }
+
+        private string SpeechLine(Progress progress, List<StageData> floors)
+        {
+            if (next == null) return "Hmm, the tower's empty.";
+            if (progress.AllCleared(floors)) return "We did it! Rematch for stars?";
+            if (Router.IsBoss(next)) return "The boss is next. Stay sharp!";
+            if (next.floor == 1) return "Ready when you are. Floor 1 first!";
+            return "Floor " + next.floor + " next. Let's go!";
         }
     }
 }

@@ -11,6 +11,7 @@ namespace JLPTQuest
         [SerializeField] private Button dimButton; //Tapping outside the sheet closes it too
         [SerializeField] private Button closeButton;
         [SerializeField] private Button startButton;
+        [SerializeField] private Button scrollButton;
         [SerializeField] private TMP_Text kicker;
         [SerializeField] private TMP_Text title;
         [SerializeField] private TMP_Text details;
@@ -27,10 +28,8 @@ namespace JLPTQuest
             chipTemplate.gameObject.SetActive(false);
             dimButton.onClick.AddListener(Close);
             closeButton.onClick.AddListener(Close);
-            startButton.onClick.AddListener(() =>
-            {
-                if (stage != null) GameFlow.PlayStage(stage.id);
-            });
+            startButton.onClick.AddListener(() => Router.StartFloor(stage));
+            scrollButton.onClick.AddListener(() => Router.OpenScroll(stage));
         }
 
         public void Show(StageData stage)
@@ -39,7 +38,9 @@ namespace JLPTQuest
             kicker.text = Router.IsBoss(stage) ? "BOSS FLOOR" : "FLOOR " + stage.floor;
             title.text = stage.title;
             details.text = Lessons(stage) + "  ·  " + stage.waves.Count + (stage.waves.Count == 1 ? " wave" : " waves");
-            best.text = "Not cleared yet"; //Best stars come with progress saving
+            StageRecord record = Router.Progress.Record(stage.id);
+            if (record == null || record.clears == 0) best.text = "Not cleared yet";
+            else best.text = StarText.Line(record.stars) + "  best  ·  cleared " + record.clears + (record.clears == 1 ? " time" : " times");
 
             foreach (EnemyChip chip in chips) Destroy(chip.gameObject);
             chips.Clear();

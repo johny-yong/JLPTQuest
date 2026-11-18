@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    //First thing you see when the app opens: the name of the game, tap anywhere to go Home
+    //First thing you see when the app opens: the name of the game, tap anywhere to go on (the intro the very first time, Home after)
     public class TitleScreen : MenuPanel
     {
         [SerializeField] private Button startButton; //Covers the whole screen
@@ -13,7 +13,7 @@ namespace JLPTQuest
         public override void Init(MenuRouter router)
         {
             base.Init(router);
-            startButton.onClick.AddListener(() => Router.Show(MenuScreen.Home));
+            startButton.onClick.AddListener(() => Router.Show(SaveSystem.Data.introSeen ? MenuScreen.Home : MenuScreen.Intro));
         }
 
         //Slow breathing on "Tap to start" so it reads as something to do

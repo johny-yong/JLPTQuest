@@ -31,6 +31,8 @@ namespace JLPTQuest.EditorTools
         public int lessonsImported;
         public int enemiesImported;
         public int stagesImported;
+        public int grammarImported;
+        public int wordsImported;
         public int draftsSkipped;
         public int retiredSkipped;
 
@@ -64,7 +66,8 @@ namespace JLPTQuest.EditorTools
 
             var builder = new StringBuilder();
             builder.Append("Imported ").Append(questionsImported).Append(" questions across ").Append(lessonsImported)
-                .Append(" lessons, ").Append(enemiesImported).Append(" enemies and ").Append(stagesImported).Append(" stages.");
+                .Append(" lessons, ").Append(enemiesImported).Append(" enemies, ").Append(stagesImported).Append(" stages, ")
+                .Append(grammarImported).Append(" grammar points and ").Append(wordsImported).Append(" words.");
             if (RowsSkippedForErrors > 0) builder.Append(" Skipped ").Append(RowsSkippedForErrors).Append(" row(s) with errors.");
             if (draftsSkipped > 0) builder.Append(" Left out ").Append(draftsSkipped).Append(" draft(s).");
             if (retiredSkipped > 0) builder.Append(" Left out ").Append(retiredSkipped).Append(" retired.");

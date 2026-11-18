@@ -14,6 +14,8 @@ namespace JLPTQuest.EditorTools
         public readonly List<QuestionData> questions = new List<QuestionData>();
         public readonly List<EnemyData> enemies = new List<EnemyData>();
         public readonly List<StageData> stages = new List<StageData>();
+        public readonly List<GrammarData> grammar = new List<GrammarData>();
+        public readonly List<WordData> words = new List<WordData>();
     }
 
     /*
@@ -29,30 +31,44 @@ namespace JLPTQuest.EditorTools
             string questions = ReadRaw(settings, ContentKind.Questions, report);
             string enemies = ReadRaw(settings, ContentKind.Enemies, report);
             string stages = ReadRaw(settings, ContentKind.Stages, report);
+            string grammar = ReadRaw(settings, ContentKind.Grammar, report);
+            string words = ReadRaw(settings, ContentKind.Words, report);
             if (report.aborted) return report;
 
-            ContentBundle bundle = Build(questions, enemies, stages, report);
+            ContentBundle bundle = Build(questions, enemies, stages, grammar, words, report);
             if (!report.aborted) WriteAssets(bundle, settings, report);
             return report;
         }
 
-        //The pure part, no assets touched, so tests can feed it plain strings
         public static ContentBundle Build(string questionsCsv, string enemiesCsv, string stagesCsv, ImportReport report)
+        {
+            return Build(questionsCsv, enemiesCsv, stagesCsv, null, null, report);
+        }
+
+        //The pure part, no assets touched, so tests can feed it plain strings. Null grammar or words means that tab is left out
+        public static ContentBundle Build(string questionsCsv, string enemiesCsv, string stagesCsv, string grammarCsv, string wordsCsv, ImportReport report)
         {
             var bundle = new ContentBundle();
             CsvTable questionTable = LoadTable(QuestionRowParser.Tab, questionsCsv, QuestionRowParser.requiredColumns, report);
             CsvTable enemyTable = LoadTable(EnemyRowParser.Tab, enemiesCsv, EnemyRowParser.requiredColumns, report);
             CsvTable stageTable = LoadTable(StageRowParser.Tab, stagesCsv, StageRowParser.requiredColumns, report);
+            CsvTable grammarTable = grammarCsv == null ? null : LoadTable(GrammarRowParser.Tab, grammarCsv, GrammarRowParser.requiredColumns, report);
+            CsvTable wordTable = wordsCsv == null ? null : LoadTable(WordRowParser.Tab, wordsCsv, WordRowParser.requiredColumns, report);
             if (report.aborted) return bundle;
 
             ReadRows(questionTable, QuestionRowParser.Tab, report, row => QuestionRowParser.Parse(row, report), bundle.questions);
             ReadRows(enemyTable, EnemyRowParser.Tab, report, row => EnemyRowParser.Parse(row, report), bundle.enemies);
             ReadRows(stageTable, StageRowParser.Tab, report, row => StageRowParser.Parse(row, report), bundle.stages);
+            if (grammarTable != null) ReadRows(grammarTable, GrammarRowParser.Tab, report, row => GrammarRowParser.Parse(row, report), bundle.grammar);
+            if (wordTable != null) ReadRows(wordTable, WordRowParser.Tab, report, row => WordRowParser.Parse(row, report), bundle.words);
             CheckStages(bundle, report);
+            if (grammarTable != null) CheckGrammar(bundle, report);
 
             report.questionsImported = bundle.questions.Count;
             report.enemiesImported = bundle.enemies.Count;
             report.stagesImported = bundle.stages.Count;
+            report.grammarImported = bundle.grammar.Count;
+            report.wordsImported = bundle.words.Count;
             return bundle;
         }
 
@@ -85,6 +101,8 @@ namespace JLPTQuest.EditorTools
             database.lessons = sets;
             database.enemies = bundle.enemies;
             database.stages = bundle.stages;
+            database.grammar = bundle.grammar;
+            database.words = bundle.words;
             database.lastImport = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             database.RebuildLookups();
             EditorUtility.SetDirty(database);
@@ -163,6 +181,18 @@ namespace JLPTQuest.EditorTools
 
             bundle.stages.Clear();
             bundle.stages.AddRange(kept);
+        }
+
+        //A question tagged with a grammar id that doesn't exist still plays, it just won't show up on the scroll
+        private static void CheckGrammar(ContentBundle bundle, ImportReport report)
+        {
+            var ids = new HashSet<string>(bundle.grammar.Select(point => point.id));
+            foreach (QuestionData question in bundle.questions)
+            {
+                if (string.IsNullOrEmpty(question.grammar) || ids.Contains(question.grammar)) continue;
+                report.Warn(QuestionRowParser.Tab, question.sheetRow, "grammar", "'" + question.grammar + "' isn't a ready id on the Grammar tab");
+                question.grammar = string.Empty;
+            }
         }
 
         private static CsvTable LoadTable(string tab, string csv, string[] required, ImportReport report)

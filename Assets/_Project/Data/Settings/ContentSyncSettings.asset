@@ -23,5 +23,11 @@ MonoBehaviour:
   - name: Stages
     gid: 300
     kind: 2
+  - name: Grammar
+    gid: 400
+    kind: 3
+  - name: Words
+    gid: 500
+    kind: 4
   rawFolder: Assets/_Project/Data/Raw
   generatedFolder: Assets/_Project/Data/Generated

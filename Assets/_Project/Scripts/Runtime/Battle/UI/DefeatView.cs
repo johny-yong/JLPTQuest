@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    //Out of HP. Try the floor again or head back to the tower
+    //Out of HP. Try again, read the scroll on whatever tripped you up, or head back to the tower
     public class DefeatView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup group;
@@ -13,9 +13,11 @@ namespace JLPTQuest
         [SerializeField] private TMP_Text subtitle;
         [SerializeField] private Button retryButton;
         [SerializeField] private Button towerButton;
+        [SerializeField] private Button scrollButton;
 
         private Action onRetry;
         private Action onTower;
+        private Action onScroll;
 
         void Awake()
         {
@@ -25,12 +27,14 @@ namespace JLPTQuest
                 onRetry?.Invoke();
             });
             towerButton.onClick.AddListener(() => onTower?.Invoke());
+            scrollButton.onClick.AddListener(() => onScroll?.Invoke());
         }
 
-        public void Show(string heading, string detail, Action onRetry, Action onTower)
+        public void Show(string heading, string detail, Action onRetry, Action onTower, Action onScroll)
         {
             this.onRetry = onRetry;
             this.onTower = onTower;
+            this.onScroll = onScroll;
             title.text = heading;
             subtitle.text = detail;
             SetVisible(true);

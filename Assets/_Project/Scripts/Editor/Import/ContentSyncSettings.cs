@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace JLPTQuest.EditorTools
 {
-    public enum ContentKind { Questions, Enemies, Stages }
+    public enum ContentKind { Questions, Enemies, Stages, Grammar, Words }
 
     [Serializable]
     public class SheetTab
@@ -25,7 +25,9 @@ namespace JLPTQuest.EditorTools
         {
             new SheetTab { name = "Questions", gid = 100, kind = ContentKind.Questions },
             new SheetTab { name = "Enemies", gid = 200, kind = ContentKind.Enemies },
-            new SheetTab { name = "Stages", gid = 300, kind = ContentKind.Stages }
+            new SheetTab { name = "Stages", gid = 300, kind = ContentKind.Stages },
+            new SheetTab { name = "Grammar", gid = 400, kind = ContentKind.Grammar },
+            new SheetTab { name = "Words", gid = 500, kind = ContentKind.Words }
         };
         public string rawFolder = "Assets/_Project/Data/Raw";
         public string generatedFolder = "Assets/_Project/Data/Generated";
@@ -43,6 +45,26 @@ namespace JLPTQuest.EditorTools
             return rawFolder + "/" + tab.name + ".csv";
         }
 
+        //A settings asset made before a tab existed won't list it, so new tabs get added here once
+        private void AddMissingTabs()
+        {
+            var defaults = new List<SheetTab>
+            {
+                new SheetTab { name = "Grammar", gid = 400, kind = ContentKind.Grammar },
+                new SheetTab { name = "Words", gid = 500, kind = ContentKind.Words }
+            };
+            bool added = false;
+            foreach (SheetTab tab in defaults)
+            {
+                if (TabFor(tab.kind) != null) continue;
+                tabs.Add(tab);
+                added = true;
+            }
+            if (!added) return;
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+        }
+
         public SheetTab TabFor(ContentKind kind)
         {
             return tabs.Find(tab => tab.kind == kind);
@@ -51,7 +73,11 @@ namespace JLPTQuest.EditorTools
         public static ContentSyncSettings LoadOrCreate()
         {
             var settings = AssetDatabase.LoadAssetAtPath<ContentSyncSettings>(AssetPath);
-            if (settings != null) return settings;
+            if (settings != null)
+            {
+                settings.AddMissingTabs();
+                return settings;
+            }
 
             settings = CreateInstance<ContentSyncSettings>();
             EditorFolders.Ensure(System.IO.Path.GetDirectoryName(AssetPath));

@@ -19,11 +19,16 @@ namespace JLPTQuest
         public static DamageBreakdown Calculate(BattleRules rules, QuestionFormat format, float timeLeft, float timeLimit, int combo, int hintsUsed)
         {
             double timeShare = timeLimit > 0f ? Clamp01(timeLeft / timeLimit) : 0.0;
+            return CalculateAtSpeed(rules, format, (float)(1.0 + rules.speedBonus * timeShare), combo, hintsUsed);
+        }
 
+        //Same hit with the speed already decided, Calm mode passes its fixed speed in here
+        public static DamageBreakdown CalculateAtSpeed(BattleRules rules, QuestionFormat format, float speed, int combo, int hintsUsed)
+        {
             var hit = new DamageBreakdown
             {
                 format = rules.FormatMultiplier(format),
-                speed = (float)(1.0 + rules.speedBonus * timeShare),
+                speed = speed,
                 combo = (float)(1.0 + rules.comboStep * Math.Min(Math.Max(combo, 0), rules.comboCap)),
                 hints = (float)Math.Pow(rules.hintMultiplier, Math.Max(hintsUsed, 0))
             };

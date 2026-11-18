@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    //The realm's floors stacked up like a tower, boss on top. Tapping one opens its preview
+    //The realm's floors stacked up like a tower, boss on top. Tapping an open floor opens its preview
     public class TowerScreen : MenuPanel
     {
         [SerializeField] private FloorTile tileTemplate; //Kept switched off, every floor is a copy of it
@@ -36,17 +36,19 @@ namespace JLPTQuest
             foreach (FloorTile tile in tiles) Destroy(tile.gameObject);
             tiles.Clear();
 
+            Progress progress = Router.Progress;
             List<StageData> floors = Router.Floors();
             for (int i = floors.Count - 1; i >= 0; i--)
             {
                 StageData stage = floors[i];
+                FloorState state = progress.IsCleared(stage.id) ? FloorState.Cleared : progress.IsUnlocked(stage, floors) ? FloorState.Next : FloorState.Locked;
                 FloorTile tile = Instantiate(tileTemplate, floorList);
                 tile.gameObject.SetActive(true);
-                tile.Show(stage, Router.IsBoss(stage), () => Router.PreviewFloor(stage));
+                tile.Show(stage, Router.IsBoss(stage), state, progress.Stars(stage.id), () => Router.PreviewFloor(stage));
                 tiles.Add(tile);
             }
 
-            realmLabel.text = "Realm " + Router.Realm + "  ·  " + floors.Count + " floors";
+            realmLabel.text = "Realm " + Router.Realm + "  ·  ★ " + progress.TotalStars(floors) + " / " + floors.Count * 3;
         }
     }
 }

@@ -29,6 +29,7 @@ MonoBehaviour:
       - "\u306E"
     rule: "\u3092 marks the thing an action is done to."
     english: I eat bread.
+    grammar: G06-wo
     tags:
     - wo
     sheetRow: 152
@@ -48,6 +49,7 @@ MonoBehaviour:
       - "\u304C"
     rule: "\u3092 marks what you read: the newspaper."
     english: I read the newspaper every morning.
+    grammar: G06-wo
     tags:
     - wo
     sheetRow: 153
@@ -67,6 +69,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u3067 marks the place where an action happens."
     english: I buy a newspaper at the station.
+    grammar: G06-de
     tags:
     - de-place
     sheetRow: 154
@@ -85,6 +88,7 @@ MonoBehaviour:
       - "\u304C"
     rule: "\u3067 marks the place where an action happens."
     english: I study at the library.
+    grammar: G06-de
     tags:
     - de-place
     sheetRow: 155
@@ -104,6 +108,7 @@ MonoBehaviour:
       - "\u304C"
     rule: "Sports and activities take \u3092 with \u3057\u307E\u3059."
     english: I play tennis on Sundays.
+    grammar: G06-wo
     tags:
     - wo
     sheetRow: 156
@@ -123,6 +128,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u4F1A\u3044\u307E\u3059 takes \u306B (or \u3068) for the person you meet."
     english: I'm meeting a friend.
+    grammar: G06-ni
     tags:
     - ni-person
     sheetRow: 157
@@ -143,6 +149,7 @@ MonoBehaviour:
       - "\u3044\u3064"
     rule: "\u306A\u306B\u3092 asks what you'll do."
     english: What will you do tomorrow? ...I'm going to Kyoto.
+    grammar: G06-nani
     tags:
     - question-word
     sheetRow: 158
@@ -162,6 +169,7 @@ MonoBehaviour:
       - "{\u98DF|\u305F}\u3079\u307E\u3057\u305F"
     rule: "\u307E\u305B\u3093\u304B invites someone politely: won't you...?"
     english: Won't you have lunch with me?
+    grammar: G06-invite
     tags:
     - invite
     sheetRow: 159
@@ -180,6 +188,7 @@ MonoBehaviour:
       - "{\u884C|\u3044}\u304D\u307E\u305B\u3093\u3067\u3057\u305F"
     rule: "\u307E\u3057\u3087\u3046 means let's."
     english: Yes, sounds good. Let's go.
+    grammar: G06-invite
     tags:
     - invite
     sheetRow: 160
@@ -198,6 +207,7 @@ MonoBehaviour:
       - "{\u6C34|\u307F\u305A}"
     rule: "\u5199\u771F\u3092\u64AE\u308A\u307E\u3059 means take a photo."
     english: I take photos in the garden.
+    grammar: G06-wo
     tags:
     - vocab
     sheetRow: 161
@@ -216,6 +226,7 @@ MonoBehaviour:
       - "{\u5375|\u305F\u307E\u3054}"
     rule: "\u304A\u8336 (\u304A\u3061\u3083) means tea, and you drink it with \u98F2\u307F\u307E\u3059."
     english: I drink tea every night.
+    grammar: G06-wo
     tags:
     - vocab
     sheetRow: 162
@@ -234,6 +245,7 @@ MonoBehaviour:
       - "{\u898B|\u307F}\u307E\u3059"
     rule: "\u66F8\u304D\u307E\u3059 (\u304B\u304D\u307E\u3059) means write."
     english: I write a letter.
+    grammar: G06-wo
     tags:
     - vocab
     - verb
@@ -254,6 +266,7 @@ MonoBehaviour:
       - "\u3082"
     rule: "\u305D\u3046\u3067\u3059\u304B with a falling tone means oh, I see."
     english: I'm going back to my country next week. ...Oh, I see.
+    grammar: G06-souka
     tags:
     - ka
     sheetRow: 164
@@ -278,6 +291,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u3067 marks where it happened, \u3092 marks what you bought."
     english: I bought juice at the station.
+    grammar: G06-de
     tags:
     - de-place
     - wo
@@ -304,6 +318,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u3067 marks where you eat, \u3092 marks what you eat."
     english: I eat dinner at home.
+    grammar: G06-de
     tags:
     - de-place
     - wo
@@ -330,6 +345,7 @@ MonoBehaviour:
       - "\u307E\u3057\u305F"
     rule: "\u3092 marks the movie. Say yes to an invitation with \u307E\u3057\u3087\u3046."
     english: Won't you watch a movie with me tomorrow? ...Yes, let's.
+    grammar: G06-invite
     tags:
     - wo
     - invite
@@ -349,6 +365,7 @@ MonoBehaviour:
       - "{\u98F2|\u306E}\u307F\u307E\u305B\u3093\u3067\u3057\u305F"
     rule: "\u307E\u3059 becomes \u307E\u305B\u3093\u304B to invite someone."
     english: Won't you drink...?
+    grammar: G06-invite
     tags:
     - invite
     - verb-form
@@ -368,6 +385,7 @@ MonoBehaviour:
       - "{\u8AAD|\u3088}\u307F\u307E\u305B\u3093"
     rule: "\u307E\u3059 becomes \u307E\u3057\u3087\u3046 for let's."
     english: Let's read.
+    grammar: G06-invite
     tags:
     - invite
     - verb-form
@@ -388,6 +406,7 @@ MonoBehaviour:
     rule: "\u307E\u3059 becomes \u307E\u305B\u3093\u3067\u3057\u305F for the past
       negative."
     english: didn't watch
+    grammar: G04-masu
     tags:
     - verb-form
     sheetRow: 170
@@ -406,6 +425,7 @@ MonoBehaviour:
       - "{\u8CB7|\u304B}\u3044\u307E\u305B\u3093\u3067\u3057\u305F"
     rule: "\u307E\u3059 becomes \u307E\u3057\u305F for the past."
     english: bought
+    grammar: G04-masu
     tags:
     - verb-form
     sheetRow: 171
@@ -421,6 +441,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u9B5A (\u3055\u304B\u306A) means fish."
     english: I eat fish.
+    grammar: 
     tags:
     - vocab
     - food
@@ -437,6 +458,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u6C34 (\u307F\u305A) means water."
     english: I drink water.
+    grammar: 
     tags:
     - vocab
     - food
@@ -453,6 +475,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u91CE\u83DC (\u3084\u3055\u3044) means vegetables."
     english: I eat vegetables.
+    grammar: 
     tags:
     - vocab
     - food
@@ -469,6 +492,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u30B8\u30E5\u30FC\u30B9 means juice."
     english: I drink juice.
+    grammar: 
     tags:
     - vocab
     - katakana
@@ -485,6 +509,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u624B\u7D19 (\u3066\u304C\u307F) means letter."
     english: I write a letter.
+    grammar: 
     tags:
     - vocab
     sheetRow: 176
@@ -503,6 +528,7 @@ MonoBehaviour:
       wrong: []
     rule: "The \u3067 and \u3092 parts can swap places. The verb always comes last."
     english: I buy a newspaper at the station.
+    grammar: G06-de
     tags:
     - word-order
     sheetRow: 177
@@ -521,6 +547,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u307E\u305B\u3093\u304B comes at the end to invite."
     english: Won't you watch a movie with me?
+    grammar: G06-invite
     tags:
     - word-order
     - invite
@@ -540,6 +567,7 @@ MonoBehaviour:
       - "\u30D1\u30F3\u3067 {\u98DF|\u305F}\u3079\u307E\u3059\u3002"
     rule: "\u306A\u306B\u3092 asks what, so answer with a thing and \u3092."
     english: What will you eat? ...I'll eat bread.
+    grammar: G06-nani
     tags:
     - wo
     sheetRow: 179
@@ -559,6 +587,7 @@ MonoBehaviour:
     rule: "\u3069\u3053\u3067 asks where something happened, so answer with a place
       and \u3067."
     english: Where did you take the photo? ...In the garden.
+    grammar: G06-de
     tags:
     - de-place
     sheetRow: 180
@@ -580,6 +609,7 @@ MonoBehaviour:
     rule: "Accept an invitation with \u3048\u3048 and \u307E\u3057\u3087\u3046 or
       \u3044\u3044\u3067\u3059\u306D."
     english: Won't you have lunch with me? ...Sure, let's eat.
+    grammar: G06-invite
     tags:
     - invite
     sheetRow: 181

@@ -15,6 +15,7 @@ namespace JLPTQuest
 
         public float speedBonus = 0.5f; //Answering instantly gives 1 + this, answering at the buzzer gives 1
         public float perfectSpeed = 1.3f; //Speed this high with no hints shows the Perfect stamp
+        public float calmSpeed = 1.25f; //Calm mode turns the clock off and every answer counts as this fast, so no Perfects
 
         public float comboStep = 0.1f;
         public int comboCap = 10;

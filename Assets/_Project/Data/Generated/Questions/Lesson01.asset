@@ -29,6 +29,7 @@ MonoBehaviour:
       - "\u3067"
     rule: "\u306F marks the topic, what the sentence is about."
     english: I am a student.
+    grammar: G01-wa
     tags:
     - wa
     sheetRow: 2
@@ -47,6 +48,7 @@ MonoBehaviour:
       - "\u3067"
     rule: "\u306F marks who the sentence is about: \u30A2\u30F3\u30CA\u3055\u3093."
     english: Anna is a company employee.
+    grammar: G01-wa
     tags:
     - wa
     sheetRow: 3
@@ -66,6 +68,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u3082 means also, and it takes the place of \u306F."
     english: I'm a student. Lee is a student too.
+    grammar: G01-mo
     tags:
     - mo
     sheetRow: 4
@@ -85,6 +88,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u306E joins two nouns: a student of Sakura University."
     english: I'm a student at Sakura University.
+    grammar: G01-no
     tags:
     - no
     sheetRow: 5
@@ -103,6 +107,7 @@ MonoBehaviour:
       - "\u3067"
     rule: "\u306E joins the company to \u793E\u54E1: an IMC employee."
     english: Mr Tanaka is an employee of IMC.
+    grammar: G01-no
     tags:
     - no
     sheetRow: 6
@@ -121,6 +126,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u304B at the end turns a sentence into a question."
     english: Are you a student?
+    grammar: G01-ka
     tags:
     - ka
     sheetRow: 7
@@ -140,6 +146,7 @@ MonoBehaviour:
       - "\u3042\u308A\u307E\u305B\u3093"
     rule: "\u3058\u3083\u3042\u308A\u307E\u305B\u3093 is the negative of \u3067\u3059."
     english: I am not a doctor.
+    grammar: G01-neg
     tags:
     - copula
     sheetRow: 8
@@ -158,6 +165,7 @@ MonoBehaviour:
       - "\u3067"
     rule: "\u306F marks the topic: that person."
     english: Who is that person?
+    grammar: G01-wa
     tags:
     - wa
     sheetRow: 9
@@ -177,6 +185,7 @@ MonoBehaviour:
       - "\u3042\u306A\u305F"
     rule: "\u3060\u308C asks who. \u3069\u306A\u305F is the polite version."
     english: Who is that person? ...It's Lee.
+    grammar: G01-who
     tags:
     - question-word
     sheetRow: 10
@@ -197,6 +206,7 @@ MonoBehaviour:
     rule: "\u306A\u3093\u3055\u3044 asks someone's age. \u304A\u3044\u304F\u3064
       is the polite version."
     english: How old is Lee? ...26.
+    grammar: G01-who
     tags:
     - question-word
     - age
@@ -216,6 +226,7 @@ MonoBehaviour:
       - "\u3082"
     rule: "\u304B\u3089 marks where something comes from."
     english: I came from Thailand.
+    grammar: G01-kara
     tags:
     - kara
     sheetRow: 12
@@ -235,6 +246,7 @@ MonoBehaviour:
       - "\u3067"
     rule: "\u3082 means also."
     english: Ken is an engineer. Anna is an engineer too.
+    grammar: G01-mo
     tags:
     - mo
     sheetRow: 13
@@ -254,6 +266,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u306E joins the bank to \u9280\u884C\u54E1: an ABC Bank employee."
     english: Lee is an employee of ABC Bank.
+    grammar: G01-no
     tags:
     - no
     sheetRow: 14
@@ -280,6 +293,7 @@ MonoBehaviour:
     rule: "\u306F marks the topic. \u306E joins \u3055\u304F\u3089\u5927\u5B66 to
       \u5B66\u751F."
     english: I'm a Sakura University student.
+    grammar: G01-wa
     tags:
     - wa
     - no
@@ -305,6 +319,7 @@ MonoBehaviour:
       - "\u3078"
     rule: "\u306F marks the topic, and \u304B at the end makes it a question."
     english: Are you a teacher?
+    grammar: G01-ka
     tags:
     - wa
     - ka
@@ -326,6 +341,7 @@ MonoBehaviour:
     rule: "\u3067\u3059 becomes \u3058\u3083\u3042\u308A\u307E\u305B\u3093 in the
       negative."
     english: (I'm) not a student.
+    grammar: G01-neg
     tags:
     - copula
     sheetRow: 17
@@ -344,6 +360,7 @@ MonoBehaviour:
       - "{\u5148\u751F|\u305B\u3093\u305B\u3044}\u3058\u3083\u3042\u308A\u307E\u305B\u3093"
     rule: "Add \u304B after \u3067\u3059 to ask a question."
     english: Are you a teacher?
+    grammar: G01-ka
     tags:
     - copula
     - ka
@@ -360,6 +377,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u5B66\u751F (\u304C\u304F\u305B\u3044) means student."
     english: I am a student.
+    grammar: 
     tags:
     - vocab
     sheetRow: 19
@@ -375,6 +393,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u533B\u8005 (\u3044\u3057\u3083) means doctor."
     english: Lee is a doctor.
+    grammar: 
     tags:
     - vocab
     sheetRow: 20
@@ -391,6 +410,7 @@ MonoBehaviour:
     rule: "\u4F1A\u793E\u54E1 (\u304B\u3044\u3057\u3083\u3044\u3093) means company
       employee."
     english: Anna is a company employee.
+    grammar: 
     tags:
     - vocab
     sheetRow: 21
@@ -406,6 +426,7 @@ MonoBehaviour:
       wrong: []
     rule: "A country + \u4EBA (\u3058\u3093) means a person from that country."
     english: I am Japanese.
+    grammar: 
     tags:
     - vocab
     - country
@@ -422,6 +443,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u5148\u751F (\u305B\u3093\u305B\u3044) means teacher."
     english: Mr Tanaka is a teacher.
+    grammar: 
     tags:
     - vocab
     sheetRow: 23
@@ -438,6 +460,7 @@ MonoBehaviour:
       wrong: []
     rule: "The topic with \u306F comes first, then the noun phrase, then \u3067\u3059."
     english: I'm a Sakura University student.
+    grammar: G01-wa
     tags:
     - word-order
     sheetRow: 24
@@ -453,6 +476,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u3060\u308C sits where the answer will go, and \u304B ends the question."
     english: Who is that person?
+    grammar: G01-who
     tags:
     - word-order
     sheetRow: 25
@@ -470,6 +494,7 @@ MonoBehaviour:
     rule: "\u3082 takes the place of \u306F, and \u3058\u3083\u3042\u308A\u307E\u305B\u3093
       comes last."
     english: Lee isn't a company employee either.
+    grammar: G01-neg
     tags:
     - word-order
     sheetRow: 26
@@ -489,6 +514,7 @@ MonoBehaviour:
       - "\u30A2\u30F3\u30CA\u3067\u3059\u304B\u3002"
     rule: "Never put \u3055\u3093 on your own name."
     english: What's your name? ...I'm Anna.
+    grammar: G01-san
     tags:
     - self-intro
     sheetRow: 27
@@ -507,6 +533,7 @@ MonoBehaviour:
       - "{\u5B66\u751F|\u304C\u304F\u305B\u3044}\u3067\u3059\u304B\u3002"
     rule: "\u306F\u3044 goes with \u3067\u3059, \u3044\u3044\u3048 goes with \u3058\u3083\u3042\u308A\u307E\u305B\u3093."
     english: Are you a student? ...Yes, I am.
+    grammar: G01-ka
     tags:
     - yes-no
     sheetRow: 28
@@ -525,6 +552,7 @@ MonoBehaviour:
       - "\u30A2\u30F3\u30CA\u3067\u3059\u3002"
     rule: "\u304A\u3044\u304F\u3064 asks your age, so answer with a number of years."
     english: How old are you? ...I'm 28.
+    grammar: G01-who
     tags:
     - age
     sheetRow: 29
@@ -543,6 +571,7 @@ MonoBehaviour:
       - "26{\u6B73|\u3055\u3044}\u3067\u3059\u3002"
     rule: "\u3060\u308C asks who, so answer with a name. Don't start with \u306F\u3044."
     english: Who is that person? ...It's Mr Tanaka.
+    grammar: G01-who
     tags:
     - question-word
     sheetRow: 30
@@ -562,6 +591,7 @@ MonoBehaviour:
     rule: "Answer \u306F\u3044 with \u3082...\u3067\u3059, and \u3044\u3044\u3048
       with \u306F...\u3058\u3083\u3042\u308A\u307E\u305B\u3093."
     english: Is Ken an engineer too? ...Yes, he is.
+    grammar: G01-mo
     tags:
     - mo
     - yes-no

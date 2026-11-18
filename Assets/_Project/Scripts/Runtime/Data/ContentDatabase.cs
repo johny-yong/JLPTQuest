@@ -13,12 +13,15 @@ namespace JLPTQuest
         public List<QuestionSet> lessons = new List<QuestionSet>();
         public List<EnemyData> enemies = new List<EnemyData>();
         public List<StageData> stages = new List<StageData>();
+        public List<GrammarData> grammar = new List<GrammarData>(); //In teaching order, as on the sheet
+        public List<WordData> words = new List<WordData>();
         public string lastImport;
 
         private Dictionary<string, QuestionData> questionLookup;
         private Dictionary<string, EnemyData> enemyLookup;
         private Dictionary<string, StageData> stageLookup;
         private Dictionary<int, QuestionSet> lessonLookup;
+        private Dictionary<string, GrammarData> grammarLookup;
 
         void OnEnable()
         {
@@ -41,6 +44,23 @@ namespace JLPTQuest
         {
             EnsureLookups();
             return id != null && stageLookup.TryGetValue(id, out StageData stage) ? stage : null;
+        }
+
+        public GrammarData GetGrammar(string id)
+        {
+            EnsureLookups();
+            return !string.IsNullOrEmpty(id) && grammarLookup.TryGetValue(id, out GrammarData point) ? point : null;
+        }
+
+        //A lesson's grammar points in teaching order
+        public List<GrammarData> GrammarFor(int lesson)
+        {
+            return grammar.FindAll(point => point.lesson == lesson);
+        }
+
+        public List<WordData> WordsFor(int lesson)
+        {
+            return words.FindAll(word => word.lesson == lesson);
         }
 
         public QuestionSet GetLesson(int lesson)
@@ -79,6 +99,10 @@ namespace JLPTQuest
             stageLookup = new Dictionary<string, StageData>();
             foreach (StageData stage in stages)
                 stageLookup[stage.id] = stage;
+
+            grammarLookup = new Dictionary<string, GrammarData>();
+            foreach (GrammarData point in grammar)
+                grammarLookup[point.id] = point;
         }
 
         private void EnsureLookups()

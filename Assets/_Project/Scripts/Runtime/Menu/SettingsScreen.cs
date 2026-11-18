@@ -1,24 +1,24 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    //Opened from 設 on any screen. Only Back works so far, the rest gets wired up in the settings step
+    //The menu's Settings screen, opened from 設. The controls themselves live in the shared SettingsPanel
     public class SettingsScreen : MenuPanel
     {
-        [SerializeField] private Button backButton;
-        [SerializeField] private Toggle furiganaToggle;
-        [SerializeField] private Button resetButton;
+        [SerializeField] private SettingsPanel panel;
 
         public override void Init(MenuRouter router)
         {
             base.Init(router);
-            backButton.onClick.AddListener(Router.Back);
+            panel.BackPressed += Router.Back;
+            panel.IntroPressed += () => Router.Show(MenuScreen.Intro);
+            panel.ProgressReset += () => Router.Show(MenuScreen.Title); //A brand new player starts at the title, then the intro
+        }
 
-            //Shown so players know it exists, but locked on like FuriganaSettings says
-            furiganaToggle.isOn = FuriganaSettings.ShowFurigana;
-            furiganaToggle.interactable = false;
-            resetButton.interactable = false; //Nothing to reset until progress is saved
+        public override void Open()
+        {
+            base.Open();
+            panel.Refresh(true);
         }
     }
 }

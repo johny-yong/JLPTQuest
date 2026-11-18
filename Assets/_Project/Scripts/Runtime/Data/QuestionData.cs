@@ -26,6 +26,7 @@ namespace JLPTQuest
         public List<AnswerSlot> slots = new List<AnswerSlot>();
         public string rule;
         public string english;
+        public string grammar; //Id from the Grammar tab, empty for rows that only practise a word
         public List<string> tags = new List<string>();
         public int sheetRow; //So a weird question can be traced back to its row in the sheet
 

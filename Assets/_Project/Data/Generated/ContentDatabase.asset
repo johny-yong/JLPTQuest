@@ -286,4 +286,640 @@ MonoBehaviour:
     - kara-made
     - jikan-dorobo
     sheetRow: 8
-  lastImport: 2026-11-17 15:28
+  grammar:
+  - id: G01-wa
+    lesson: 1
+    name: "\u306F: the topic"
+    pattern: "N1 \u306F N2 \u3067\u3059"
+    explanation: "\u306F (read \u308F) marks what you're talking about, and \u3067\u3059
+      ends the sentence politely: N1 is N2. \u308F\u305F\u3057\u306F {\u5B66\u751F|\u304C\u304F\u305B\u3044}\u3067\u3059:
+      I am a student."
+    sheetRow: 2
+  - id: G01-neg
+    lesson: 1
+    name: "\u3058\u3083\u3042\u308A\u307E\u305B\u3093: is not"
+    pattern: "N1 \u306F N2 \u3058\u3083\u3042\u308A\u307E\u305B\u3093"
+    explanation: "The negative of \u3067\u3059. \u3067\u306F\u3042\u308A\u307E\u305B\u3093
+      means the same and sounds a little more formal."
+    sheetRow: 3
+  - id: G01-ka
+    lesson: 1
+    name: "\u304B: asking a question"
+    pattern: "N1 \u306F N2 \u3067\u3059\u304B"
+    explanation: "\u304B at the end turns a sentence into a question. Answer \u306F\u3044\u3001\u301C\u3067\u3059
+      or \u3044\u3044\u3048\u3001\u301C\u3058\u3083\u3042\u308A\u307E\u305B\u3093."
+    sheetRow: 4
+  - id: G01-mo
+    lesson: 1
+    name: "\u3082: also"
+    pattern: "N1 \u3082 N2 \u3067\u3059"
+    explanation: "\u3082 means also, and it takes the place of \u306F: \u30EA\u30FC\u3055\u3093\u3082
+      {\u5B66\u751F|\u304C\u304F\u305B\u3044}\u3067\u3059, Lee is a student too."
+    sheetRow: 5
+  - id: G01-no
+    lesson: 1
+    name: "\u306E: joining two nouns"
+    pattern: "N1 \u306E N2"
+    explanation: "\u306E joins two nouns, and the first one tells you more about
+      the second: \u3055\u304F\u3089{\u5927\u5B66|\u3060\u3044\u304C\u304F}\u306E
+      {\u5B66\u751F|\u304C\u304F\u305B\u3044}, a student at Sakura University."
+    sheetRow: 6
+  - id: G01-who
+    lesson: 1
+    name: "\u3060\u308C, \u306A\u3093\u3055\u3044: who and how old"
+    pattern: "\u3060\u308C\u3067\u3059\u304B / \u306A\u3093\u3055\u3044\u3067\u3059\u304B"
+    explanation: "\u3060\u308C asks who and \u306A\u3093\u3055\u3044 asks someone's
+      age. \u3069\u306A\u305F and \u304A\u3044\u304F\u3064 are the polite versions.
+      Answer with the name or the age, not \u306F\u3044."
+    sheetRow: 7
+  - id: G01-san
+    lesson: 1
+    name: "\u3055\u3093: other people's names"
+    pattern: "\u301C\u3055\u3093"
+    explanation: "Put \u3055\u3093 after other people's names to be polite. Never
+      put it after your own name."
+    sheetRow: 8
+  - id: G01-kara
+    lesson: 1
+    name: "\u304B\u3089: where you're from"
+    pattern: "\u301C\u304B\u3089 {\u6765|\u304D}\u307E\u3057\u305F"
+    explanation: "\u304B\u3089 marks where something comes from: \u30BF\u30A4\u304B\u3089
+      {\u6765|\u304D}\u307E\u3057\u305F, I'm from Thailand."
+    sheetRow: 9
+  - id: G02-kore
+    lesson: 2
+    name: "\u3053\u308C, \u305D\u308C, \u3042\u308C: this and that"
+    pattern: "\u3053\u308C / \u305D\u308C / \u3042\u308C \u306F N \u3067\u3059"
+    explanation: "\u3053\u308C is near me, \u305D\u308C is near you, and \u3042\u308C
+      is far from both of us. If someone asks about \u305D\u308C, answer with \u3053\u308C."
+    sheetRow: 10
+  - id: G02-kono
+    lesson: 2
+    name: "\u3053\u306E, \u305D\u306E, \u3042\u306E: this book, that person"
+    pattern: "\u3053\u306E / \u305D\u306E / \u3042\u306E + N"
+    explanation: "The same three, but they sit right before a noun: \u3053\u306E
+      {\u672C|\u307B\u3093}, this book. \u3053\u308C stands on its own."
+    sheetRow: 11
+  - id: G02-no
+    lesson: 2
+    name: "\u306E: whose and what about"
+    pattern: "\u308F\u305F\u3057\u306E N / \u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u306E
+      N"
+    explanation: "\u306E shows the owner (\u308F\u305F\u3057\u306E {\u672C|\u307B\u3093},
+      my book) or what a thing is about (\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u306E
+      {\u672C|\u307B\u3093}, a computer book). The noun after \u306E can drop: \u308F\u305F\u3057\u306E\u3067\u3059."
+    sheetRow: 12
+  - id: G02-nan
+    lesson: 2
+    name: "\u306A\u3093, \u3060\u308C\u306E: what and whose"
+    pattern: "\u306A\u3093\u3067\u3059\u304B / \u306A\u3093\u306E N / \u3060\u308C\u306E
+      N"
+    explanation: "\u306A\u3093 asks what a thing is, \u306A\u3093\u306E asks what
+      kind, and \u3060\u308C\u306E asks whose."
+    sheetRow: 13
+  - id: G02-sou
+    lesson: 2
+    name: "\u305D\u3046\u3067\u3059: that's right"
+    pattern: "\u306F\u3044\u3001\u305D\u3046\u3067\u3059 / \u3044\u3044\u3048\u3001\u3061\u304C\u3044\u307E\u3059"
+    explanation: "\u305D\u3046\u3067\u3059 agrees with what was said. \u3044\u3044\u3048
+      goes with \u3061\u304C\u3044\u307E\u3059, that's wrong."
+    sheetRow: 14
+  - id: G02-choice
+    lesson: 2
+    name: "A \u3067\u3059\u304B\u3001B \u3067\u3059\u304B: either-or"
+    pattern: "A \u3067\u3059\u304B\u3001B \u3067\u3059\u304B"
+    explanation: "An either-or question puts \u304B after each choice. Answer with
+      the choice and \u3067\u3059, not \u306F\u3044 or \u3044\u3044\u3048."
+    sheetRow: 15
+  - id: G03-koko
+    lesson: 3
+    name: "\u3053\u3053, \u305D\u3053, \u3042\u305D\u3053: places"
+    pattern: "\u3053\u3053 / \u305D\u3053 / \u3042\u305D\u3053 \u306F N \u3067\u3059"
+    explanation: "Places: here, there by you, and over there. \u3053\u3061\u3089,
+      \u305D\u3061\u3089 and \u3042\u3061\u3089 are the polite versions."
+    sheetRow: 16
+  - id: G03-doko
+    lesson: 3
+    name: "\u3069\u3053, \u3069\u3061\u3089: where"
+    pattern: "N \u306F \u3069\u3053\u3067\u3059\u304B"
+    explanation: "\u3069\u3053 asks where, and \u3069\u3061\u3089 is the polite version.
+      \u304A{\u56FD|\u304F\u306B}\u306F \u3069\u3061\u3089\u3067\u3059\u304B asks
+      which country someone is from. Use \u306F before \u3069\u3053\u3067\u3059\u304B."
+    sheetRow: 17
+  - id: G03-no
+    lesson: 3
+    name: "\u306E: made in"
+    pattern: "{\u65E5\u672C|\u306B\u307B\u3093}\u306E N"
+    explanation: "\u306E can show where a thing is from or made: {\u65E5\u672C|\u306B\u307B\u3093}\u306E
+      \u304F\u308B\u307E, a Japanese car. \u3069\u3053\u306E asks where it's from."
+    sheetRow: 18
+  - id: G03-ikura
+    lesson: 3
+    name: "\u3044\u304F\u3089: how much"
+    pattern: "N \u306F \u3044\u304F\u3089\u3067\u3059\u304B"
+    explanation: "\u3044\u304F\u3089 asks the price. Answer with the amount and {\u5186|\u3048\u3093}:
+      500{\u5186|\u3048\u3093}\u3067\u3059."
+    sheetRow: 19
+  - id: G03-count
+    lesson: 3
+    name: Numbers that change sound
+    pattern: "\u3055\u3093\u3073\u3083\u304F / \u306F\u3063\u305B\u3093 / \u3055\u3093\u304C\u3044"
+    explanation: "Some numbers change sound when they join: 300 is \u3055\u3093\u3073\u3083\u304F,
+      8,000 is \u306F\u3063\u305B\u3093, the 3rd floor is \u3055\u3093\u304C\u3044.
+      \u306A\u3093\u304C\u3044 asks which floor."
+    sheetRow: 20
+  - id: G04-time
+    lesson: 4
+    name: "\u301C\u3058\u301C\u3075\u3093: telling the time"
+    pattern: "{\u4ECA|\u3044\u307E} \u301C{\u6642|\u3058}\u301C{\u5206|\u3075\u3093}\u3067\u3059"
+    explanation: "\u306A\u3093\u3058 asks the time. Watch the readings: 4{\u6642|\u3058}
+      \u3088\u3058, 7{\u6642|\u3058} \u3057\u3061\u3058, 9{\u6642|\u3058} \u304F\u3058,
+      10{\u5206|\u3077\u3093} \u3058\u3085\u3063\u3077\u3093. {\u5348\u524D|\u3054\u305C\u3093}
+      is a.m. and {\u5348\u5F8C|\u3054\u3054} is p.m."
+    sheetRow: 21
+  - id: G04-masu
+    lesson: 4
+    name: "\u307E\u3059 forms: do, don't, did, didn't"
+    pattern: "\u301C\u307E\u3059 / \u301C\u307E\u305B\u3093 / \u301C\u307E\u3057\u305F
+      / \u301C\u307E\u305B\u3093\u3067\u3057\u305F"
+    explanation: Polite verbs change their ending for the negative and the past.
+      A past question needs a past answer.
+    sheetRow: 22
+  - id: G04-ni
+    lesson: 4
+    name: "\u306B: at a time"
+    pattern: "\u301C{\u6642|\u3058}\u306B V"
+    explanation: "\u306B marks the time something happens: 6{\u6642|\u3058}\u306B
+      {\u8D77|\u304A}\u304D\u307E\u3059, I get up at 6."
+    sheetRow: 23
+  - id: G04-kara
+    lesson: 4
+    name: "\u304B\u3089, \u307E\u3067: from and until"
+    pattern: "\u301C\u304B\u3089 \u301C\u307E\u3067"
+    explanation: "\u304B\u3089 marks the start and \u307E\u3067 marks the end: 9{\u6642|\u3058}\u304B\u3089
+      5{\u6642|\u3058}\u307E\u3067, from 9 until 5."
+    sheetRow: 24
+  - id: G04-to
+    lesson: 4
+    name: "\u3068: and"
+    pattern: "N \u3068 N"
+    explanation: "\u3068 joins nouns: {\u571F\u66DC\u65E5|\u3069\u3088\u3046\u3073}\u3068
+      {\u65E5\u66DC\u65E5|\u306B\u3061\u3088\u3046\u3073}, Saturday and Sunday."
+    sheetRow: 25
+  - id: G04-ne
+    lesson: 4
+    name: "\u306D: sharing a feeling"
+    pattern: "\u301C\u306D"
+    explanation: "\u306D at the end shares a feeling and invites the listener to
+      agree."
+    sheetRow: 26
+  - id: G05-he
+    lesson: 5
+    name: "\u3078: going somewhere"
+    pattern: "{\u5834\u6240|\u3070\u3057\u3087}\u3078 {\u884C|\u3044}\u304D\u307E\u3059"
+    explanation: "\u3078 (read \u3048) marks where you're heading with {\u884C|\u3044}\u304D\u307E\u3059,
+      {\u6765|\u304D}\u307E\u3059 and {\u5E30|\u304B\u3048}\u308A\u307E\u3059. \u306B
+      works too."
+    sheetRow: 27
+  - id: G05-de
+    lesson: 5
+    name: "\u3067: by train, by bus"
+    pattern: "{\u96FB\u8ECA|\u3067\u3093\u3057\u3083}\u3067 {\u884C|\u3044}\u304D\u307E\u3059"
+    explanation: "\u3067 marks how you travel. \u306A\u3093\u3067 asks how. On foot
+      is {\u6B69|\u3042\u308B}\u3044\u3066, with no \u3067."
+    sheetRow: 28
+  - id: G05-to
+    lesson: 5
+    name: "\u3068: with someone"
+    pattern: "{\u53CB\u9054|\u3068\u3082\u3060\u3061}\u3068 {\u884C|\u3044}\u304D\u307E\u3059"
+    explanation: "\u3068 marks who you do something with, and \u3060\u308C\u3068
+      asks who with. {\u4E00\u4EBA|\u3072\u3068\u308A}\u3067 means alone."
+    sheetRow: 29
+  - id: G05-itsu
+    lesson: 5
+    name: "\u3044\u3064 and dates"
+    pattern: "\u3044\u3064 / \u301C{\u6708|\u304C\u3064}\u301C{\u65E5|\u306B\u3061}"
+    explanation: "\u3044\u3064 asks when. Some dates have their own readings: the
+      1st is \u3064\u3044\u305F\u3061, the 8th is \u3088\u3046\u304B, and April is
+      \u3057\u304C\u3064."
+    sheetRow: 30
+  - id: G05-nimo
+    lesson: 5
+    name: "\u3069\u3053\u3082 + negative: nowhere"
+    pattern: "\u3069\u3053(\u3078)\u3082 {\u884C|\u3044}\u304D\u307E\u305B\u3093"
+    explanation: "A question word with \u3082 and a negative verb means not anywhere,
+      or nothing at all."
+    sheetRow: 31
+  - id: G05-yo
+    lesson: 5
+    name: "\u3088: telling someone"
+    pattern: "\u301C\u3088"
+    explanation: "\u3088 at the end tells the listener something they don't know
+      yet."
+    sheetRow: 32
+  - id: G06-wo
+    lesson: 6
+    name: "\u3092: the thing you act on"
+    pattern: "N \u3092 V"
+    explanation: "\u3092 marks the thing an action is done to: \u30D1\u30F3\u3092
+      {\u98DF|\u305F}\u3079\u307E\u3059, I eat bread. Sports and activities take
+      \u3092 with \u3057\u307E\u3059."
+    sheetRow: 33
+  - id: G06-de
+    lesson: 6
+    name: "\u3067: where it happens"
+    pattern: "{\u5834\u6240|\u3070\u3057\u3087}\u3067 V"
+    explanation: "\u3067 marks the place where an action happens: {\u56F3\u66F8\u9928|\u3068\u3057\u3087\u304B\u3093}\u3067
+      {\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u3059. \u3078 is
+      where you go, \u3067 is where you do it."
+    sheetRow: 34
+  - id: G06-nani
+    lesson: 6
+    name: "\u306A\u306B\u3092: what will you do"
+    pattern: "{\u4F55|\u306A\u306B}\u3092 \u3057\u307E\u3059\u304B"
+    explanation: "\u306A\u306B\u3092 asks what you'll do or what thing. Answer with
+      the thing and \u3092."
+    sheetRow: 35
+  - id: G06-ni
+    lesson: 6
+    name: "\u306B: meeting someone"
+    pattern: "N \u306B {\u4F1A|\u3042}\u3044\u307E\u3059"
+    explanation: "{\u4F1A|\u3042}\u3044\u307E\u3059 takes \u306B (or \u3068) for
+      the person you meet."
+    sheetRow: 36
+  - id: G06-invite
+    lesson: 6
+    name: "\u307E\u305B\u3093\u304B, \u307E\u3057\u3087\u3046: inviting"
+    pattern: "\u3044\u3063\u3057\u3087\u306B \u301C\u307E\u305B\u3093\u304B"
+    explanation: "\u307E\u305B\u3093\u304B invites someone politely: won't you...?
+      \u307E\u3057\u3087\u3046 means let's. Say yes with \u3048\u3048\u3001\u301C\u307E\u3057\u3087\u3046."
+    sheetRow: 37
+  - id: G06-souka
+    lesson: 6
+    name: "\u305D\u3046\u3067\u3059\u304B: oh, I see"
+    pattern: "\u305D\u3046\u3067\u3059\u304B"
+    explanation: "With a falling tone, \u305D\u3046\u3067\u3059\u304B means oh, I
+      see. It shows you heard something new."
+    sheetRow: 38
+  words:
+  - id: W01-01
+    lesson: 1
+    word: "{\u5B66\u751F|\u304C\u304F\u305B\u3044}"
+    meaning: student
+    sheetRow: 2
+  - id: W01-02
+    lesson: 1
+    word: "{\u5148\u751F|\u305B\u3093\u305B\u3044}"
+    meaning: teacher
+    sheetRow: 3
+  - id: W01-03
+    lesson: 1
+    word: "{\u4F1A\u793E\u54E1|\u304B\u3044\u3057\u3083\u3044\u3093}"
+    meaning: company employee
+    sheetRow: 4
+  - id: W01-04
+    lesson: 1
+    word: "{\u533B\u8005|\u3044\u3057\u3083}"
+    meaning: doctor
+    sheetRow: 5
+  - id: W01-05
+    lesson: 1
+    word: "{\u9280\u884C\u54E1|\u304E\u3093\u3053\u3046\u3044\u3093}"
+    meaning: bank employee
+    sheetRow: 6
+  - id: W01-06
+    lesson: 1
+    word: "\u30A8\u30F3\u30B8\u30CB\u30A2"
+    meaning: engineer
+    sheetRow: 7
+  - id: W01-07
+    lesson: 1
+    word: "{\u5927\u5B66|\u3060\u3044\u304C\u304F}"
+    meaning: university
+    sheetRow: 8
+  - id: W01-08
+    lesson: 1
+    word: "{\u4EBA|\u3072\u3068}"
+    meaning: person
+    sheetRow: 9
+  - id: W01-09
+    lesson: 1
+    word: "{\u540D\u524D|\u306A\u307E\u3048}"
+    meaning: name
+    sheetRow: 10
+  - id: W01-10
+    lesson: 1
+    word: "{\u56FD|\u304F\u306B}"
+    meaning: country
+    sheetRow: 11
+  - id: W01-11
+    lesson: 1
+    word: "\u301C{\u6B73|\u3055\u3044}"
+    meaning: ... years old
+    sheetRow: 12
+  - id: W01-12
+    lesson: 1
+    word: "\u306F\u3044 / \u3044\u3044\u3048"
+    meaning: yes / no
+    sheetRow: 13
+  - id: W02-01
+    lesson: 2
+    word: "{\u672C|\u307B\u3093}"
+    meaning: book
+    sheetRow: 14
+  - id: W02-02
+    lesson: 2
+    word: "{\u8F9E\u66F8|\u3058\u3057\u3087}"
+    meaning: dictionary
+    sheetRow: 15
+  - id: W02-03
+    lesson: 2
+    word: "{\u96D1\u8A8C|\u3056\u3063\u3057}"
+    meaning: magazine
+    sheetRow: 16
+  - id: W02-04
+    lesson: 2
+    word: "{\u65B0\u805E|\u3057\u3093\u3076\u3093}"
+    meaning: newspaper
+    sheetRow: 17
+  - id: W02-05
+    lesson: 2
+    word: "{\u5098|\u304B\u3055}"
+    meaning: umbrella
+    sheetRow: 18
+  - id: W02-06
+    lesson: 2
+    word: "\u304B\u304E"
+    meaning: key
+    sheetRow: 19
+  - id: W02-07
+    lesson: 2
+    word: "{\u6642\u8A08|\u3068\u3051\u3044}"
+    meaning: watch, clock
+    sheetRow: 20
+  - id: W02-08
+    lesson: 2
+    word: "\u304F\u308B\u307E"
+    meaning: car
+    sheetRow: 21
+  - id: W02-09
+    lesson: 2
+    word: "\u30AB\u30E1\u30E9"
+    meaning: camera
+    sheetRow: 22
+  - id: W02-10
+    lesson: 2
+    word: "\u30DC\u30FC\u30EB\u30DA\u30F3"
+    meaning: ballpoint pen
+    sheetRow: 23
+  - id: W02-11
+    lesson: 2
+    word: "\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC"
+    meaning: computer
+    sheetRow: 24
+  - id: W02-12
+    lesson: 2
+    word: "\u3061\u304C\u3044\u307E\u3059"
+    meaning: that's wrong
+    sheetRow: 25
+  - id: W03-01
+    lesson: 3
+    word: "{\u98DF\u5802|\u3057\u3087\u304F\u3069\u3046}"
+    meaning: cafeteria
+    sheetRow: 26
+  - id: W03-02
+    lesson: 3
+    word: "{\u6559\u5BA4|\u304D\u3087\u3046\u3057\u3064}"
+    meaning: classroom
+    sheetRow: 27
+  - id: W03-03
+    lesson: 3
+    word: "\u30C8\u30A4\u30EC"
+    meaning: toilet
+    sheetRow: 28
+  - id: W03-04
+    lesson: 3
+    word: "{\u4E8B\u52D9\u6240|\u3058\u3080\u3057\u3087}"
+    meaning: office
+    sheetRow: 29
+  - id: W03-05
+    lesson: 3
+    word: "{\u4F1A\u8B70\u5BA4|\u304B\u3044\u304E\u3057\u3064}"
+    meaning: meeting room
+    sheetRow: 30
+  - id: W03-06
+    lesson: 3
+    word: "\u3046\u3051\u3064\u3051"
+    meaning: reception desk
+    sheetRow: 31
+  - id: W03-07
+    lesson: 3
+    word: "{\u58F2|\u3046}\u308A{\u5834|\u3070}"
+    meaning: department (in a shop)
+    sheetRow: 32
+  - id: W03-08
+    lesson: 3
+    word: "\u301C{\u968E|\u304B\u3044}"
+    meaning: ... floor
+    sheetRow: 33
+  - id: W03-09
+    lesson: 3
+    word: "{\u5186|\u3048\u3093}"
+    meaning: yen
+    sheetRow: 34
+  - id: W03-10
+    lesson: 3
+    word: "{\u9774|\u304F\u3064}"
+    meaning: shoes
+    sheetRow: 35
+  - id: W03-11
+    lesson: 3
+    word: "\u30EF\u30A4\u30F3"
+    meaning: wine
+    sheetRow: 36
+  - id: W03-12
+    lesson: 3
+    word: "{\u99C5|\u3048\u304D}"
+    meaning: station
+    sheetRow: 37
+  - id: W04-01
+    lesson: 4
+    word: "{\u8D77|\u304A}\u304D\u307E\u3059"
+    meaning: get up
+    sheetRow: 38
+  - id: W04-02
+    lesson: 4
+    word: "{\u5BDD|\u306D}\u307E\u3059"
+    meaning: go to bed
+    sheetRow: 39
+  - id: W04-03
+    lesson: 4
+    word: "{\u50CD|\u306F\u305F\u3089}\u304D\u307E\u3059"
+    meaning: work
+    sheetRow: 40
+  - id: W04-04
+    lesson: 4
+    word: "{\u52C9\u5F37|\u3079\u3093\u304D\u3087\u3046}\u3057\u307E\u3059"
+    meaning: study
+    sheetRow: 41
+  - id: W04-05
+    lesson: 4
+    word: "{\u4F11|\u3084\u3059}\u307F"
+    meaning: day off, break
+    sheetRow: 42
+  - id: W04-06
+    lesson: 4
+    word: "{\u4ECA|\u3044\u307E}"
+    meaning: now
+    sheetRow: 43
+  - id: W04-07
+    lesson: 4
+    word: "{\u6BCE\u671D|\u307E\u3044\u3042\u3055}"
+    meaning: every morning
+    sheetRow: 44
+  - id: W04-08
+    lesson: 4
+    word: "{\u6BCE\u6669|\u307E\u3044\u3070\u3093}"
+    meaning: every night
+    sheetRow: 45
+  - id: W04-09
+    lesson: 4
+    word: "\u304D\u306E\u3046"
+    meaning: yesterday
+    sheetRow: 46
+  - id: W04-10
+    lesson: 4
+    word: "\u3042\u3057\u305F"
+    meaning: tomorrow
+    sheetRow: 47
+  - id: W04-11
+    lesson: 4
+    word: "{\u5348\u524D|\u3054\u305C\u3093} / {\u5348\u5F8C|\u3054\u3054}"
+    meaning: a.m. / p.m.
+    sheetRow: 48
+  - id: W04-12
+    lesson: 4
+    word: "{\u9280\u884C|\u304E\u3093\u3053\u3046}"
+    meaning: bank
+    sheetRow: 49
+  - id: W05-01
+    lesson: 5
+    word: "{\u884C|\u3044}\u304D\u307E\u3059"
+    meaning: go
+    sheetRow: 50
+  - id: W05-02
+    lesson: 5
+    word: "{\u6765|\u304D}\u307E\u3059"
+    meaning: come
+    sheetRow: 51
+  - id: W05-03
+    lesson: 5
+    word: "{\u5E30|\u304B\u3048}\u308A\u307E\u3059"
+    meaning: go home, go back
+    sheetRow: 52
+  - id: W05-04
+    lesson: 5
+    word: "{\u96FB\u8ECA|\u3067\u3093\u3057\u3083}"
+    meaning: train
+    sheetRow: 53
+  - id: W05-05
+    lesson: 5
+    word: "{\u81EA\u8EE2\u8ECA|\u3058\u3066\u3093\u3057\u3083}"
+    meaning: bicycle
+    sheetRow: 54
+  - id: W05-06
+    lesson: 5
+    word: "\u30D0\u30B9"
+    meaning: bus
+    sheetRow: 55
+  - id: W05-07
+    lesson: 5
+    word: "{\u53CB\u9054|\u3068\u3082\u3060\u3061}"
+    meaning: friend
+    sheetRow: 56
+  - id: W05-08
+    lesson: 5
+    word: "{\u5BB6\u65CF|\u304B\u305E\u304F}"
+    meaning: family
+    sheetRow: 57
+  - id: W05-09
+    lesson: 5
+    word: "{\u4E00\u4EBA|\u3072\u3068\u308A}\u3067"
+    meaning: alone
+    sheetRow: 58
+  - id: W05-10
+    lesson: 5
+    word: "{\u6B69|\u3042\u308B}\u3044\u3066"
+    meaning: on foot
+    sheetRow: 59
+  - id: W05-11
+    lesson: 5
+    word: "{\u53BB\u5E74|\u304D\u3087\u306D\u3093}"
+    meaning: last year
+    sheetRow: 60
+  - id: W05-12
+    lesson: 5
+    word: "{\u8A95\u751F\u65E5|\u305F\u3093\u3058\u3087\u3046\u3073}"
+    meaning: birthday
+    sheetRow: 61
+  - id: W06-01
+    lesson: 6
+    word: "{\u98DF|\u305F}\u3079\u307E\u3059"
+    meaning: eat
+    sheetRow: 62
+  - id: W06-02
+    lesson: 6
+    word: "{\u98F2|\u306E}\u307F\u307E\u3059"
+    meaning: drink
+    sheetRow: 63
+  - id: W06-03
+    lesson: 6
+    word: "{\u8AAD|\u3088}\u307F\u307E\u3059"
+    meaning: read
+    sheetRow: 64
+  - id: W06-04
+    lesson: 6
+    word: "{\u8CB7|\u304B}\u3044\u307E\u3059"
+    meaning: buy
+    sheetRow: 65
+  - id: W06-05
+    lesson: 6
+    word: "{\u66F8|\u304B}\u304D\u307E\u3059"
+    meaning: write
+    sheetRow: 66
+  - id: W06-06
+    lesson: 6
+    word: "{\u64AE|\u3068}\u308A\u307E\u3059"
+    meaning: take (a photo)
+    sheetRow: 67
+  - id: W06-07
+    lesson: 6
+    word: "{\u4F1A|\u3042}\u3044\u307E\u3059"
+    meaning: meet
+    sheetRow: 68
+  - id: W06-08
+    lesson: 6
+    word: "\u30D1\u30F3"
+    meaning: bread
+    sheetRow: 69
+  - id: W06-09
+    lesson: 6
+    word: "\u304A{\u8336|\u3061\u3083}"
+    meaning: tea
+    sheetRow: 70
+  - id: W06-10
+    lesson: 6
+    word: "{\u5199\u771F|\u3057\u3083\u3057\u3093}"
+    meaning: photo
+    sheetRow: 71
+  - id: W06-11
+    lesson: 6
+    word: "{\u56F3\u66F8\u9928|\u3068\u3057\u3087\u304B\u3093}"
+    meaning: library
+    sheetRow: 72
+  - id: W06-12
+    lesson: 6
+    word: "\u3044\u3063\u3057\u3087\u306B"
+    meaning: together
+    sheetRow: 73
+  lastImport: 2026-11-18 13:58

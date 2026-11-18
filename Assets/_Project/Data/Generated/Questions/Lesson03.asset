@@ -30,6 +30,7 @@ MonoBehaviour:
       - "\u3092"
     rule: "Use \u306F, not \u304C, before a question like \u3069\u3053\u3067\u3059\u304B."
     english: Where is my teacher?
+    grammar: G03-doko
     tags:
     - wa
     sheetRow: 62
@@ -49,6 +50,7 @@ MonoBehaviour:
       - "\u3069\u3053"
     rule: "\u3042\u305D\u3053 is a place far from both of you."
     english: The toilet is over there.
+    grammar: G03-koko
     tags:
     - kosoado
     - place
@@ -68,6 +70,7 @@ MonoBehaviour:
       - "\u3069\u308C"
     rule: "\u3069\u3053 asks where, or what place."
     english: Where is this? ...It's the cafeteria.
+    grammar: G03-doko
     tags:
     - question-word
     - place
@@ -88,6 +91,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u3069\u3053\u306E asks where something is from."
     english: Where is this wine from? ...It's Italian wine.
+    grammar: G03-no
     tags:
     - no
     - origin
@@ -107,6 +111,7 @@ MonoBehaviour:
       - "\u306F"
     rule: "\u306E shows where something is made: a Japanese car."
     english: This is a Japanese car.
+    grammar: G03-no
     tags:
     - no
     - origin
@@ -126,6 +131,7 @@ MonoBehaviour:
       - "\u3060\u308C"
     rule: "\u3044\u304F\u3089 asks how much something costs."
     english: How much is this tie? ...3,500 yen.
+    grammar: G03-ikura
     tags:
     - question-word
     - price
@@ -146,6 +152,7 @@ MonoBehaviour:
       - "\u306A\u3093"
     rule: "\u3069\u3053 asks where. \u3069\u3061\u3089 is the polite version."
     english: Where is the shoe section? ...In the basement.
+    grammar: G03-doko
     tags:
     - question-word
     - place
@@ -166,6 +173,7 @@ MonoBehaviour:
       - "\u3069\u3053"
     rule: "\u3053\u3053 is the place where the speaker is."
     english: This is the office.
+    grammar: G03-koko
     tags:
     - kosoado
     - place
@@ -187,6 +195,7 @@ MonoBehaviour:
     rule: "\u304A\u56FD\u306F\u3069\u3061\u3089\u3067\u3059\u304B is the polite way
       to ask where someone is from."
     english: Where are you from? ...Thailand.
+    grammar: G03-doko
     tags:
     - question-word
     - polite
@@ -208,6 +217,7 @@ MonoBehaviour:
       - "\u306A\u3093"
     rule: "\u306A\u3093\u304C\u3044 asks which floor. Note the reading: \u306A\u3093\u304C\u3044."
     english: Which floor is the bag section on? ...The 5th floor.
+    grammar: G03-count
     tags:
     - question-word
     - floor
@@ -227,6 +237,7 @@ MonoBehaviour:
       - "\u3055\u3093\u307C\u3093"
     rule: "3\u968E is read \u3055\u3093\u304C\u3044, not \u3055\u3093\u304B\u3044."
     english: The meeting room is on the 3rd floor.
+    grammar: G03-count
     tags:
     - counter
     - floor
@@ -247,6 +258,7 @@ MonoBehaviour:
     rule: "300 is \u3055\u3093\u3073\u3083\u304F: \u3072\u3083\u304F turns into \u3073\u3083\u304F
       after \u3055\u3093."
     english: The coffee is 300 yen.
+    grammar: G03-count
     tags:
     - number
     - price
@@ -267,6 +279,7 @@ MonoBehaviour:
     rule: "8,000 is \u306F\u3063\u305B\u3093: \u306F\u3061 shortens to \u306F\u3063
       before \u305B\u3093."
     english: These shoes are 8,000 yen.
+    grammar: G03-count
     tags:
     - number
     - price
@@ -294,6 +307,7 @@ MonoBehaviour:
     rule: "Both sentences use \u306F: this place is the cafeteria, the classroom
       is over there."
     english: This is the cafeteria. The classroom is over there.
+    grammar: G03-koko
     tags:
     - wa
     - place
@@ -320,6 +334,7 @@ MonoBehaviour:
       - "\u306B"
     rule: "\u3069\u3053\u306E asks where it's from, and the answer uses \u306E too."
     english: Where is this computer from? ...It's a Japanese computer.
+    grammar: G03-no
     tags:
     - no
     - origin
@@ -348,6 +363,7 @@ MonoBehaviour:
     rule: "\u3069\u3053 asks where. \u3042\u305D\u3053 is over there, far from both
       of you."
     english: Where is the elevator? ...Over there.
+    grammar: G03-doko
     tags:
     - kosoado
     - place
@@ -367,6 +383,7 @@ MonoBehaviour:
       - "\u3069\u306A\u305F"
     rule: "\u3069\u3061\u3089 is the polite form of \u3069\u3053."
     english: where (polite)
+    grammar: G03-doko
     tags:
     - polite
     - kosoado
@@ -386,6 +403,7 @@ MonoBehaviour:
       - "\u306A\u306B"
     rule: "\u3069\u306A\u305F is the polite form of \u3060\u308C."
     english: who (polite)
+    grammar: G03-doko
     tags:
     - polite
     sheetRow: 79
@@ -401,6 +419,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u6559\u5BA4 (\u304D\u3087\u3046\u3057\u3064) means classroom."
     english: This is the classroom.
+    grammar: 
     tags:
     - vocab
     - place
@@ -417,6 +436,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u968E\u6BB5 (\u304B\u3044\u3060\u3093) means stairs."
     english: The stairs are over there.
+    grammar: 
     tags:
     - vocab
     - place
@@ -435,6 +455,7 @@ MonoBehaviour:
     rule: "\u30C8\u30A4\u30EC means toilet. \u304A\u3066\u3042\u3089\u3044 is the
       polite word."
     english: Where is the toilet?
+    grammar: 
     tags:
     - vocab
     - place
@@ -451,6 +472,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u30EF\u30A4\u30F3 means wine."
     english: This is Italian wine.
+    grammar: 
     tags:
     - vocab
     - katakana
@@ -467,6 +489,7 @@ MonoBehaviour:
       wrong: []
     rule: "\u53D7\u4ED8 (\u3046\u3051\u3064\u3051) means reception desk."
     english: Where is the reception desk?
+    grammar: 
     tags:
     - vocab
     - place
@@ -484,6 +507,7 @@ MonoBehaviour:
     rule: "\u3053\u306E comes before \u30EF\u30A4\u30F3, and \u3044\u304F\u3089 asks
       the price."
     english: How much is this wine?
+    grammar: G03-ikura
     tags:
     - word-order
     sheetRow: 85
@@ -500,6 +524,7 @@ MonoBehaviour:
     rule: "\u65E5\u672C\u306E goes right before \u304F\u3064 to say where they're
       from."
     english: These are Japanese shoes.
+    grammar: G03-no
     tags:
     - word-order
     sheetRow: 86
@@ -515,6 +540,7 @@ MonoBehaviour:
       wrong: []
     rule: "The place goes first with \u306F, then \u3069\u3053\u3067\u3059\u304B."
     english: Where is the elevator?
+    grammar: G03-doko
     tags:
     - word-order
     sheetRow: 87
@@ -535,6 +561,7 @@ MonoBehaviour:
     rule: "\u3069\u3053 asks where, so answer with a place word. Don't start with
       \u306F\u3044."
     english: Where is the toilet? ...Over there.
+    grammar: G03-doko
     tags:
     - place
     sheetRow: 88
@@ -553,6 +580,7 @@ MonoBehaviour:
       - "5{\u968E|\u304B\u3044}\u3067\u3059\u3002"
     rule: "\u3044\u304F\u3089 asks the price, so answer with an amount of yen."
     english: How much is this bag? ...5,000 yen.
+    grammar: G03-ikura
     tags:
     - price
     sheetRow: 89
@@ -571,6 +599,7 @@ MonoBehaviour:
       - "\u30BF\u30A4\u306E {\u4EBA|\u3072\u3068}\u3067\u3059\u3002"
     rule: Answer with the name of your country.
     english: Where are you from? ...Thailand.
+    grammar: G03-doko
     tags:
     - polite
     sheetRow: 90
@@ -590,6 +619,7 @@ MonoBehaviour:
     rule: "\u306F\u3044 agrees. \u3044\u3044\u3048 disagrees and then says what it
       really is."
     english: Is this the cafeteria? ...Yes, it is.
+    grammar: G03-koko
     tags:
     - yes-no
     sheetRow: 91

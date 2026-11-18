@@ -55,6 +55,12 @@ namespace JLPTQuest
             instruction.gameObject.SetActive(cue.Length > 0);
         }
 
+        //Calm mode has no clock, so no timer bar either
+        public void SetCalm(bool calm)
+        {
+            timerBar.gameObject.SetActive(!calm);
+        }
+
         public void Reveal(string answer)
         {
             if (round == null) return;

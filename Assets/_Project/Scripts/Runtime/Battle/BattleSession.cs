@@ -15,6 +15,7 @@ namespace JLPTQuest
         When the countdown hits 0 the next turn is a parry: the enemy asks something and you pick the reply.
         Right blocks it and counters for half a strike, wrong costs HP equal to the enemy's attack.
         The streak and the question decks carry over between waves, each enemy brings its own HP and CD.
+        Calm mode stops the clock and counts every answer at a fixed speed, it can be flipped mid fight from Settings.
     */
     public class BattleSession
     {
@@ -40,6 +41,7 @@ namespace JLPTQuest
         public bool ParryPending { get; private set; }
         public int HintCharges { get; private set; }
         public StageStats Stats { get; } = new StageStats();
+        public bool Calm { get; set; }
 
         private readonly List<EnemyData> waves;
         private readonly BattleRules rules;
@@ -81,7 +83,7 @@ namespace JLPTQuest
 
         public void Tick(float deltaTime)
         {
-            if (Phase != BattlePhase.Asking) return;
+            if (Phase != BattlePhase.Asking || Calm) return;
 
             Round.timeLeft -= deltaTime;
             if (Round.timeLeft > 0f) return;
@@ -102,6 +104,7 @@ namespace JLPTQuest
         public bool CanUseHint(HintKind kind)
         {
             if (Phase != BattlePhase.Asking || HintCharges <= 0 || Round.UsedHint(kind)) return false;
+            if (kind == HintKind.ExtraTime && Calm) return false; //No clock to add to
             if (!rules.HintWorks(kind, Round.question.format, Round.isParry)) return false;
             if (kind == HintKind.FiftyFifty && Round.options.Count < 4) return false; //Needs two wrong ones to take away
             return true;
@@ -236,7 +239,9 @@ namespace JLPTQuest
         //Hints that cost damage take their quarter, and any hint at all means no Perfect
         private DamageBreakdown Hit(QuestionFormat format)
         {
-            DamageBreakdown hit = DamageCalculator.Calculate(rules, format, Round.timeLeft, Round.timeLimit, Streak, Round.DamageHints);
+            DamageBreakdown hit = Calm
+                ? DamageCalculator.CalculateAtSpeed(rules, format, rules.calmSpeed, Streak, Round.DamageHints)
+                : DamageCalculator.Calculate(rules, format, Round.timeLeft, Round.timeLimit, Streak, Round.DamageHints);
             if (Round.hintsUsed.Count > 0) hit.perfect = false;
             return hit;
         }
