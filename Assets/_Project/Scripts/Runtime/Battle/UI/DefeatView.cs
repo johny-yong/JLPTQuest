@@ -5,15 +5,17 @@ using UnityEngine.UI;
 
 namespace JLPTQuest
 {
-    //Out of HP. The full results screen with stars comes in step 5
+    //Out of HP. Try the floor again or head back to the tower
     public class DefeatView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup group;
         [SerializeField] private TMP_Text title;
         [SerializeField] private TMP_Text subtitle;
         [SerializeField] private Button retryButton;
+        [SerializeField] private Button towerButton;
 
         private Action onRetry;
+        private Action onTower;
 
         void Awake()
         {
@@ -22,11 +24,13 @@ namespace JLPTQuest
                 Hide();
                 onRetry?.Invoke();
             });
+            towerButton.onClick.AddListener(() => onTower?.Invoke());
         }
 
-        public void Show(string heading, string detail, Action onRetry)
+        public void Show(string heading, string detail, Action onRetry, Action onTower)
         {
             this.onRetry = onRetry;
+            this.onTower = onTower;
             title.text = heading;
             subtitle.text = detail;
             SetVisible(true);

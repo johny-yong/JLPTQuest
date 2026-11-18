@@ -17,11 +17,13 @@ namespace JLPTQuest
         [SerializeField] private RubyText seals;
         [SerializeField] private Button againButton;
         [SerializeField] private Button nextButton;
+        [SerializeField] private Button towerButton;
 
         private static readonly string[] starNames = { "Clear", "80%+ right", "No hints" };
 
         private Action onAgain;
         private Action onNext;
+        private Action onTower;
 
         void Awake()
         {
@@ -35,13 +37,15 @@ namespace JLPTQuest
                 Hide();
                 onNext?.Invoke();
             });
+            towerButton.onClick.AddListener(() => onTower?.Invoke());
         }
 
         //onNext null hides the Next button, there's no floor after this one
-        public void Show(string heading, bool[] earned, string stats, IList<string> wordSeals, Action onAgain, Action onNext)
+        public void Show(string heading, bool[] earned, string stats, IList<string> wordSeals, Action onAgain, Action onNext, Action onTower)
         {
             this.onAgain = onAgain;
             this.onNext = onNext;
+            this.onTower = onTower;
             title.text = heading;
 
             //Earned stars in vermilion, missed ones faint, and the note under each says what it was for

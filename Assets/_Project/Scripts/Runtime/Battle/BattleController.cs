@@ -32,11 +32,13 @@ namespace JLPTQuest
         [SerializeField] private TeachCardView teachCard;
         [SerializeField] private VictoryView victory;
         [SerializeField] private DefeatView defeat;
+        [SerializeField] private PauseView pauseView;
         [SerializeField] private float worriedSeconds = 3f; //Companion looks worried on the last seconds of the clock
         [SerializeField, Range(0f, 1f)] private float worriedHp = 0.3f; //...or below this much HP
 
         private BattleSession session;
         private StagePlan plan;
+        private bool paused;
 
         void Start()
         {
@@ -46,6 +48,9 @@ namespace JLPTQuest
 
             answerTiles.Picked += OnPicked;
             hintBar.Picked += OnHintPicked;
+            pauseView.PauseRequested += Pause;
+            pauseView.ResumeRequested += Resume;
+            pauseView.QuitRequested += BackToTower;
             StartStage();
         }
 
@@ -53,7 +58,17 @@ namespace JLPTQuest
         {
             answerTiles.Picked -= OnPicked;
             hintBar.Picked -= OnHintPicked;
+            pauseView.PauseRequested -= Pause;
+            pauseView.ResumeRequested -= Resume;
+            pauseView.QuitRequested -= BackToTower;
             Unhook();
+            Time.timeScale = 1f; //Never leave the next scene frozen
+        }
+
+        //Phone went to the background mid question, don't let the clock run out behind the player's back
+        void OnApplicationPause(bool away)
+        {
+            if (away) Pause();
         }
 
         void Update()
@@ -69,6 +84,9 @@ namespace JLPTQuest
         {
             StopAllCoroutines();
             Unhook();
+            paused = false;
+            Time.timeScale = 1f;
+            pauseView.Hide();
 
             plan = StagePlan.Build(database, stageId, out string problem);
             if (config == null || plan == null)
@@ -207,13 +225,36 @@ namespace JLPTQuest
             string next = StagePlan.NextStageId(database, plan.stage);
             Action onNext = null;
             if (next != null) onNext = () => PlayStage(next);
-            victory.Show(plan.stage.title + " cleared!", stars, StatsLine(), WordSeals(), StartStage, onNext);
+            victory.Show(plan.stage.title + " cleared!", stars, StatsLine(), WordSeals(), StartStage, onNext, BackToTower);
         }
 
         private void ShowDefeat()
         {
             string detail = "Wave " + (session.WaveIndex + 1) + "/" + session.WaveCount + "  ·  " + session.CurrentEnemy.displayName + " won this time\n" + StatsLine();
-            defeat.Show("Out of HP", detail, StartStage);
+            defeat.Show("Out of HP", detail, StartStage, BackToTower);
+        }
+
+        //Time scale 0 stops the question clock and every WaitForSeconds in here and the views in one go
+        private void Pause()
+        {
+            if (session == null || paused || session.Phase == BattlePhase.StageCleared || session.Phase == BattlePhase.Defeated) return;
+            paused = true;
+            Time.timeScale = 0f;
+            pauseView.Show();
+        }
+
+        private void Resume()
+        {
+            if (!paused) return;
+            paused = false;
+            Time.timeScale = 1f;
+            pauseView.Hide();
+        }
+
+        private void BackToTower()
+        {
+            Time.timeScale = 1f;
+            GameFlow.OpenMenu(MenuScreen.Tower);
         }
 
         public void PlayStage(string id)

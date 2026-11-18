@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 namespace JLPTQuest
 {
-    //The menu screens you can land on. Same order as the tab bar, Settings isn't a tab
-    public enum MenuScreen { Home, Tower, Codex, Companions, Settings }
+    //The menu screens you can land on. The first four match the tab bar's order, Settings and Title aren't tabs
+    public enum MenuScreen { Home, Tower, Codex, Companions, Settings, Title }
 
     /*
         Carries the player between scenes.
@@ -19,7 +19,7 @@ namespace JLPTQuest
 
         private static string stageToPlay;
 
-        public static MenuScreen ReturnScreen { get; private set; } = MenuScreen.Home;
+        public static MenuScreen ReturnScreen { get; private set; } = MenuScreen.Title; //A fresh launch starts on the title screen
 
         public static void PlayStage(string stageId)
         {
@@ -46,7 +46,7 @@ namespace JLPTQuest
         private static void ResetOnLaunch()
         {
             stageToPlay = null;
-            ReturnScreen = MenuScreen.Home;
+            ReturnScreen = MenuScreen.Title;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace JLPTQuest
         [SerializeField] private MenuPanel codex;
         [SerializeField] private MenuPanel companions;
         [SerializeField] private MenuPanel settings;
+        [SerializeField] private MenuPanel title;
         [SerializeField] private FloorPreviewSheet floorPreview;
         [SerializeField] private TabBar tabBar;
 
@@ -114,6 +115,7 @@ namespace JLPTQuest
                 case MenuScreen.Codex: return codex;
                 case MenuScreen.Companions: return companions;
                 case MenuScreen.Settings: return settings;
+                case MenuScreen.Title: return title;
                 default: return home;
             }
         }
@@ -125,6 +127,7 @@ namespace JLPTQuest
             yield return codex;
             yield return companions;
             yield return settings;
+            yield return title;
             yield return floorPreview;
         }
     }
