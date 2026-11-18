@@ -6,7 +6,7 @@ namespace JLPTQuest
     //First thing that runs. Sets up app wide stuff, then hops over to the first real scene
     public class Bootstrapper : MonoBehaviour
     {
-        [SerializeField] private string firstScene = "Battle";
+        [SerializeField] private string firstScene = GameFlow.MenuScene;
         [SerializeField] private int targetFrameRate = 60;
 
         void Start()

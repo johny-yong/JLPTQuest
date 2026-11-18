@@ -40,6 +40,10 @@ namespace JLPTQuest
 
         void Start()
         {
+            //Came from the menu? Play the floor it picked, otherwise whatever's set in the inspector
+            string picked = GameFlow.TakeStage();
+            if (!string.IsNullOrEmpty(picked)) stageId = picked;
+
             answerTiles.Picked += OnPicked;
             hintBar.Picked += OnHintPicked;
             StartStage();
