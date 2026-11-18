@@ -14,6 +14,7 @@ namespace JLPTQuest
         [SerializeField] private RubyText label;
         [SerializeField] private TMP_Text mark;
         [SerializeField] private float maxFontSize = 72f;
+        [SerializeField] private float heightShare = 0.6f; //Font can't go past this much of the label's height, matters on the short Very hard tiles
 
         private TMP_Text labelText;
 
@@ -29,8 +30,10 @@ namespace JLPTQuest
         {
             //Long answers like じゃありません shrink to stay on one line. Kana and kanji are about 1 em wide
             int length = Mathf.Max(1, RubyMarkup.StripReadings(markup).Length);
-            float width = ((RectTransform)LabelText.transform).rect.width;
-            LabelText.fontSize = width > 0f ? Mathf.Min(maxSize, width / (length + 0.5f)) : maxSize;
+            Rect area = ((RectTransform)LabelText.transform).rect;
+            float size = area.width > 0f ? Mathf.Min(maxSize, area.width / (length + 0.5f)) : maxSize;
+            if (area.height > 0f) size = Mathf.Min(size, area.height * heightShare); //Leaves room for furigana on short tiles
+            LabelText.fontSize = size;
 
             label.Markup = markup; //After the size, the furigana is measured at the new size
             SetState(TileState.Idle);

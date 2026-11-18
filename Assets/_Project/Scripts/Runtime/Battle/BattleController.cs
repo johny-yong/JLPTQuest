@@ -17,6 +17,7 @@ namespace JLPTQuest
         [SerializeField] private ContentDatabase database;
         [SerializeField] private BattleConfig config;
         [SerializeField] private string stageId = "R1-F1";
+        [SerializeField] private Difficulty difficulty; //Like stageId, only used when the scene is opened straight in the editor
 
         [SerializeField] private TMP_Text topLabel;
         [SerializeField] private TMP_Text waveLabel;
@@ -46,8 +47,12 @@ namespace JLPTQuest
         void Start()
         {
             //Came from the menu? Play the floor it picked, otherwise whatever's set in the inspector
-            string picked = GameFlow.TakeStage();
-            if (!string.IsNullOrEmpty(picked)) stageId = picked;
+            string picked = GameFlow.TakeStage(out Difficulty pickedDifficulty);
+            if (!string.IsNullOrEmpty(picked))
+            {
+                stageId = picked;
+                difficulty = pickedDifficulty;
+            }
 
             answerTiles.Picked += OnPicked;
             hintBar.Picked += OnHintPicked;
@@ -104,12 +109,15 @@ namespace JLPTQuest
 
             session = new BattleSession(plan.waves, plan.questions, config.rules, Environment.TickCount, plan.parryQuestions);
             session.Calm = GameSettings.CalmMode;
+            session.Difficulty = difficulty;
             questionCard.SetCalm(session.Calm);
             session.WaveStarted += OnWaveStarted;
             session.RoundStarted += OnRoundStarted;
             session.RoundResolved += OnRoundResolved;
 
             topLabel.text = "Floor " + plan.stage.floor + "  ·  " + plan.stage.title;
+            //Just the 難 or 極 stamp, the full name doesn't fit beside the wave count
+            if (difficulty != Difficulty.Normal) topLabel.text += "  <color=" + InkColors.ToTag(InkColors.Vermilion) + ">" + DifficultyText.Badge(difficulty) + "</color>";
             teachCard.Hide();
             victory.Hide();
             defeat.Hide();
@@ -260,12 +268,13 @@ namespace JLPTQuest
         private void ShowStageCleared()
         {
             bool[] stars = StageStars.Earned(true, session.Stats, config.rules);
-            SaveSystem.Progress.RecordClear(plan.stage.id, stars, WordSeals()); //Stars, the floor above unlocking, and the seals
+            SaveSystem.Progress.RecordClear(plan.stage.id, difficulty, stars, WordSeals()); //Stars, the floor above unlocking, and the seals
             SaveSystem.Save();
             string next = StagePlan.NextStageId(database, plan.stage);
             Action onNext = null;
             if (next != null) onNext = () => PlayStage(next);
-            victory.Show(plan.stage.title + " cleared!", stars, StatsLine(), WordSeals(), StartStage, onNext, BackToTower);
+            string heading = plan.stage.title + (difficulty == Difficulty.Normal ? " cleared!" : " cleared on " + DifficultyText.Name(difficulty) + "!");
+            victory.Show(heading, stars, StatsLine(), WordSeals(), StartStage, onNext, BackToTower);
         }
 
         private void ShowDefeat()
@@ -315,6 +324,7 @@ namespace JLPTQuest
         public void PlayStage(string id)
         {
             stageId = id;
+            difficulty = Difficulty.Normal; //The floor above hasn't been cleared yet, so Normal is all it has
             StartStage();
         }
 

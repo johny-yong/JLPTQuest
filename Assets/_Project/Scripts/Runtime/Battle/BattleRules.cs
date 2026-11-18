@@ -58,7 +58,10 @@ namespace JLPTQuest
         public int playerMaxHp = 100; //Survives about four failed parries
         public float parryCounterShare = 0.5f; //A blocked attack hits back for this much of a strike
 
-        public int choiceCount = 4; //The 2x2 tiles
+        //Choices per blank, extra seconds and the companion drop chance for each difficulty
+        public DifficultyRules normal = new DifficultyRules(4, 0f, 0.01f);
+        public DifficultyRules hard = new DifficultyRules(6, 2f, 0.05f);
+        public DifficultyRules veryHard = new DifficultyRules(8, 4f, 0.10f);
 
         public int hintCharges = 2; //What a stage starts with
         public int hintMaxCharges = 2;
@@ -66,6 +69,16 @@ namespace JLPTQuest
         public float extraTimeSeconds = 5f;
 
         public float starAccuracy = 0.8f; //Share of right answers the second star needs
+
+        public DifficultyRules For(Difficulty difficulty)
+        {
+            switch (difficulty)
+            {
+                case Difficulty.Hard: return hard;
+                case Difficulty.VeryHard: return veryHard;
+                default: return normal;
+            }
+        }
 
         //Which hint helps with which format. parry is true on parry turns, whatever question stands in
         public bool HintWorks(HintKind kind, QuestionFormat format, bool parry)

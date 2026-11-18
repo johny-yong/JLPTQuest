@@ -44,7 +44,7 @@ namespace JLPTQuest
                 FloorState state = progress.IsCleared(stage.id) ? FloorState.Cleared : progress.IsUnlocked(stage, floors) ? FloorState.Next : FloorState.Locked;
                 FloorTile tile = Instantiate(tileTemplate, floorList);
                 tile.gameObject.SetActive(true);
-                tile.Show(stage, Router.IsBoss(stage), state, progress.Stars(stage.id), () => Router.PreviewFloor(stage));
+                tile.Show(stage, Router.IsBoss(stage), state, progress.Stars(stage.id), progress.HardestCleared(stage.id), () => Router.PreviewFloor(stage));
                 tiles.Add(tile);
             }
 

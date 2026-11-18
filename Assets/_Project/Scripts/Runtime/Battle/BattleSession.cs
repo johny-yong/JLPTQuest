@@ -16,6 +16,7 @@ namespace JLPTQuest
         Right blocks it and counters for half a strike, wrong costs HP equal to the enemy's attack.
         The streak and the question decks carry over between waves, each enemy brings its own HP and CD.
         Calm mode stops the clock and counts every answer at a fixed speed, it can be flipped mid fight from Settings.
+        Difficulty only changes how many tiles each question gets and how long its clock runs.
     */
     public class BattleSession
     {
@@ -42,6 +43,7 @@ namespace JLPTQuest
         public int HintCharges { get; private set; }
         public StageStats Stats { get; } = new StageStats();
         public bool Calm { get; set; }
+        public Difficulty Difficulty { get; set; } //Set before Start
 
         private readonly List<EnemyData> waves;
         private readonly BattleRules rules;
@@ -118,7 +120,7 @@ namespace JLPTQuest
             Round.hintsUsed.Add(kind);
             Stats.hintsUsed++;
 
-            if (kind == HintKind.FiftyFifty) RemoveTwoWrong();
+            if (kind == HintKind.FiftyFifty) RemoveHalf();
             if (kind == HintKind.ExtraTime)
             {
                 //The limit grows too, so the extra seconds can't pump up the speed bonus
@@ -130,14 +132,16 @@ namespace JLPTQuest
             return true;
         }
 
-        private void RemoveTwoWrong()
+        //Takes wrong tiles away until half are left, 4 -> 2, 6 -> 3, 8 -> 4. The right one always stays
+        private void RemoveHalf()
         {
             var wrong = new List<int>();
             for (int i = 0; i < Round.options.Count; i++)
                 if (i != Round.correctIndex) wrong.Add(i);
             ListShuffle.Shuffle(wrong, random);
-            Round.removedOptions.Add(wrong[0]);
-            Round.removedOptions.Add(wrong[1]);
+            int remove = Round.options.Count - Round.options.Count / 2;
+            for (int i = 0; i < remove && i < wrong.Count; i++)
+                Round.removedOptions.Add(wrong[i]);
         }
 
         private void EnterWave(int index)
@@ -156,9 +160,10 @@ namespace JLPTQuest
             QuestionData question = parry && parryDeck != null ? parryDeck.Draw() : deck.Draw();
 
             roundCount++;
-            Round = ChoiceBuilder.Build(question, random, rules.choiceCount, 0f, roundCount);
+            DifficultyRules level = rules.For(Difficulty);
+            Round = ChoiceBuilder.Build(question, random, level.choices, 0f, roundCount);
             Round.isParry = parry;
-            Round.StartClock(rules.TimeLimit(question, Round.options, parry)); //Longer questions and replies get more time
+            Round.StartClock(rules.TimeLimit(question, Round.options, parry) + level.extraSeconds); //Longer questions and replies get more time, so do the extra tiles on Hard
             Phase = BattlePhase.Asking;
             RoundStarted?.Invoke(Round);
         }

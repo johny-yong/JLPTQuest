@@ -7,7 +7,8 @@ namespace JLPTQuest
 {
     public enum FloorState { Locked, Next, Cleared }
 
-    //One floor on the tower map: green badge and stars once cleared, red for the floor you're on, faded while locked
+    //One floor on the tower map: green badge and stars once cleared, red for the floor you're on, faded while locked.
+    //A Hard clear adds a red 難 after the stars, Very hard a 極
     public class FloorTile : MonoBehaviour
     {
         [SerializeField] private Button button;
@@ -30,7 +31,7 @@ namespace JLPTQuest
             button.colors = colors;
         }
 
-        public void Show(StageData stage, bool boss, FloorState floorState, bool[] stars, Action onPicked)
+        public void Show(StageData stage, bool boss, FloorState floorState, bool[] stars, Difficulty? hardest, Action onPicked)
         {
             this.onPicked = onPicked;
             bool locked = floorState == FloorState.Locked;
@@ -40,7 +41,7 @@ namespace JLPTQuest
             badgeLabel.text = boss ? "鬼" : "F" + stage.floor;
             title.text = boss ? "Boss floor" : "Floor " + stage.floor;
             subtitle.text = stage.title;
-            state.text = cleared ? StarText.Line(stars) : locked ? "Locked" : "Next";
+            state.text = cleared ? StarText.Line(stars) + Stamp(hardest) : locked ? "Locked" : "Next";
 
             background.color = boss ? InkColors.Ink : locked ? InkColors.Panel : InkColors.Card;
             if (locked) badge.color = boss ? InkColors.InkSoft : InkColors.Tile;
@@ -49,6 +50,12 @@ namespace JLPTQuest
             title.color = boss ? InkColors.Paper : locked ? InkColors.InkFaint : InkColors.Ink;
             subtitle.color = boss ? InkColors.Tile : locked ? InkColors.InkFaint : InkColors.InkSoft;
             state.color = floorState == FloorState.Next ? InkColors.Vermilion : InkColors.InkFaint;
+        }
+
+        private static string Stamp(Difficulty? hardest)
+        {
+            string glyph = hardest.HasValue ? DifficultyText.Badge(hardest.Value) : string.Empty;
+            return glyph.Length == 0 ? string.Empty : "  <color=" + InkColors.ToTag(InkColors.Vermilion) + ">" + glyph + "</color>";
         }
     }
 }

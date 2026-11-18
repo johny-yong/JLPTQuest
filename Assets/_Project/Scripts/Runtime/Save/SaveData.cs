@@ -30,11 +30,12 @@ namespace JLPTQuest
         public bool calmMode;
     }
 
-    //How one floor has gone so far
+    //How one floor has gone so far on one difficulty
     [Serializable]
     public class StageRecord
     {
         public string id;
+        public Difficulty difficulty; //One record per floor and difficulty, saves from before difficulties load as Normal
         public int clears;
         public bool[] stars = new bool[3]; //Each star stays once it's earned, they don't all have to come from one run
     }

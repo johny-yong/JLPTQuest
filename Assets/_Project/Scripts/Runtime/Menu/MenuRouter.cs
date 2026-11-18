@@ -80,11 +80,12 @@ namespace JLPTQuest
         }
 
         //The first time a floor is played its scroll comes up first, after that Start goes straight in
-        public void StartFloor(StageData stage)
+        public void StartFloor(StageData stage, Difficulty difficulty = Difficulty.Normal)
         {
             if (stage == null) return;
-            if (!Progress.HasReadScroll(stage.id)) scroll.Show(stage, true);
-            else GameFlow.PlayStage(stage.id);
+            //The scroll only comes first on Normal, Hard needs a Normal clear so it's been read by then anyway
+            if (difficulty == Difficulty.Normal && !Progress.HasReadScroll(stage.id)) scroll.Show(stage, true);
+            else GameFlow.PlayStage(stage.id, difficulty);
         }
 
         public void OpenScroll(StageData stage)

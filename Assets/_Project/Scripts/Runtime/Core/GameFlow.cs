@@ -18,14 +18,16 @@ namespace JLPTQuest
         public const string BattleScene = "Battle";
 
         private static string stageToPlay;
+        private static Difficulty difficultyToPlay;
         private static string scrollStage;
         private static string scrollGrammar;
 
         public static MenuScreen ReturnScreen { get; private set; } = MenuScreen.Title; //A fresh launch starts on the title screen
 
-        public static void PlayStage(string stageId)
+        public static void PlayStage(string stageId, Difficulty difficulty = Difficulty.Normal)
         {
             stageToPlay = stageId;
+            difficultyToPlay = difficulty;
             SceneManager.LoadScene(BattleScene);
         }
 
@@ -53,10 +55,12 @@ namespace JLPTQuest
         }
 
         //Null when nobody picked a floor, like opening the Battle scene straight in the editor
-        public static string TakeStage()
+        public static string TakeStage(out Difficulty difficulty)
         {
             string id = stageToPlay;
+            difficulty = difficultyToPlay;
             stageToPlay = null;
+            difficultyToPlay = Difficulty.Normal;
             return id;
         }
 
@@ -65,6 +69,7 @@ namespace JLPTQuest
         private static void ResetOnLaunch()
         {
             stageToPlay = null;
+            difficultyToPlay = Difficulty.Normal;
             scrollStage = null;
             scrollGrammar = null;
             ReturnScreen = MenuScreen.Title;
