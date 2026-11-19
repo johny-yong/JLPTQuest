@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f30e15b84711c49800afbf58c892c7, type: 3}
+  m_Name: Ryu
+  m_EditorClassIdentifier: JLPTQuest.Runtime::JLPTQuest.CompanionData
+  id: ryu
+  displayName: "Ry\u016B"
+  kana: "\u308A\u3085\u3046"
+  glyph: "\u7ADC"
+  role: Dragon scribe
+  blurb: Brush-spear swordsman. Strikes when you answer right, blocks with you on
+    a parry, and cuts in on counters and every 5th Perfect.
+  portrait: {fileID: 21300000, guid: 58df040316ece284bb6e29914705fe85, type: 3}
+  artFacesLeft: 0
+  avatar: {fileID: 0}
+  homeOffset: {x: 0, y: 0}
+  homeScale: 1
+  skillName: Dragon's Breath
+  skillGlyph: "\u9F8D"
+  skillText: Your next correct answer hits twice as hard. Charges after 4 correct
+    answers.
+  skillCharge: 4
+  lines:
+    dawn:
+    - Morning! Floor {floor} before school?
+    - Early start! The ink's still fresh.
+    day:
+    - Lunch break? One quick floor!
+    - Floor {floor} next. Let's go!
+    dusk:
+    - The lanterns are lit. Floor {floor}?
+    - Evening already. One more floor?
+    night:
+    - Late study? I'm with you.
+    - The moon's up. Floor {floor}?
+    firstFloor:
+    - Ready when you are. Floor 1 first!
+    bossNext:
+    - The boss is next. Stay sharp!
+    realmCleared:
+    - We did it! Rematch for stars?
+    noFloors:
+    - Hmm, the tower's empty.
+    introMeet:
+    - Yo! I'm {name}. You read the question, I swing the brush. Answer right and
+      fast, and we hit harder.
+    introHow:
+    - Floor 1 is gentle. I've got your back.
+    scrollFirst:
+    - Here's what this floor is about.
+    scrollNext:
+    - Next one. You'll need it up there.
+    scrollWords:
+    - Words you'll run into on this floor.
+    scrollReview:
+    - A quick look back before the boss.
+    victory:
+    - We did it!
+    - "\u898B\u4E8B! Clean work."
+    defeat:
+    - Read the scroll, then we go again.
+    perfect:
+    - "\u898B\u4E8B!"
+    hurt:
+    - Ow! Stay with me.

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +15,10 @@ namespace JLPTQuest
         [SerializeField] private Button skipButton;
         [SerializeField] private Button backButton;
         [SerializeField] private Button startButton;
+        [SerializeField] private Image art;
+        [SerializeField] private TMP_Text meetLine;
+        [SerializeField] private TMP_Text howLine;
+        [SerializeField] private TMP_Text nameLabel;
 
         public override void Init(MenuRouter router)
         {
@@ -30,7 +36,20 @@ namespace JLPTQuest
         public override void Open()
         {
             base.Open();
+            ShowCompanion();
             ShowPage(true);
+        }
+
+        //Whoever is equipped introduces themselves, words and art from their CompanionData
+        private void ShowCompanion()
+        {
+            CompanionData companion = Router.Companion;
+            if (companion == null) return;
+            int seed = CompanionTalk.DaySeed(DateTime.Now);
+            if (art != null && companion.portrait != null) art.sprite = companion.portrait;
+            if (meetLine != null) meetLine.text = CompanionTalk.Say(companion.lines.introMeet, meetLine.text, seed, companion.displayName);
+            if (howLine != null) howLine.text = CompanionTalk.Say(companion.lines.introHow, howLine.text, seed, companion.displayName);
+            if (nameLabel != null) nameLabel.text = companion.displayName;
         }
 
         private void ShowPage(bool meet)

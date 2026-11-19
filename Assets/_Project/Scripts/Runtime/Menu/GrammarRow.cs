@@ -26,9 +26,9 @@ namespace JLPTQuest
         {
             this.onPicked = onPicked;
             button.interactable = met;
-            background.color = met ? InkColors.Card : InkColors.Panel;
+            background.color = met ? InkColors.Lacquer : InkColors.LacquerLow;
             title.Markup = met ? point.name : "？  Not met yet";
-            title.GetComponent<TMPro.TMP_Text>().color = met ? InkColors.Ink : InkColors.InkFaint;
+            title.GetComponent<TMPro.TMP_Text>().color = met ? InkColors.Moon : InkColors.MoonFaint;
             pattern.gameObject.SetActive(met);
             if (met) pattern.Markup = point.pattern;
         }

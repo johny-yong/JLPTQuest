@@ -97,8 +97,8 @@ namespace JLPTQuest
                     CodexScreen.Paint(button, each == picked);
                     continue;
                 }
-                button.GetComponent<Image>().color = InkColors.Panel;
-                Color faded = InkColors.InkFaint;
+                button.GetComponent<Image>().color = InkColors.LacquerLow;
+                Color faded = InkColors.MoonFaint;
                 faded.a = 0.5f;
                 button.GetComponentInChildren<TMP_Text>().color = faded;
             }

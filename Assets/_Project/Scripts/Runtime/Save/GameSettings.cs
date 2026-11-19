@@ -44,5 +44,17 @@ namespace JLPTQuest
                 Changed?.Invoke();
             }
         }
+
+        //The scenery follows the clock unless this is on
+        public static bool AlwaysNight
+        {
+            get => Data.alwaysNight;
+            set
+            {
+                if (Data.alwaysNight == value) return;
+                Data.alwaysNight = value;
+                Changed?.Invoke();
+            }
+        }
     }
 }

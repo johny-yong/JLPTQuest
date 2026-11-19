@@ -6,8 +6,9 @@ using UnityEngine.UI;
 namespace JLPTQuest
 {
     /*
-        Your shikigami, lower left, facing the enemy. Greybox for now: a panel with a glyph on it.
-        Drop character art into portrait and it replaces the panel and glyph, hurt and worried then tint the art.
+        Your shikigami, big on the left behind the HUD, facing the enemy.
+        The art comes from the equipped companion's CompanionData. With no art it falls back to a panel with a glyph,
+        hurt and worried tint whichever is showing.
         Real art and Feel players come in Phase 8 through these same calls, so the battle code never changes.
 
         Rule: big moves only happen after an answer (attack, block, hurt, cheer).
@@ -19,6 +20,7 @@ namespace JLPTQuest
         [SerializeField] private Image bodyImage;
         [SerializeField] private TMP_Text glyph;
         [SerializeField] private Image portrait;
+        [SerializeField] private CompanionRoster roster;
         [SerializeField] private bool flipArt; //Tick if the art faces left, the companion should face the enemy
         [SerializeField, Range(0f, 1f)] private float worriedTint = 0.5f;
         [SerializeField] private TMP_Text popup;
@@ -35,6 +37,13 @@ namespace JLPTQuest
 
         void Awake()
         {
+            CompanionData companion = roster != null ? roster.Equipped : null;
+            if (companion != null && companion.portrait != null)
+            {
+                portrait.sprite = companion.portrait;
+                flipArt = companion.artFacesLeft;
+                glyph.text = companion.glyph;
+            }
             bool hasArt = portrait.sprite != null;
             portrait.enabled = hasArt;
             glyph.enabled = !hasArt;
@@ -77,7 +86,7 @@ namespace JLPTQuest
         public void Hurt(int damage)
         {
             Move(Shake());
-            Pop("-" + damage, InkColors.Vermilion);
+            Pop("-" + damage, InkColors.VermilionGlow);
         }
 
         public void Cheer()

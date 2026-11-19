@@ -27,9 +27,9 @@ namespace JLPTQuest
 
         private IEnumerator Flash()
         {
-            hpLabel.color = InkColors.Vermilion;
+            hpLabel.color = InkColors.VermilionGlow;
             yield return new WaitForSeconds(flashSeconds);
-            hpLabel.color = InkColors.Ink;
+            hpLabel.color = InkColors.Moon;
             flashRoutine = null;
         }
     }

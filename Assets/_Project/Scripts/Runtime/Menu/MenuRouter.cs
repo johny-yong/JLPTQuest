@@ -7,6 +7,7 @@ namespace JLPTQuest
         Runs the menu scene: one screen open at a time, the tab bar to hop between them,
         and the floor preview sheet on top when a floor gets picked.
         Settings remembers where it was opened from so Back goes to the right place.
+        The scenery sits behind every screen: Home shows it in full, the others pull a night veil over it.
     */
     public class MenuRouter : MonoBehaviour
     {
@@ -23,6 +24,8 @@ namespace JLPTQuest
         [SerializeField] private FloorPreviewSheet floorPreview;
         [SerializeField] private ScrollSheet scroll;
         [SerializeField] private TabBar tabBar;
+        [SerializeField] private SceneryView scenery;
+        [SerializeField] private CompanionRoster roster;
 
         private MenuScreen current = MenuScreen.Home;
         private MenuScreen beforeSettings = MenuScreen.Home;
@@ -30,6 +33,7 @@ namespace JLPTQuest
         public ContentDatabase Database => database;
         public int Realm => realm;
         public Progress Progress => SaveSystem.Progress;
+        public CompanionData Companion => roster != null ? roster.Equipped : null;
 
         void Awake()
         {
@@ -69,11 +73,25 @@ namespace JLPTQuest
                 if (panel != floorPreview && panel != scroll && panel != Get(screen)) panel.Close();
 
             current = screen;
+            if (scenery != null) scenery.SetVeil(Veil(screen));
             Get(screen).Open();
             tabBar.Select(screen);
+            tabBar.SetVisible(screen != MenuScreen.Title && screen != MenuScreen.Intro);
         }
 
-        //Settings is the only screen with a back button, everything else is a tab
+        //How far back the scene sits behind each screen
+        private static float Veil(MenuScreen screen)
+        {
+            switch (screen)
+            {
+                case MenuScreen.Home: return 0f;
+                case MenuScreen.Title: return 0.25f;
+                case MenuScreen.Intro: return 0.55f;
+                default: return 0.9f;
+            }
+        }
+
+        //Settings has a back button too, it goes back to where it was opened from
         public void Back()
         {
             Show(beforeSettings);

@@ -48,15 +48,15 @@ namespace JLPTQuest
             this.onTower = onTower;
             title.text = heading;
 
-            //Earned stars in vermilion, missed ones faint, and the note under each says what it was for
-            string on = InkColors.ToTag(InkColors.Vermilion);
-            string off = InkColors.ToTag(InkColors.InkFaint);
+            //Earned stars in gold, missed ones faint, and the note under each says what it was for
+            string on = InkColors.ToTag(InkColors.GoldLight);
+            string off = InkColors.ToTag(InkColors.MoonDim);
             string starText = string.Empty;
             string notes = string.Empty;
             for (int i = 0; i < earned.Length; i++)
             {
                 starText += "<color=" + (earned[i] ? on : off) + ">" + (earned[i] ? "★" : "☆") + "</color>";
-                notes += (i > 0 ? "   ·   " : string.Empty) + "<color=" + (earned[i] ? InkColors.ToTag(InkColors.Ink) : off) + ">" + starNames[Mathf.Min(i, starNames.Length - 1)] + "</color>";
+                notes += (i > 0 ? "   ·   " : string.Empty) + "<color=" + (earned[i] ? InkColors.ToTag(InkColors.Moon) : off) + ">" + starNames[Mathf.Min(i, starNames.Length - 1)] + "</color>";
             }
             stars.text = starText;
             starNotes.text = notes;

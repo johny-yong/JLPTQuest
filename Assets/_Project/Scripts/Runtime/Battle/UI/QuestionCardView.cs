@@ -21,7 +21,7 @@ namespace JLPTQuest
         {
             this.round = round;
             prompt.Markup = PromptDisplay.WithBlanks(round.question.prompt);
-            background.color = round.isParry ? InkColors.ParryTint : InkColors.Card;
+            background.color = round.isParry ? InkColors.ParryTint : Color.white; //The washi sprite carries its own colour
             parryTag.gameObject.SetActive(round.isParry);
             SetCue(false);
         }
@@ -31,7 +31,7 @@ namespace JLPTQuest
         {
             round = null;
             prompt.Markup = string.Empty;
-            background.color = InkColors.Card;
+            background.color = Color.white;
             parryTag.gameObject.SetActive(false);
             instruction.gameObject.SetActive(false);
             timerBar.Value = 1f;

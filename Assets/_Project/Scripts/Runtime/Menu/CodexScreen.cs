@@ -79,10 +79,10 @@ namespace JLPTQuest
 
                 GameObject tile = Instantiate(sealTemplate, grid);
                 tile.SetActive(true);
-                tile.GetComponent<Image>().color = have ? InkColors.Card : InkColors.Panel;
+                tile.GetComponent<Image>().color = have ? InkColors.Lacquer : InkColors.LacquerLow;
                 RubyText word = tile.GetComponentInChildren<RubyText>();
                 word.Markup = have ? seal : "？";
-                word.GetComponent<TMP_Text>().color = have ? InkColors.Ink : InkColors.InkFaint;
+                word.GetComponent<TMP_Text>().color = have ? InkColors.Moon : InkColors.MoonDim;
                 built.Add(tile);
             }
             countLabel.text = found + " / " + seals.Count + " Word Seals found";
@@ -127,8 +127,8 @@ namespace JLPTQuest
         //Also used by the Kana tab's script switch so the pills look the same
         internal static void Paint(Button tab, bool on)
         {
-            tab.GetComponent<Image>().color = on ? InkColors.Ink : InkColors.Panel;
-            tab.GetComponentInChildren<TMP_Text>().color = on ? InkColors.Paper : InkColors.InkSoft;
+            tab.GetComponent<Image>().color = on ? InkColors.GoldChip : InkColors.LacquerLow;
+            tab.GetComponentInChildren<TMP_Text>().color = on ? InkColors.GoldLight : InkColors.MoonSoft;
         }
     }
 }

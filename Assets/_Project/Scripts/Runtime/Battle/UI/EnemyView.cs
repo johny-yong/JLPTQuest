@@ -53,7 +53,7 @@ namespace JLPTQuest
         {
             string name = string.IsNullOrEmpty(data.nameJp) ? data.displayName : data.displayName + "  " + data.nameJp;
             if (data.kind == EnemyKind.Grunt) return name;
-            return "<color=" + InkColors.ToTag(InkColors.Vermilion) + ">" + data.kind + "</color>  " + name;
+            return "<color=" + InkColors.ToTag(InkColors.VermilionGlow) + ">" + data.kind + "</color>  " + name;
         }
 
         public void Refresh(EnemyState state)
@@ -62,7 +62,7 @@ namespace JLPTQuest
 
             //Red at 1 as a warning, "Attack!" while the parry is coming
             cooldownLabel.text = state.IsReadyToAttack ? "Attack!" : "CD " + state.CooldownLeft;
-            cooldownLabel.color = state.CooldownLeft <= 1 ? InkColors.Vermilion : InkColors.Ink;
+            cooldownLabel.color = state.CooldownLeft <= 1 ? InkColors.Vermilion : InkColors.Ink; //Ink, the tag is washi
         }
 
         //counter is the hit back after a blocked attack
@@ -73,7 +73,7 @@ namespace JLPTQuest
             if (counter) text = "<size=55%>Counter </size>" + text;
             if (hit.perfect) text += "<size=55%> 会心</size>";
             damageLabel.text = text;
-            damageLabel.color = hit.perfect ? InkColors.Vermilion : InkColors.Ink;
+            damageLabel.color = hit.perfect ? InkColors.GoldLight : InkColors.Moon;
             if (damageRoutine != null) StopCoroutine(damageRoutine);
             damageRoutine = StartCoroutine(FloatDamage());
         }

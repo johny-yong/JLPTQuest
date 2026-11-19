@@ -117,7 +117,7 @@ namespace JLPTQuest
 
             topLabel.text = "Floor " + plan.stage.floor + "  ·  " + plan.stage.title;
             //Just the 難 or 極 stamp, the full name doesn't fit beside the wave count
-            if (difficulty != Difficulty.Normal) topLabel.text += "  <color=" + InkColors.ToTag(InkColors.Vermilion) + ">" + DifficultyText.Badge(difficulty) + "</color>";
+            if (difficulty != Difficulty.Normal) topLabel.text += "  <color=" + InkColors.ToTag(InkColors.VermilionGlow) + ">" + DifficultyText.Badge(difficulty) + "</color>";
             teachCard.Hide();
             victory.Hide();
             defeat.Hide();

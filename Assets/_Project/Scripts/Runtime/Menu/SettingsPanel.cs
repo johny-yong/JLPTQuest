@@ -16,6 +16,7 @@ namespace JLPTQuest
         [SerializeField] private Slider effectsSlider;
         [SerializeField] private Toggle calmToggle;
         [SerializeField] private Toggle furiganaToggle;
+        [SerializeField] private Toggle alwaysNightToggle;
         [SerializeField] private Button introButton;
         [SerializeField] private Button resetButton;
         [SerializeField] private TMP_Text resetLabel;
@@ -38,6 +39,12 @@ namespace JLPTQuest
             musicSlider.onValueChanged.AddListener(value => GameSettings.MusicVolume = value);
             effectsSlider.onValueChanged.AddListener(value => GameSettings.EffectsVolume = value);
             calmToggle.onValueChanged.AddListener(on => GameSettings.CalmMode = on);
+            if (alwaysNightToggle != null)
+                alwaysNightToggle.onValueChanged.AddListener(on =>
+                {
+                    GameSettings.AlwaysNight = on;
+                    SceneryView.RefreshAll(); //The scene behind changes straight away
+                });
             introButton.onClick.AddListener(() => IntroPressed?.Invoke());
             resetButton.onClick.AddListener(OnReset);
             furiganaToggle.interactable = false; //Shown so players know it's coming, locked on like FuriganaSettings says
@@ -54,6 +61,7 @@ namespace JLPTQuest
             musicSlider.SetValueWithoutNotify(GameSettings.MusicVolume);
             effectsSlider.SetValueWithoutNotify(GameSettings.EffectsVolume);
             calmToggle.SetIsOnWithoutNotify(GameSettings.CalmMode);
+            if (alwaysNightToggle != null) alwaysNightToggle.SetIsOnWithoutNotify(GameSettings.AlwaysNight);
             furiganaToggle.SetIsOnWithoutNotify(FuriganaSettings.ShowFurigana);
             foreach (GameObject item in menuOnly) item.SetActive(inMenu);
             Disarm();

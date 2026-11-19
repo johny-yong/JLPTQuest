@@ -6,7 +6,7 @@ namespace JLPTQuest
 {
     public enum TileState { Idle, Locked, Right, Wrong, Missed, Removed }
 
-    //One of the 2x2 answer tiles. The red ○ and × are how Japanese teachers mark work
+    //One of the answer tiles, lacquer on night. The ○ and × are how Japanese teachers mark work
     public class AnswerTile : MonoBehaviour
     {
         [SerializeField] private Button button;
@@ -42,31 +42,31 @@ namespace JLPTQuest
         public void SetState(TileState state)
         {
             button.interactable = state == TileState.Idle;
-            Color text = state == TileState.Locked ? InkColors.InkFaint : InkColors.Ink;
+            Color text = state == TileState.Locked ? InkColors.MoonDim : InkColors.Moon;
             if (state == TileState.Removed) text.a = 0.2f; //50/50 took it, nearly gone
             LabelText.color = text;
 
             switch (state)
             {
                 case TileState.Right:
-                    background.color = InkColors.RightTint;
+                    background.color = InkColors.TileRight;
                     ShowMark("○");
                     break;
                 case TileState.Missed: //The right answer the player didn't pick
-                    background.color = InkColors.RightTint;
+                    background.color = InkColors.TileRight;
                     ShowMark(string.Empty);
                     break;
                 case TileState.Wrong:
-                    background.color = InkColors.WrongTint;
+                    background.color = InkColors.TileWrong;
                     ShowMark("×");
                     break;
                 case TileState.Removed:
                 case TileState.Locked: //Tiles nobody picked fade back
-                    background.color = InkColors.Panel;
+                    background.color = InkColors.LacquerLow;
                     ShowMark(string.Empty);
                     break;
                 default:
-                    background.color = InkColors.Tile;
+                    background.color = InkColors.Lacquer;
                     ShowMark(string.Empty);
                     break;
             }

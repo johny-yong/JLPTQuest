@@ -37,7 +37,7 @@ namespace JLPTQuest
         public void Refresh(BattleSession session)
         {
             for (int i = 0; i < chargeDots.Length; i++)
-                chargeDots[i].color = i < session.HintCharges ? InkColors.Ink : InkColors.Tile;
+                chargeDots[i].color = i < session.HintCharges ? InkColors.VermilionGlow : InkColors.LacquerLow;
 
             QuestionRound round = session.Phase == BattlePhase.Asking ? session.Round : null;
             for (int i = 0; i < buttons.Length; i++)
@@ -47,8 +47,8 @@ namespace JLPTQuest
                 bool usable = session.CanUseHint(kind);
 
                 buttons[i].interactable = usable;
-                backgrounds[i].color = used ? InkColors.RightTint : InkColors.Tile;
-                Color text = InkColors.Ink;
+                backgrounds[i].color = used ? InkColors.TileRight : InkColors.Lacquer;
+                Color text = InkColors.Moon;
                 text.a = usable || used ? 1f : offAlpha;
                 labels[i].color = text;
             }

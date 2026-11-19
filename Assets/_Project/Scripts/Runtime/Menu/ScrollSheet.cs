@@ -14,6 +14,7 @@ namespace JLPTQuest
     {
         [SerializeField] private TMP_Text kicker;
         [SerializeField] private TMP_Text speech;
+        [SerializeField] private Image avatar;
         [SerializeField] private RubyText title;
         [SerializeField] private GameObject patternBlock;
         [SerializeField] private RubyText pattern;
@@ -100,7 +101,8 @@ namespace JLPTQuest
 
         private void ShowGrammar(ScrollCard card)
         {
-            speech.text = index == 0 ? "Here's what this floor is about." : "Next one. You'll need it up there.";
+            CompanionLines lines = Lines();
+            speech.text = index == 0 ? Say(lines?.scrollFirst, "Here's what this floor is about.") : Say(lines?.scrollNext, "Next one. You'll need it up there.");
             title.Markup = card.grammar.name;
             SetPattern(card.grammar.pattern);
             SetBody(card.grammar.explanation);
@@ -113,7 +115,7 @@ namespace JLPTQuest
 
         private void ShowWords(ScrollCard card)
         {
-            speech.text = "Words you'll run into on this floor.";
+            speech.text = Say(Lines()?.scrollWords, "Words you'll run into on this floor.");
             title.Markup = "Words for Lesson " + card.lesson;
             SetPattern(null);
             SetBody(null);
@@ -125,7 +127,7 @@ namespace JLPTQuest
 
         private void ShowReview(ScrollCard card)
         {
-            speech.text = "A quick look back before the boss.";
+            speech.text = Say(Lines()?.scrollReview, "A quick look back before the boss.");
             title.Markup = "Lesson " + card.lesson;
             SetPattern(null);
             SetBody(null);
@@ -155,6 +157,24 @@ namespace JLPTQuest
         }
 
         //English and other second-line text, smaller and softer than the Japanese above it
+        //The companion's own words for each card, from their CompanionData
+        private CompanionLines Lines()
+        {
+            CompanionData companion = Router.Companion;
+            if (avatar != null && companion != null)
+            {
+                Sprite face = companion.avatar != null ? companion.avatar : companion.portrait;
+                if (face != null) avatar.sprite = face;
+            }
+            return companion != null ? companion.lines : null;
+        }
+
+        private string Say(System.Collections.Generic.List<string> pool, string fallback)
+        {
+            CompanionData companion = Router.Companion;
+            return CompanionTalk.Say(pool, fallback, index, companion != null ? companion.displayName : null);
+        }
+
         private static string Soft(string text)
         {
             return "<size=80%><color=" + InkColors.ToTag(InkColors.InkSoft) + ">" + text + "</color></size>";

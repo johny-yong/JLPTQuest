@@ -28,6 +28,7 @@ namespace JLPTQuest
         public float musicVolume = 0.8f;
         public float effectsVolume = 0.8f;
         public bool calmMode;
+        public bool alwaysNight; //Keeps the night scene whatever the clock says
     }
 
     //How one floor has gone so far on one difficulty

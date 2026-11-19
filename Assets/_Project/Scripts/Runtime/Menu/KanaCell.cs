@@ -31,12 +31,12 @@ namespace JLPTQuest
             SetPicked(false);
         }
 
-        //The tapped square goes ink coloured so you can see which one the detail bar is about
+        //The tapped square goes vermilion so you can see which one the detail bar is about
         public void SetPicked(bool picked)
         {
-            background.color = picked ? InkColors.Ink : InkColors.Card;
-            kana.color = picked ? InkColors.Paper : InkColors.Ink;
-            romaji.color = picked ? InkColors.Panel : InkColors.InkSoft;
+            background.color = picked ? InkColors.Vermilion : InkColors.Lacquer;
+            kana.color = picked ? InkColors.OnVermilion : InkColors.Moon;
+            romaji.color = picked ? InkColors.WrongTint : InkColors.MoonSoft;
         }
     }
 }

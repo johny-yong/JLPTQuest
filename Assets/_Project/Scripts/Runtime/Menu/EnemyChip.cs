@@ -18,8 +18,8 @@ namespace JLPTQuest
 
             //Elites and bosses stand out in vermilion
             bool tough = enemy.kind != EnemyKind.Grunt;
-            face.color = tough ? InkColors.Vermilion : InkColors.Tile;
-            glyph.color = tough ? InkColors.Paper : InkColors.InkSoft;
+            face.color = tough ? InkColors.Vermilion : InkColors.Lacquer;
+            glyph.color = tough ? InkColors.OnVermilion : InkColors.MoonSoft;
         }
     }
 }
