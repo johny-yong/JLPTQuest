@@ -80,3 +80,8 @@ crashlytics-build.properties
 
 # IDE solution files, Unity makes these again
 *.slnx
+
+# Live2D Cubism SDK: Cubism Core can't be republished, import the SDK from live2d.com instead
+/[Aa]ssets/[Ll]ive2[Dd]/
+/[Aa]ssets/[Ll]ive2[Dd].meta
+/[Tt]hird[Pp]arty/
